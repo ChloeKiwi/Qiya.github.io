@@ -1,0 +1,785 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.png">
+  <link rel="icon" href="/img/avatar.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="pytorch1torch.manual_seed(0) torch.backends.cudnn.deterministic &#x3D; False torch.backends.cudnn.benchmark &#x3D; True   ​              TORCH.BACKENDS控制PyTorch支持的各种后端行为 These backends include:  torch.backends.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Pytorch杂碎记录">
+<meta property="og:url" content="http://example.com/2022/04/22/Pytorch%E6%9D%82%E7%A2%8E%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="pytorch1torch.manual_seed(0) torch.backends.cudnn.deterministic &#x3D; False torch.backends.cudnn.benchmark &#x3D; True   ​              TORCH.BACKENDS控制PyTorch支持的各种后端行为 These backends include:  torch.backends.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/Pytorch%E6%9D%82%E7%A2%8E%E8%AE%B0%E5%BD%95.assets/image-20220128154152732.png">
+<meta property="article:published_time" content="2022-04-22T09:06:10.000Z">
+<meta property="article:modified_time" content="2022-04-22T09:06:24.177Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="深度学习">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/Pytorch%E6%9D%82%E7%A2%8E%E8%AE%B0%E5%BD%95.assets/image-20220128154152732.png">
+  
+  
+  <title>Pytorch杂碎记录 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Qiya</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Pytorch杂碎记录"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-04-22 17:06" pubdate>
+          April 22, 2022 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.5k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          38 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Pytorch杂碎记录</h1>
+            
+            <div class="markdown-body">
+              
+              <h1 id="pytorch"><a href="#pytorch" class="headerlink" title="pytorch"></a>pytorch</h1><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">torch<span class="hljs-selector-class">.manual_seed</span>(<span class="hljs-number">0</span>) torch<span class="hljs-selector-class">.backends</span><span class="hljs-selector-class">.cudnn</span><span class="hljs-selector-class">.deterministic</span> = False torch<span class="hljs-selector-class">.backends</span><span class="hljs-selector-class">.cudnn</span><span class="hljs-selector-class">.benchmark</span> = True <br></code></pre></td></tr></table></figure>
+
+<p>​             </p>
+<h2 id="TORCH-BACKENDS"><a href="#TORCH-BACKENDS" class="headerlink" title="TORCH.BACKENDS"></a><strong>TORCH.BACKENDS</strong></h2><p>控制PyTorch支持的<strong>各种后端行为</strong></p>
+<p>These backends include:</p>
+<ul>
+<li>torch.backends.cuda</li>
+<li>torch.backends.cudnn</li>
+<li>torch.backends.mkl</li>
+<li>torch.backends.mkldnn</li>
+<li>torch.backends.openmp</li>
+</ul>
+<h3 id="torch-backends-cuda"><a href="#torch-backends-cuda" class="headerlink" title="torch.backends.cuda"></a><strong>torch.backends.cuda</strong></h3><h4 id="torch-backends-cuda-is-built"><a href="#torch-backends-cuda-is-built" class="headerlink" title="torch.backends.cuda.is_built()"></a>torch.backends.cuda.is_built()</h4><p>返回PyTorch<strong>是否支持CUDA</strong>。请注意，这并<strong>不一定意味着CUDA可用</strong>;只是如果这个PyTorch二进制文件<strong>运行在一台有CUDA驱动和设备的机器上</strong>，我们就<strong>可以使用它。</strong></p>
+<h3 id="torch-backends-cudnn"><a href="#torch-backends-cudnn" class="headerlink" title="torch.backends.cudnn"></a><strong>torch.backends.cudnn</strong></h3><h4 id="torch-backends-cudnn-version"><a href="#torch-backends-cudnn-version" class="headerlink" title="torch.backends.cudnn.version() "></a>torch.backends.cudnn.version()<a target="_blank" rel="noopener" href="https://pytorch.org/docs/stable/_modules/torch/backends/cudnn.html#version"> </a></h4><p>返回cuDNN的版本<a target="_blank" rel="noopener" href="https://pytorch.org/docs/stable/_modules/torch/backends/cudnn.html#version"> </a></p>
+<h4 id="torch-backends-cudnn-is-available"><a href="#torch-backends-cudnn-is-available" class="headerlink" title="torch.backends.cudnn.is_available**()**"></a>torch.backends.cudnn.is_available**()**</h4><p>返回一个bool值，指示<strong>CUDNN当前是否可用。</strong></p>
+<h4 id="torch-backends-cudnn-enabled"><a href="#torch-backends-cudnn-enabled" class="headerlink" title="torch.backends.cudnn.enabled"></a>torch.backends.cudnn.enabled</h4><p>控制是否启用cuDNN的bool。</p>
+<h4 id="x3D-x3D-torch-backends-cudnn-deterministic-x3D-x3D"><a href="#x3D-x3D-torch-backends-cudnn-deterministic-x3D-x3D" class="headerlink" title="&#x3D;&#x3D;torch.backends.cudnn.deterministic&#x3D;&#x3D;"></a>&#x3D;&#x3D;torch.backends.cudnn.deterministic&#x3D;&#x3D;</h4><p>如果为True，则导致cuDNN只使用<strong>确定性卷积算法</strong></p>
+<h2 id="TORCH-USE-DETERMINISTIC-ALGORITHMS"><a href="#TORCH-USE-DETERMINISTIC-ALGORITHMS" class="headerlink" title="TORCH.USE_DETERMINISTIC_ALGORITHMS"></a><strong>TORCH.USE_DETERMINISTIC_ALGORITHMS</strong></h2><p><strong>设置 PyTorch 操作是否必须使用“确定性”算法</strong></p>
+<ul>
+<li>在给定相同输入的情况下，在相同的软件和硬件上运行时，算法总是产生相同的输出</li>
+</ul>
+<h4 id="x3D-x3D-torch-backends-cudnn-benchmark-x3D-x3D"><a href="#x3D-x3D-torch-backends-cudnn-benchmark-x3D-x3D" class="headerlink" title="&#x3D;&#x3D;torch.backends.cudnn.benchmark&#x3D;&#x3D;"></a>&#x3D;&#x3D;torch.backends.cudnn.benchmark&#x3D;&#x3D;</h4><p>使cuDNN对<strong>多个卷积算法</strong>进行基准测试，<strong>并选择最快的卷积算法</strong></p>
+<h2 id="torch-manual-seed-1"><a href="#torch-manual-seed-1" class="headerlink" title="torch.manual_seed(1)"></a>torch.manual_seed(1)</h2><h3 id="解释1"><a href="#解释1" class="headerlink" title="解释1"></a>解释1</h3><ul>
+<li>在神经网络中，参数默认是进行<strong>随机初始化</strong>的</li>
+<li>如果不设置的话<strong>每次训练时的初始化都是随机的</strong>，导致结果不确定</li>
+<li>果<strong>设置初始化</strong>，则<strong>每次初始化都是固定的</strong></li>
+<li>如果使用<strong>多个GPU</strong>，应该使用torch.cuda.manual_seed_all()为所有的GPU设置种子</li>
+</ul>
+<h3 id="解释2"><a href="#解释2" class="headerlink" title="解释2"></a>解释2</h3><ul>
+<li>由于每次实验都需要生成数据，设置随机种子是为了确保<strong>每次生成固定的随机数（生成的随机数是一样的）</strong></li>
+<li>使得<strong>每次实验结果显示一致了</strong></li>
+<li>有利于实验的比较和改进</li>
+<li>在需要生成随机数的实验中，使得每次运行该 python文件时<strong>生成的随机数相同</strong></li>
+<li>torch.manual_seed()为 <strong>CPU&#x2F;GPU</strong> 中设置种子，生成随机数</li>
+</ul>
+<h3 id="解释3"><a href="#解释3" class="headerlink" title="解释3"></a>解释3</h3><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">torch</span>.manual_seed(<span class="hljs-number">1</span>)<br><span class="hljs-attribute">torch</span>.rand(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>)<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>👆输出结果一样，每一次rand都是一样的</li>
+<li>若去掉 <strong>torch.manual_seed(1)</strong> 直接torch.rand（1,2） 则生成的结果是不一样的</li>
+</ul>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs stylus">import torch<br>torch<span class="hljs-selector-class">.manual_seed</span>(<span class="hljs-number">0</span>)<br><span class="hljs-function"><span class="hljs-title">print</span><span class="hljs-params">(torch.rand(<span class="hljs-number">1</span>)</span></span>)<br><span class="hljs-function"><span class="hljs-title">print</span><span class="hljs-params">(torch.rand(<span class="hljs-number">1</span>)</span></span>)<br></code></pre></td></tr></table></figure>
+
+<p>是每次运行<code>test.py</code>文件的输出结果都一样，而不是每次随机函数生成的结果一样</p>
+<p>输出：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">tensor([<span class="hljs-number">0.4963</span>])<br>tensor([<span class="hljs-number">0.7682</span>])<br></code></pre></td></tr></table></figure>
+
+<h2 id="torch-autograd-Variable"><a href="#torch-autograd-Variable" class="headerlink" title="torch.autograd.Variable"></a>torch.autograd.Variable</h2><h3 id="了解Variable"><a href="#了解Variable" class="headerlink" title="了解Variable"></a>了解Variable</h3><p>一种可以变化的变量，这正好就符合了<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD&spm=1001.2101.3001.7020">反向传播</a>，参数更新的属性</p>
+<p>Variable就是一个存放会变化值的地理位置</p>
+<p>里面的值（tensor）会不停发生变化</p>
+<p>pytorch都是有tensor计算的</p>
+<p>tensor里面的参数都是Variable的形式</p>
+<p>&#x3D;&#x3D;【<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=tensor&spm=1001.2101.3001.7020">tensor</a> 是一个多维矩阵】&#x3D;&#x3D;</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs clean"><span class="hljs-keyword">import</span> torch<br><span class="hljs-keyword">from</span> torch.autograd <span class="hljs-keyword">import</span> Variable # torch 中 Variable 模块<br>tensor = torch.FloatTensor([[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>],[<span class="hljs-number">3</span>,<span class="hljs-number">4</span>]])<br># 把鸡蛋放到篮子里, requires_grad是参不参与误差反向传播, 要不要计算梯度<br>variable = Variable(tensor, requires_grad=<span class="hljs-literal">True</span>)<br></code></pre></td></tr></table></figure>
+
+<p>&#x3D;&#x3D;注：tensor不能反向传播，variable可以反向传播。&#x3D;&#x3D;</p>
+<h1 id="torch-nn"><a href="#torch-nn" class="headerlink" title="torch.nn"></a>torch.nn</h1><p>图形的基本构建模块(计算图？)</p>
+<p><img src="/Pytorch%E6%9D%82%E7%A2%8E%E8%AE%B0%E5%BD%95.assets/image-20220128154152732.png" srcset="/img/loading.gif" lazyload alt="image-20220128154152732"></p>
+<h2 id="Containers"><a href="#Containers" class="headerlink" title="Containers"></a><a target="_blank" rel="noopener" href="https://pytorch.org/docs/stable/nn.html#id1">Containers</a></h2><h3 id="Module"><a href="#Module" class="headerlink" title="Module"></a><a target="_blank" rel="noopener" href="https://pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module"><code>Module</code></a></h3><h3 id="Sequential顺序容器"><a href="#Sequential顺序容器" class="headerlink" title="Sequential顺序容器"></a><a target="_blank" rel="noopener" href="https://pytorch.org/docs/stable/generated/torch.nn.Sequential.html#torch.nn.Sequential"><code>Sequential顺序容器</code></a></h3><p><em>CLASS</em><code>torch.nn.``Sequential</code>(*<em>args</em>)[](<a target="_blank" rel="noopener" href="https://pytorch.org/docs/stable/_modules/torch/nn/modules/container.html#Sequential">https://pytorch.org/docs/stable/_modules/torch/nn/modules/container.html#Sequential</a></p>
+<ul>
+<li>模块将按照它们在构造函数中传递的顺序添加</li>
+<li>按照顺序执行</li>
+<li>输入给1</li>
+<li>1的输出给2</li>
+<li>最后返回最后一层的输出</li>
+<li>按顺序排列的层按<strong>级联方式</strong>连接</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># Using Sequential to create a small model. When `model` is run,</span><br><span class="hljs-comment"># input will first be passed to `Conv2d(1,20,5)`. The output of</span><br><span class="hljs-comment"># `Conv2d(1,20,5)` will be used as the input to the first</span><br><span class="hljs-comment"># `ReLU`; the output of the first `ReLU` will become the input</span><br><span class="hljs-comment"># for `Conv2d(20,64,5)`. Finally, the output of</span><br><span class="hljs-comment"># `Conv2d(20,64,5)` will be used as input to the second `ReLU`</span><br>model = nn.Sequential(<br>          nn.Conv2d(<span class="hljs-number">1</span>,<span class="hljs-number">20</span>,<span class="hljs-number">5</span>),<br>          nn.ReLU(),<br>          nn.Conv2d(<span class="hljs-number">20</span>,<span class="hljs-number">64</span>,<span class="hljs-number">5</span>),<br>          nn.ReLU()<br>        )<br><br><span class="hljs-comment"># Using Sequential with OrderedDict. This is functionally the</span><br><span class="hljs-comment"># same as the above code</span><br>model = nn.Sequential(OrderedDict([<br>          (<span class="hljs-string">&#x27;conv1&#x27;</span>, nn.Conv2d(<span class="hljs-number">1</span>,<span class="hljs-number">20</span>,<span class="hljs-number">5</span>)),<br>          (<span class="hljs-string">&#x27;relu1&#x27;</span>, nn.ReLU()),<br>          (<span class="hljs-string">&#x27;conv2&#x27;</span>, nn.Conv2d(<span class="hljs-number">20</span>,<span class="hljs-number">64</span>,<span class="hljs-number">5</span>)),<br>          (<span class="hljs-string">&#x27;relu2&#x27;</span>, nn.ReLU())<br>        ]))<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>加上OrderdeDict有序字典效果一样，</p>
+<p>只是写法不同，要再前面加上名字</p>
+</blockquote>
+<h2 id="Tensor-view"><a href="#Tensor-view" class="headerlink" title="Tensor.view"></a><a target="_blank" rel="noopener" href="https://pytorch.org/docs/stable/generated/torch.Tensor.view.html#torch.Tensor.view"><code>Tensor.view</code></a></h2><p>返回与张量具有相同数据<code>self</code>但不同的新张量<code>shape</code></p>
+<figure class="highlight python-repl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python-repl"><span class="hljs-meta prompt_">&gt;&gt;&gt;</span> <span class="language-python">x = torch.randn(<span class="hljs-number">4</span>, <span class="hljs-number">4</span>)</span><br><span class="hljs-meta prompt_">&gt;&gt;&gt;</span> <span class="language-python">x.size()</span><br>torch.Size([4, 4])<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight python-repl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python-repl"><span class="hljs-meta prompt_">&gt;&gt;&gt;</span> <span class="language-python">z = x.view(-<span class="hljs-number">1</span>, <span class="hljs-number">8</span>)  <span class="hljs-comment"># the size -1 is inferred from other dimensions</span></span><br><span class="hljs-meta prompt_">&gt;&gt;&gt;</span> <span class="language-python">z.size()</span><br>torch.Size([2, 8])<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight python-repl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python-repl"><span class="hljs-meta prompt_">&gt;&gt;&gt;</span> <span class="language-python">y = x.view(<span class="hljs-number">16</span>)</span><br><span class="hljs-meta prompt_">&gt;&gt;&gt;</span> <span class="language-python">y.size()</span><br>torch.Size([16])<br></code></pre></td></tr></table></figure>
+
+<h2 id="torch-argmax-输入"><a href="#torch-argmax-输入" class="headerlink" title="torch.argmax(输入)"></a><code>torch.argmax</code>(<em>输入</em>)</h2><p>返回张量中<strong>所有元素的最大值的索引</strong><code>input</code></p>
+<blockquote>
+<p>如果有多个最大值，则返回<strong>第一个最大值</strong>的索引。</p>
+</blockquote>
+<h2 id="torch-argmax-输入，dim，keepdim-x3D-False"><a href="#torch-argmax-输入，dim，keepdim-x3D-False" class="headerlink" title="torch.argmax(输入，dim，keepdim &#x3D; False)"></a><code>torch.argmax</code>(<em>输入</em>，dim，<em>keepdim &#x3D; False</em>)</h2><p>参数</p>
+<ul>
+<li><strong>input</strong> ( <a target="_blank" rel="noopener" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor"><em>Tensor</em></a> ) – 输入张量。</li>
+<li><strong>dim</strong> ( <a target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#int"><em>int</em></a> ) – 要减少的维度。如果<code>None</code>，则返回展平输入的 argmax。</li>
+<li><strong>keepdim</strong> ( <a target="_blank" rel="noopener" href="https://docs.python.org/3/library/functions.html#bool"><em>bool</em></a> ) – 输出张量是否<code>dim</code>保留。忽略如果<code>dim=None</code>。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python">a = torch.randn(<span class="hljs-number">4</span>, <span class="hljs-number">4</span>)<br>a<br>tensor([[ <span class="hljs-number">1.3398</span>,  <span class="hljs-number">0.2663</span>, -<span class="hljs-number">0.2686</span>,  <span class="hljs-number">0.2450</span>],<br>        [-<span class="hljs-number">0.7401</span>, -<span class="hljs-number">0.8805</span>, -<span class="hljs-number">0.3402</span>, -<span class="hljs-number">1.1936</span>],<br>        [ <span class="hljs-number">0.4907</span>, -<span class="hljs-number">1.3948</span>, -<span class="hljs-number">1.0691</span>, -<span class="hljs-number">0.3132</span>],<br>        [-<span class="hljs-number">1.6092</span>,  <span class="hljs-number">0.5419</span>, -<span class="hljs-number">0.2993</span>,  <span class="hljs-number">0.3195</span>]])<br>torch.argmax(a, dim=<span class="hljs-number">1</span>)<br>tensor([ <span class="hljs-number">0</span>,  <span class="hljs-number">2</span>,  <span class="hljs-number">0</span>,  <span class="hljs-number">1</span>])<br></code></pre></td></tr></table></figure>
+
+<p><strong>dim&#x3D;0</strong>：沿每个↓找</p>
+<p><strong>dim&#x3D;1</strong>，沿每个→找</p>
+<p>tensor([[ <strong>1.3398,</strong>  0.2663, -0.2686,  0.2450],<br>        [-0.7401, -0.8805, <strong>-0.3402</strong>, -1.1936],<br>        [ <strong>0.4907</strong>, -1.3948, -1.0691, -0.3132],<br>        [-1.6092,  <strong>0.5419</strong>, -0.2993,  0.3195]])</p>
+<h1 id="python中"><a href="#python中" class="headerlink" title="python中"></a>python中</h1><h2 id="glob-glob-文件全提函数"><a href="#glob-glob-文件全提函数" class="headerlink" title="glob.glob()文件全提函数"></a>glob.glob()文件全提函数</h2><p>适用场景：深度学习的<strong>训练集、测试集一般放在不同的文件夹中</strong>，因此需要获取<strong>所有文件</strong>的地址</p>
+<p>&#x3D;&#x3D;此时glob.glob()函数就可以非常方便的一次性获取<strong>一个文件夹内所有文件的地址</strong>&#x3D;&#x3D;</p>
+<p>并把地址转为<strong>字符串</strong>形式</p>
+<blockquote>
+<p>文件全提，用 * 表示，最好用 &#x2F; 间隔</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> glob<br><br><span class="hljs-comment"># 最后train文件夹内的所有图片全要：</span><br>train_dataset_path = glob.glob(<span class="hljs-string">&#x27;E:/ceshi/train/*&#x27;</span>)<br><br><span class="hljs-built_in">len</span>( train_dataset_path )<br><span class="hljs-number">344</span><br><br><span class="hljs-built_in">type</span>( train_dataset_path[<span class="hljs-number">0</span>] )<br><span class="hljs-built_in">str</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>tensorflow官方喜欢用<strong>pathlib</strong>这个包进行文件的读取，但是我觉得用glob更加方便！</p>
+</blockquote>
+<h1 id="numpy"><a href="#numpy" class="headerlink" title="numpy"></a>numpy</h1><h2 id="numpy-concatenate"><a href="#numpy-concatenate" class="headerlink" title="numpy.concatenate"></a>numpy.concatenate</h2><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><span class="hljs-selector-tag">a</span> = np<span class="hljs-selector-class">.array</span>(<span class="hljs-selector-attr">[[1, 2]</span>, <span class="hljs-selector-attr">[3, 4]</span>])<br>&gt;&gt;&gt; <span class="hljs-selector-tag">b</span> = np<span class="hljs-selector-class">.array</span>(<span class="hljs-selector-attr">[[5, 6]</span>])<br>&gt;&gt;&gt; np<span class="hljs-selector-class">.concatenate</span>((<span class="hljs-selector-tag">a</span>, b), axis=<span class="hljs-number">0</span>)<br><span class="hljs-built_in">array</span>(<span class="hljs-selector-attr">[[1, 2]</span>,<br>       <span class="hljs-selector-attr">[3, 4]</span>,<br>       <span class="hljs-selector-attr">[5, 6]</span>])<br>&gt;&gt;&gt; np<span class="hljs-selector-class">.concatenate</span>((<span class="hljs-selector-tag">a</span>, <span class="hljs-selector-tag">b</span>.T), axis=<span class="hljs-number">1</span>)<br><span class="hljs-built_in">array</span>(<span class="hljs-selector-attr">[[1, 2, 5]</span>,<br>       <span class="hljs-selector-attr">[3, 4, 6]</span>])<br>&gt;&gt;&gt; np<span class="hljs-selector-class">.concatenate</span>((<span class="hljs-selector-tag">a</span>, b), axis=None)<br><span class="hljs-function"><span class="hljs-title">array</span><span class="hljs-params">([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>])</span></span><br></code></pre></td></tr></table></figure>
+
+<h2 id="numpy-vstack"><a href="#numpy-vstack" class="headerlink" title="numpy.vstack"></a>numpy.vstack</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs python">a = np.array([[<span class="hljs-number">1</span>], [<span class="hljs-number">2</span>], [<span class="hljs-number">3</span>]])<br><span class="hljs-meta">&gt;&gt;&gt; </span>b = np.array([[<span class="hljs-number">4</span>], [<span class="hljs-number">5</span>], [<span class="hljs-number">6</span>]])<br><span class="hljs-meta">&gt;&gt;&gt; </span>np.vstack((a,b))<br>array([[<span class="hljs-number">1</span>],<br>       [<span class="hljs-number">2</span>],<br>       [<span class="hljs-number">3</span>],<br>       [<span class="hljs-number">4</span>],<br>       [<span class="hljs-number">5</span>],<br>       [<span class="hljs-number">6</span>]])<br>       <br>a = np.array([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>])<br>b = np.array([<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>])<br>np.vstack((a,b))<br>array([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>],<br>       [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>]])<br></code></pre></td></tr></table></figure>
+
+<p>按行连接</p>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">#深度学习</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Pytorch杂碎记录</div>
+      <div>http://example.com/2022/04/22/Pytorch杂碎记录/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>John Doe</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>April 22, 2022</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>Licensed under</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/04/22/Pytorch%E6%8A%A5%E9%94%99%E5%90%88%E9%9B%86/" title="Pytorch报错合集">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Pytorch报错合集</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/04/22/MarcovChain%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E9%93%BE/" title="MarcovChain马尔科夫链">
+                        <span class="hidden-mobile">MarcovChain马尔科夫链</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'http://example.com/2022/04/22/Pytorch%E6%9D%82%E7%A2%8E%E8%AE%B0%E5%BD%95/';
+          this.page.identifier = '/2022/04/22/Pytorch%E6%9D%82%E7%A2%8E%E8%AE%B0%E5%BD%95/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <i class="iconfont icon-love"></i> <a href="" target="_blank" rel="nofollow noopener"><span>武汉大学杨淇雅</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

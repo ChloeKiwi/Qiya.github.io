@@ -1,0 +1,1277 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.png">
+  <link rel="icon" href="/img/avatar.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="[TOC] Html&amp;CSS关于height:100%和height:100vh的区别height:100vh &#x3D;&#x3D; height:100%; 当元素没有内容时候，设置height:100%，该元素不会被撑开，此时高度为0 height:100vh，该元素会被撑开屏幕高度一致 vh就是当前屏幕可见高度的1% 网页复现     让块级盒子水平居中对齐： 有一个宽：widt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS">
+<meta property="og:url" content="http://example.com/2022/04/22/CSS/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="[TOC] Html&amp;CSS关于height:100%和height:100vh的区别height:100vh &#x3D;&#x3D; height:100%; 当元素没有内容时候，设置height:100%，该元素不会被撑开，此时高度为0 height:100vh，该元素会被撑开屏幕高度一致 vh就是当前屏幕可见高度的1% 网页复现     让块级盒子水平居中对齐： 有一个宽：widt">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220322211645843.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220322211746171.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220322211914196.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220322211917448.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220322223131172.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220322225549154.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220323113321517.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220323113412500.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220323114614801.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220323114741253.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220323114813701.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220323114949621.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220323152435385.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220323152723101.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220323152801197.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220323153031673.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220323155258742.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220323155733408.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220323160118315.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220323160010232.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220323160053786.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220323160059366.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220323160821904.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220323161007347.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220323162155827.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220323162229525.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220323162549048.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220323162600899.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220323162639486.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220323162723398.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220324102010863.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220324102251578.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220324102334935.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220324102437872.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220324102449369.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220324104652862.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220324104711066.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220324104823685.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220324105104460.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220324105542348.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220324105644617.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220324110009628.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220324110106078.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220324110121654.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220324110357075.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220324111031845.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220324111042850.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220324111054911.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220324111720469.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220324111808061.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220324114033893.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220324114503654.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220324115416593.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220324120115339.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220324120731317.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220324121104775.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220324121150577.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220324121342269.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220324121404758.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220324121439790.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220324202946577.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220325102847351.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220325102906742.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220324203702795.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220325103351826.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220325103501279.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220325103541043.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220325104117729.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220325104410337.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220325105219165.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220325105256182.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220325105940464.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220325110313300.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220325111204204.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220325111417082.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220325111459783.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220325111451799.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220325111955655.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220325113713931.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220325114138281.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220325114354046.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220325114824915.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220325114834268.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220325115008405.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220325152737754.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220325152851559.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220408113713722.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220408113723086.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220408113730790.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220408113820621.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220408114010937.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220408114049335.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220408114309509.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220408114627020.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220408121017846.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220408121303285.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220408121829253.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220408122032338.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220408122125977.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220408122135419.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220408122838245.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220408123100980.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220408123237940.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220408123757684.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220408095319203.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220408095413348.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220327204154120.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220408101228577.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220328111520155.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220329195005424.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220329195035018.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220331103341806.png">
+<meta property="og:image" content="http://example.com/2022/04/22/CSS/CSS.assets/image-20220329195332550.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220329201106877.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220329201742387.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220329202346172.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220329203126026.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220329204321057.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220408094435210.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220408094545844.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220329210536961.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220329210552057.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220408110803082.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220408111725777.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220324210307503.png">
+<meta property="og:image" content="http://example.com/CSS.assets/image-20220331103505142.png">
+<meta property="article:published_time" content="2022-04-22T08:55:18.000Z">
+<meta property="article:modified_time" content="2022-04-22T08:55:41.020Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="前端">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/CSS.assets/image-20220322211645843.png">
+  
+  
+  <title>CSS - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Qiya</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="CSS"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-04-22 16:55" pubdate>
+          April 22, 2022 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          6.1k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          51 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">CSS</h1>
+            
+            <div class="markdown-body">
+              
+              <p>[TOC]</p>
+<h1 id="Html-amp-CSS"><a href="#Html-amp-CSS" class="headerlink" title="Html&amp;CSS"></a>Html&amp;CSS</h1><h2 id="关于height-100-和height-100vh的区别"><a href="#关于height-100-和height-100vh的区别" class="headerlink" title="关于height:100%和height:100vh的区别"></a>关于height:100%和height:100vh的区别</h2><p>height:100vh &#x3D;&#x3D; height:100%;</p>
+<p>当元素没有内容时候，设置height:100%，该元素不会被撑开，此时高度为0</p>
+<p>height:100vh，该元素会被撑开屏幕高度一致</p>
+<p>vh就是当前屏幕可见高度的1%</p>
+<h1 id="网页复现"><a href="#网页复现" class="headerlink" title="网页复现"></a>网页复现</h1><p><img src="/CSS.assets/image-20220322211645843.png" srcset="/img/loading.gif" lazyload alt="image-20220322211645843"></p>
+<p><img src="/CSS.assets/image-20220322211746171.png" srcset="/img/loading.gif" lazyload alt="image-20220322211746171"></p>
+<p><img src="/CSS.assets/image-20220322211914196.png" srcset="/img/loading.gif" lazyload alt="image-20220322211914196"></p>
+<p><img src="/CSS.assets/image-20220322211917448.png" srcset="/img/loading.gif" lazyload alt="image-20220322211917448"></p>
+<ul>
+<li>让块级盒子水平居中对齐：<ul>
+<li>有一个宽：width:298px</li>
+<li>margin：xxpx  auto；上下有边距，左右居中</li>
+</ul>
+</li>
+</ul>
+<p><img src="/CSS.assets/image-20220322223131172.png" srcset="/img/loading.gif" lazyload alt="image-20220322223131172"></p>
+<h3 id="图片过大："><a href="#图片过大：" class="headerlink" title="图片过大："></a>图片过大：</h3><ul>
+<li>设置宽度为100%，使得和父元素一样宽</li>
+</ul>
+<p><img src="/CSS.assets/image-20220322225549154.png" srcset="/img/loading.gif" lazyload alt="image-20220322225549154"></p>
+<h3 id="设置中间的段落"><a href="#设置中间的段落" class="headerlink" title="设置中间的段落"></a>设置中间的段落</h3><ul>
+<li>高度固定</li>
+<li>宽度没设置</li>
+<li>字体大小</li>
+<li>左右设置padding<ul>
+<li>由于没有width，此处设置padding不会撑开</li>
+</ul>
+</li>
+<li>上设置margintop<ul>
+<li>由于有height，若设置padding会把height撑开，故此处设置margin</li>
+</ul>
+</li>
+</ul>
+<h3 id="预览图"><a href="#预览图" class="headerlink" title="预览图"></a>预览图</h3><p><img src="/CSS.assets/image-20220323113321517.png" srcset="/img/loading.gif" lazyload alt="image-20220323113321517"></p>
+<p><img src="/CSS.assets/image-20220323113412500.png" srcset="/img/loading.gif" lazyload alt="image-20220323113412500"></p>
+<p><img src="/CSS.assets/image-20220323114614801.png" srcset="/img/loading.gif" lazyload alt="image-20220323114614801"></p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p><img src="/CSS.assets/image-20220323114741253.png" srcset="/img/loading.gif" lazyload alt="image-20220323114741253"></p>
+<p><img src="/CSS.assets/image-20220323114813701.png" srcset="/img/loading.gif" lazyload alt="image-20220323114813701"></p>
+<p><img src="/CSS.assets/image-20220323114949621.png" srcset="/img/loading.gif" lazyload alt="image-20220323114949621"></p>
+<h2 id="自我小结"><a href="#自我小结" class="headerlink" title="自我小结"></a>自我小结</h2><ul>
+<li><p>布局，一个大盒子，从上到下分成几个div</p>
+<ul>
+<li>如果一个img，直接用img作div，无需外套div</li>
+<li>每个div命一个class名</li>
+</ul>
+</li>
+<li><p>*全局设置<code>margin:0;padding:0;</code></p>
+</li>
+<li><p>body{}设置整个页面</p>
+<ul>
+<li>背景颜色 <code>background-color</code></li>
+</ul>
+</li>
+<li><p>最外层div定义高宽:<code>width;height;</code></p>
+<ul>
+<li>背景颜色<code>background-color</code>(与body颜色不同可以区分出两个布局)</li>
+<li>让此div位于页面正中间<ul>
+<li><code>margin:上下距离 auto；</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>最上层img</p>
+<ul>
+<li>设置<code>width：100%</code>使得和父div一样宽</li>
+</ul>
+</li>
+<li><p>下方的文字</p>
+<ul>
+<li>还是要分成几个div，一行一个div</li>
+</ul>
+</li>
+<li><p>review：</p>
+<ul>
+<li>字体：<code>font-size:20px;</code></li>
+<li>字体颜色：<code>color:;</code></li>
+<li>整个div的高度：量屏幕获得；</li>
+<li>左右边距：<code>padding:0 30px;</code></li>
+<li>和上面img的距离：<code>margin-top:30px;</code></li>
+<li>如果要让文字居中:<code>text-align:center;</code></li>
+</ul>
+</li>
+<li><p>appraise:</p>
+<ul>
+<li>颜色</li>
+<li>字体大小 <code>font-size:15px;</code></li>
+<li>和上面div的距离 <code>margin-top:20px;</code></li>
+<li>左右距离 <code>padding:0 30px;</code></li>
+</ul>
+</li>
+<li><p>info:</p>
+<ul>
+<li>分成左右两块，左边可点链接，h4，右边span，显示价格</li>
+<li>info h4:<ul>
+<li>h4是块级元素，&#x3D;&#x3D;<code>display:inline-block</code>&#x3D;&#x3D; 变成行内元素</li>
+<li>取消加粗 &#x3D;&#x3D;<code>font-weight:400;</code>&#x3D;&#x3D;</li>
+<li>颜色</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>所有的a<strong>不要带下划线：</strong></p>
+<ul>
+<li>&#x3D;&#x3D;<code>text-decoration:none;</code>&#x3D;&#x3D;</li>
+</ul>
+</li>
+<li><p>图片变a：</p>
+<ul>
+<li>先<a>后<img></li>
+</ul>
+</li>
+<li><p>em斜线</p>
+<ul>
+<li><strong>使得竖直</strong>：&#x3D;&#x3D;<code>font-style:normal;</code>&#x3D;&#x3D;</li>
+<li>和左右边距：<ul>
+<li>由于h4\em\span可以看成3个div，此处<strong>用margin间隔</strong> &#x3D;&#x3D;<code>margin:0 6px 0 15px;</code>&#x3D;&#x3D;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="box-shadow"><a href="#box-shadow" class="headerlink" title="box-shadow"></a>box-shadow</h1><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-comment">/* x偏移量 | y偏移量 | 阴影模糊半径 | 阴影扩散半径 | 阴影颜色 */</span><br><span class="hljs-attribute">box-shadow</span>: <span class="hljs-number">2px</span> <span class="hljs-number">2px</span> <span class="hljs-number">2px</span> <span class="hljs-number">1px</span> <span class="hljs-built_in">rgba</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0.2</span>);<br></code></pre></td></tr></table></figure>
+
+<h1 id="快报模块"><a href="#快报模块" class="headerlink" title="快报模块"></a>快报模块</h1><p><img src="/CSS.assets/image-20220323152435385.png" srcset="/img/loading.gif" lazyload alt="image-20220323152435385"></p>
+<ul>
+<li>排列整齐：列表ul无序列表</li>
+<li>横线：一个只有下横线的div</li>
+</ul>
+<p><img src="/CSS.assets/image-20220323152723101.png" srcset="/img/loading.gif" lazyload alt="image-20220323152723101"></p>
+<p><img src="/CSS.assets/image-20220323152801197.png" srcset="/img/loading.gif" lazyload alt="image-20220323152801197"></p>
+<p><img src="/CSS.assets/image-20220323153031673.png" srcset="/img/loading.gif" lazyload alt="image-20220323153031673"></p>
+<h1 id="浮动"><a href="#浮动" class="headerlink" title="浮动"></a>浮动</h1><h2 id="170-传统网页布局的三种方式"><a href="#170-传统网页布局的三种方式" class="headerlink" title="170-传统网页布局的三种方式"></a>170-传统网页布局的三种方式</h2><ul>
+<li><h3 id="普通"><a href="#普通" class="headerlink" title="普通"></a>普通</h3><ul>
+<li>按照<strong>默认方式</strong>排列</li>
+<li>块级元素独占一行：&#x3D;&#x3D;div hr p h1-h6 ul ol form&#x3D;&#x3D;</li>
+<li>行内元素：&#x3D;&#x3D;span a i em&#x3D;&#x3D;</li>
+<li><img src="/CSS.assets/image-20220323155258742.png" srcset="/img/loading.gif" lazyload alt="image-20220323155258742"></li>
+</ul>
+</li>
+<li><h3 id="浮动-171"><a href="#浮动-171" class="headerlink" title="浮动-171"></a>浮动-171</h3><ul>
+<li>可以<strong>改变默认的排列方式</strong></li>
+<li>让多个元素<strong>一行摆放</strong></li>
+<li>&#x3D;&#x3D;横着布局：标准流&#x3D;&#x3D;</li>
+<li>&#x3D;&#x3D;竖着布局：浮动&#x3D;&#x3D;  <code>float:left;</code></li>
+<li><img src="/CSS.assets/image-20220323155733408.png" srcset="/img/loading.gif" lazyload alt="image-20220323155733408"></li>
+</ul>
+</li>
+<li><h4 id="什么是浮动？"><a href="#什么是浮动？" class="headerlink" title="什么是浮动？"></a>什么是浮动？</h4><p><img src="/CSS.assets/image-20220323160118315.png" srcset="/img/loading.gif" lazyload alt="image-20220323160118315"></p>
+<ul>
+<li><img src="/CSS.assets/image-20220323160010232.png" srcset="/img/loading.gif" lazyload alt="image-20220323160010232"></li>
+<li>left？right？</li>
+<li>找<strong>左或右边缘</strong>（body或者各种div的边缘也是）</li>
+<li><img src="/CSS.assets/image-20220323160053786.png" srcset="/img/loading.gif" lazyload alt="image-20220323160053786"></li>
+<li><img src="/CSS.assets/image-20220323160059366.png" srcset="/img/loading.gif" lazyload alt="image-20220323160059366"></li>
+</ul>
+</li>
+<li><h4 id="浮动特性1：脱标"><a href="#浮动特性1：脱标" class="headerlink" title="浮动特性1：脱标"></a>浮动特性1：脱标<img src="/CSS.assets/image-20220323160821904.png" srcset="/img/loading.gif" lazyload alt="image-20220323160821904"></h4><ul>
+<li><p>&#x3D;&#x3D;脱标的盒子<strong>不再保留原先位置</strong>（其他标准流位置<strong>补上来</strong>）&#x3D;&#x3D;<img src="/CSS.assets/image-20220323161007347.png" srcset="/img/loading.gif" lazyload alt="image-20220323161007347"></p>
+</li>
+<li><p>&#x3D;&#x3D;已经不再是标准流元素&#x3D;&#x3D;</p>
+</li>
+<li><p><img src="/CSS.assets/image-20220323162155827.png" srcset="/img/loading.gif" lazyload alt="image-20220323162155827"></p>
+</li>
+<li><h4 id="如果只给粉加了float，蓝色没加，会叠加在一起"><a href="#如果只给粉加了float，蓝色没加，会叠加在一起" class="headerlink" title="如果只给粉加了float，蓝色没加，会叠加在一起"></a>如果只给粉加了float，蓝色没加，会叠加在一起<img src="/CSS.assets/image-20220323162229525.png" srcset="/img/loading.gif" lazyload alt="image-20220323162229525"></h4></li>
+</ul>
+</li>
+<li><h4 id="浮动特性2：多个float时一行显示"><a href="#浮动特性2：多个float时一行显示" class="headerlink" title="浮动特性2：多个float时一行显示"></a>浮动特性2：多个float时一行显示</h4><ul>
+<li>一行了</li>
+<li>上沿（顶端）对齐</li>
+</ul>
+</li>
+</ul>
+<p><img src="/CSS.assets/image-20220323162549048.png" srcset="/img/loading.gif" lazyload alt="image-20220323162549048"></p>
+<p><img src="/CSS.assets/image-20220323162600899.png" srcset="/img/loading.gif" lazyload alt="image-20220323162600899"></p>
+<ul>
+<li>对div加上float：按行排列</li>
+<li><img src="/CSS.assets/image-20220323162639486.png" srcset="/img/loading.gif" lazyload alt="image-20220323162639486"></li>
+<li>缩小框时会换行</li>
+</ul>
+<p><img src="/CSS.assets/image-20220323162723398.png" srcset="/img/loading.gif" lazyload alt="image-20220323162723398"></p>
+<ul>
+<li><img src="/CSS.assets/image-20220324102010863.png" srcset="/img/loading.gif" lazyload alt="image-20220324102010863"></li>
+</ul>
+<p><strong>会换行</strong></p>
+<hr>
+<h3 id="特性3：具有行内块元素特性"><a href="#特性3：具有行内块元素特性" class="headerlink" title="特性3：具有行内块元素特性"></a>特性3：具有行内块元素特性</h3><p><img src="/CSS.assets/image-20220324102251578.png" srcset="/img/loading.gif" lazyload alt="image-20220324102251578"></p>
+<p> <img src="/CSS.assets/image-20220324102334935.png" srcset="/img/loading.gif" lazyload alt="image-20220324102334935"></p>
+<p><img src="/CSS.assets/image-20220324102437872.png" srcset="/img/loading.gif" lazyload alt="image-20220324102437872"></p>
+<p><img src="/CSS.assets/image-20220324102449369.png" srcset="/img/loading.gif" lazyload alt="image-20220324102449369"></p>
+<h2 id="浮动与标准流搭配使用"><a href="#浮动与标准流搭配使用" class="headerlink" title="浮动与标准流搭配使用"></a>浮动与标准流搭配使用</h2><p><img src="/CSS.assets/image-20220324104652862.png" srcset="/img/loading.gif" lazyload alt="image-20220324104652862"></p>
+<p><img src="/CSS.assets/image-20220324104711066.png" srcset="/img/loading.gif" lazyload alt="image-20220324104711066"></p>
+<p>不要直接给多个div添加float，先准备一个大盒子，内部再float（否则会以浏览器为基准浮动）</p>
+<p><img src="/CSS.assets/image-20220324104823685.png" srcset="/img/loading.gif" lazyload alt="image-20220324104823685"></p>
+<p>父盒子高宽、居中</p>
+<p>浮动盒子左右一个</p>
+<h2 id="小米布局案例"><a href="#小米布局案例" class="headerlink" title="小米布局案例"></a>小米布局案例</h2><p><img src="/CSS.assets/image-20220324105104460.png" srcset="/img/loading.gif" lazyload alt="image-20220324105104460"></p>
+<p>中间没有缝隙-&amp;在一行–》float</p>
+<p><img src="/CSS.assets/image-20220324105542348.png" srcset="/img/loading.gif" lazyload alt="image-20220324105542348"></p>
+<p><strong>&#x3D;&#x3D;使在一行显示：&#x3D;&#x3D;</strong></p>
+<ul>
+<li>&#x3D;&#x3D;通过宽1+宽2&#x3D;总宽&#x3D;&#x3D;</li>
+<li>&#x3D;&#x3D;最外层标准居中&#x3D;&#x3D;</li>
+<li>&#x3D;&#x3D;内层都浮动&#x3D;&#x3D;</li>
+</ul>
+<p><img src="/CSS.assets/image-20220324105644617.png" srcset="/img/loading.gif" lazyload alt="image-20220324105644617"></p>
+<p>&#x3D;&#x3D;margin控制盒子与盒子之间的距离&#x3D;&#x3D;</p>
+<p><img src="/CSS.assets/image-20220324110009628.png" srcset="/img/loading.gif" lazyload alt="image-20220324110009628"></p>
+<p>最后一个盒子单独写外边距</p>
+<p><img src="/CSS.assets/image-20220324110106078.png" srcset="/img/loading.gif" lazyload alt="image-20220324110106078"></p>
+<p>权重！下面的权重低，没有起效果</p>
+<p><img src="/CSS.assets/image-20220324110121654.png" srcset="/img/loading.gif" lazyload alt="image-20220324110121654"></p>
+<p><img src="/CSS.assets/image-20220324110357075.png" srcset="/img/loading.gif" lazyload alt="image-20220324110357075"></p>
+<p><img src="/CSS.assets/image-20220324111031845.png" srcset="/img/loading.gif" lazyload alt="image-20220324111031845"></p>
+<p><img src="/CSS.assets/image-20220324111042850.png" srcset="/img/loading.gif" lazyload alt="image-20220324111042850"></p>
+<p><img src="/CSS.assets/image-20220324111054911.png" srcset="/img/loading.gif" lazyload alt="image-20220324111054911"></p>
+<p><img src="/CSS.assets/image-20220324111720469.png" srcset="/img/loading.gif" lazyload alt="image-20220324111720469"></p>
+<h2 id="手机布局"><a href="#手机布局" class="headerlink" title="手机布局"></a>手机布局</h2><p><img src="/CSS.assets/image-20220324111808061.png" srcset="/img/loading.gif" lazyload alt="image-20220324111808061"></p>
+<p><img src="/CSS.assets/image-20220324114033893.png" srcset="/img/loading.gif" lazyload alt="image-20220324114033893"></p>
+<ol>
+<li>&#x3D;&#x3D;小<strong>间距</strong>：margin-left（边框不变，往右移动）【盒子之间用margin】&#x3D;&#x3D;</li>
+<li>用此方法，量大盒子时使用的width应该是包含边距的</li>
+</ol>
+<h1 id="网页布局准则"><a href="#网页布局准则" class="headerlink" title="网页布局准则"></a>网页布局准则</h1><ol>
+<li>标准流上下，浮动左右排</li>
+<li>先设置盒子大小，再设置位置</li>
+</ol>
+<h1 id="常见网页布局"><a href="#常见网页布局" class="headerlink" title="常见网页布局"></a>常见网页布局</h1><p><img src="/CSS.assets/image-20220324114503654.png" srcset="/img/loading.gif" lazyload alt="image-20220324114503654"></p>
+<p><img src="/CSS.assets/image-20220324115416593.png" srcset="/img/loading.gif" lazyload alt="image-20220324115416593"></p>
+<p><strong>【通栏】：</strong>&#x3D;&#x3D;块级元素不设置宽度时会默认和浏览器一样宽&#x3D;&#x3D;</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><code class="hljs css">&lt;!DOCTYPE <span class="hljs-selector-tag">html</span>&gt;<br>&lt;<span class="hljs-selector-tag">html</span> lang=&quot;en&quot;&gt;<br>&lt;head&gt;<br>  &lt;meta charset=&quot;UTF-<span class="hljs-number">8</span>&quot;&gt;<br>  &lt;meta http-equiv=&quot;X-UA-Compatible&quot; <span class="hljs-attribute">content</span>=&quot;IE=edge&quot;&gt;<br>  &lt;meta name=&quot;viewport&quot; <span class="hljs-attribute">content</span>=&quot;<span class="hljs-attribute">width</span>=device-<span class="hljs-attribute">width</span>, initial-scale=<span class="hljs-number">1.0</span>&quot;&gt;<br>  &lt;title&gt;Document&lt;/title&gt;<br>  &lt;style&gt;<br>    *&#123;<br>      <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span>;<br>      <span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span>;<br>    &#125;<br>    <span class="hljs-selector-class">.top</span>&#123;<br>      <span class="hljs-comment">/* 块级元素默认和浏览器一样宽，不用设置宽度 */</span><br>      <span class="hljs-attribute">height</span>: <span class="hljs-number">50px</span>;<br>      <span class="hljs-attribute">background-color</span>: gray;<br>    &#125;<br>    <span class="hljs-selector-class">.banner</span>&#123;<br>      <span class="hljs-attribute">width</span>: <span class="hljs-number">980px</span>;<br>      <span class="hljs-attribute">height</span>: <span class="hljs-number">150px</span>;<br>      <span class="hljs-comment">/* margin: 0 auto; */</span><br>      <span class="hljs-attribute">background-color</span>:grey;<br>      <span class="hljs-attribute">margin</span>: <span class="hljs-number">10px</span> auto;<br>    &#125;<br>    <span class="hljs-selector-tag">li</span>&#123;<br>      <span class="hljs-attribute">list-style</span>: none;<br>    &#125;<br>    <span class="hljs-selector-class">.box</span>&#123;<br>      <span class="hljs-attribute">width</span>: <span class="hljs-number">980px</span>;<br>      <span class="hljs-attribute">height</span>: <span class="hljs-number">300px</span>;<br>      <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span> auto;<br>      <span class="hljs-attribute">background-color</span>: palegoldenrod;<br>    &#125;<br>    <span class="hljs-selector-class">.box</span> <span class="hljs-selector-tag">li</span>&#123;<br>      <span class="hljs-attribute">float</span>: left;<br>      <span class="hljs-attribute">width</span>: <span class="hljs-number">237px</span>;<br>      <span class="hljs-attribute">height</span>: <span class="hljs-number">300px</span>;<br>      <span class="hljs-attribute">background-color</span>: gray;<br>      <span class="hljs-attribute">margin-right</span>: <span class="hljs-number">10px</span>;<br>    &#125;<br>    <span class="hljs-selector-class">.box</span> <span class="hljs-selector-tag">li</span><span class="hljs-selector-pseudo">:nth-child</span>(<span class="hljs-number">4</span>)&#123;<br>      <span class="hljs-comment">/* 最后一个没有右边距 */</span><br>      <span class="hljs-attribute">margin-right</span>: <span class="hljs-number">0</span>;<br>    &#125;<br>    <span class="hljs-selector-class">.footer</span>&#123;<br>      <span class="hljs-attribute">height</span>: <span class="hljs-number">200px</span>;<br>      <span class="hljs-attribute">background-color</span>: gray;<br>      <span class="hljs-attribute">margin-top</span>: <span class="hljs-number">10px</span>;<br>    &#125;<br>  &lt;/style&gt;<br>&lt;/head&gt;<br>&lt;<span class="hljs-selector-tag">body</span>&gt;<br>  &lt;<span class="hljs-selector-tag">div</span> class=&quot;<span class="hljs-attribute">top</span>&quot;&gt;&lt;/<span class="hljs-selector-tag">div</span>&gt;<br>  &lt;<span class="hljs-selector-tag">div</span> class=&quot;banner&quot;&gt;&lt;/<span class="hljs-selector-tag">div</span>&gt;<br>  &lt;<span class="hljs-selector-tag">div</span> class=&quot;box&quot;&gt;<br>    &lt;<span class="hljs-selector-tag">ul</span>&gt;<br>      &lt;<span class="hljs-selector-tag">li</span>&gt;<span class="hljs-number">1</span>&lt;/<span class="hljs-selector-tag">li</span>&gt;<br>      &lt;<span class="hljs-selector-tag">li</span>&gt;<span class="hljs-number">2</span>&lt;/<span class="hljs-selector-tag">li</span>&gt;<br>      &lt;<span class="hljs-selector-tag">li</span>&gt;<span class="hljs-number">3</span>&lt;/<span class="hljs-selector-tag">li</span>&gt;<br>      &lt;<span class="hljs-selector-tag">li</span>&gt;<span class="hljs-number">4</span>&lt;/<span class="hljs-selector-tag">li</span>&gt;<br>    &lt;/<span class="hljs-selector-tag">ul</span>&gt;<br>  &lt;/<span class="hljs-selector-tag">div</span>&gt;<br>  &lt;<span class="hljs-selector-tag">div</span> class=&quot;<span class="hljs-selector-tag">footer</span>&quot;&gt;&lt;/<span class="hljs-selector-tag">div</span>&gt;<br>&lt;/<span class="hljs-selector-tag">body</span>&gt;<br>&lt;/<span class="hljs-selector-tag">html</span>&gt;<br></code></pre></td></tr></table></figure>
+
+<h1 id="浮动布局注意点"><a href="#浮动布局注意点" class="headerlink" title="浮动布局注意点"></a>浮动布局注意点</h1><p><img src="/CSS.assets/image-20220324120115339.png" srcset="/img/loading.gif" lazyload alt="image-20220324120115339"></p>
+<ol>
+<li>父标准，子浮动</li>
+<li>一浮多浮</li>
+</ol>
+<h1 id="清除浮动"><a href="#清除浮动" class="headerlink" title="清除浮动"></a>清除浮动</h1><h2 id="父盒子高度必须写吗？"><a href="#父盒子高度必须写吗？" class="headerlink" title="父盒子高度必须写吗？"></a>父盒子高度必须写吗？</h2><p>让子盒子撑开父盒子</p>
+<p>不要给父盒子写高</p>
+<p><img src="/CSS.assets/image-20220324120731317.png" srcset="/img/loading.gif" lazyload alt="image-20220324120731317"></p>
+<blockquote>
+<p>给子元素加了浮动，不再占有位置，父元素宽度没了</p>
+</blockquote>
+<h2 id="清除浮动-1"><a href="#清除浮动-1" class="headerlink" title="清除浮动"></a>清除浮动</h2><p><img src="/CSS.assets/image-20220324121104775.png" srcset="/img/loading.gif" lazyload alt="image-20220324121104775"></p>
+<p><img src="/CSS.assets/image-20220324121150577.png" srcset="/img/loading.gif" lazyload alt="image-20220324121150577"></p>
+<p>&#x3D;&#x3D;【之前大框内几个小框，只是因为设置了宽度一样，效果上是撑开的，实际上父和子不在一个维度】&#x3D;&#x3D;</p>
+<h3 id="如何清除"><a href="#如何清除" class="headerlink" title="如何清除"></a>如何清除</h3><ol>
+<li>清楚浮动元素造成的影响</li>
+</ol>
+<p><img src="/CSS.assets/image-20220324121342269.png" srcset="/img/loading.gif" lazyload alt="image-20220324121342269"></p>
+<p><img src="/CSS.assets/image-20220324121404758.png" srcset="/img/loading.gif" lazyload alt="image-20220324121404758"></p>
+<h3 id="清除浮动方法"><a href="#清除浮动方法" class="headerlink" title="清除浮动方法"></a>清除浮动方法</h3><p><img src="/CSS.assets/image-20220324121439790.png" srcset="/img/loading.gif" lazyload alt="image-20220324121439790"></p>
+<p><img src="/CSS.assets/image-20220324202946577.png" srcset="/img/loading.gif" lazyload alt="image-20220324202946577"></p>
+<h2 id="1-额外标签法"><a href="#1-额外标签法" class="headerlink" title="1 额外标签法"></a>1 额外标签法</h2><p><img src="/CSS.assets/image-20220325102847351.png" srcset="/img/loading.gif" lazyload alt="image-20220325102847351"></p>
+<p><strong>新添加的元素必须是块级元素</strong></p>
+<p><img src="/CSS.assets/image-20220325102906742.png" srcset="/img/loading.gif" lazyload alt="image-20220325102906742">会使得box撑满l和r，同时box2不受浮动影响，被挤到该在的位置</p>
+<p><img src="/CSS.assets/image-20220324203702795.png" srcset="/img/loading.gif" lazyload alt="image-20220324203702795"></p>
+<h2 id="2-父级添加overflow"><a href="#2-父级添加overflow" class="headerlink" title="2 父级添加overflow"></a>2 父级添加overflow</h2><p><img src="/CSS.assets/image-20220325103351826.png" srcset="/img/loading.gif" lazyload alt="image-20220325103351826"></p>
+<p><img src="/CSS.assets/image-20220325103501279.png" srcset="/img/loading.gif" lazyload alt="image-20220325103501279"></p>
+<p>【无法显示溢出的部分】</p>
+<h2 id="3-：after伪元素法（给父元素）"><a href="#3-：after伪元素法（给父元素）" class="headerlink" title="3 ：after伪元素法（给父元素）"></a>3 ：after伪元素法（给父元素）</h2><p><img src="/CSS.assets/image-20220325103541043.png" srcset="/img/loading.gif" lazyload alt="image-20220325103541043"></p>
+<ol>
+<li>把这两段复制在style中放好</li>
+<li>给父盒子加一个clearfix类</li>
+</ol>
+<p><img src="/CSS.assets/image-20220325104117729.png" srcset="/img/loading.gif" lazyload alt="image-20220325104117729"></p>
+<h2 id="4-双伪元素"><a href="#4-双伪元素" class="headerlink" title="4 双伪元素"></a>4 双伪元素</h2><p><img src="/CSS.assets/image-20220325104410337.png" srcset="/img/loading.gif" lazyload alt="image-20220325104410337"></p>
+<h2 id="什么时候清除"><a href="#什么时候清除" class="headerlink" title="什么时候清除"></a>什么时候清除</h2><p><img src="/CSS.assets/image-20220325105219165.png" srcset="/img/loading.gif" lazyload alt="image-20220325105219165"></p>
+<ol>
+<li>父级盒子没有高度时，会被浮动子元素影响高度</li>
+<li>影响到其他布局了</li>
+</ol>
+<h2 id="方法总结"><a href="#方法总结" class="headerlink" title="方法总结"></a>方法总结</h2><p><img src="/CSS.assets/image-20220325105256182.png" srcset="/img/loading.gif" lazyload alt="image-20220325105256182"></p>
+<p>感觉&#x3D;&#x3D;<strong>给父级添加overflow：hidden最简单</strong>&#x3D;&#x3D;</p>
+<h1 id="195-学成在线案例"><a href="#195-学成在线案例" class="headerlink" title="195 学成在线案例"></a>195 学成在线案例</h1><h2 id="css书写顺序"><a href="#css书写顺序" class="headerlink" title="css书写顺序"></a>css书写顺序</h2><p><img src="/CSS.assets/image-20220325105940464.png" srcset="/img/loading.gif" lazyload alt="image-20220325105940464"></p>
+<h2 id="整体布局思路"><a href="#整体布局思路" class="headerlink" title="整体布局思路"></a>整体布局思路</h2><p><img src="/CSS.assets/image-20220325110313300.png" srcset="/img/loading.gif" lazyload alt="image-20220325110313300"></p>
+<h2 id="确定版心"><a href="#确定版心" class="headerlink" title="确定版心"></a>确定版心</h2><p><img src="/CSS.assets/image-20220325111204204.png" srcset="/img/loading.gif" lazyload alt="image-20220325111204204"></p>
+<h2 id="头部"><a href="#头部" class="headerlink" title="头部"></a>头部</h2><p><img src="/CSS.assets/image-20220325111417082.png" srcset="/img/loading.gif" lazyload alt="image-20220325111417082"></p>
+<h3 id="padding法"><a href="#padding法" class="headerlink" title="padding法"></a>padding法</h3><p><img src="/CSS.assets/image-20220325111459783.png" srcset="/img/loading.gif" lazyload alt="image-20220325111459783"></p>
+<p>测量最高高度</p>
+<h3 id="margin法"><a href="#margin法" class="headerlink" title="margin法"></a>margin法</h3><p><img src="/CSS.assets/image-20220325111451799.png" srcset="/img/loading.gif" lazyload alt="image-20220325111451799"></p>
+<p>测量文字高度</p>
+<p><img src="/CSS.assets/image-20220325111955655.png" srcset="/img/loading.gif" lazyload alt="image-20220325111955655"></p>
+<h2 id="导航栏"><a href="#导航栏" class="headerlink" title="导航栏"></a>导航栏</h2><p><img src="/CSS.assets/image-20220325113713931.png" srcset="/img/loading.gif" lazyload alt="image-20220325113713931"></p>
+<h3 id="logo"><a href="#logo" class="headerlink" title="logo"></a>logo</h3><p>直接设置img，设置高度、宽度</p>
+<h3 id="导航栏-1"><a href="#导航栏-1" class="headerlink" title="导航栏"></a>导航栏</h3><p><img src="/CSS.assets/image-20220325114138281.png" srcset="/img/loading.gif" lazyload alt="image-20220325114138281"></p>
+<ol>
+<li>在一行：<strong>每个li都加浮动</strong></li>
+<li><strong>ul li a</strong>写导航栏</li>
+<li>li<strong>去掉原点</strong></li>
+<li>a<strong>去掉下划线</strong></li>
+<li>文字居中：<strong>line-height</strong></li>
+<li>设置高度<strong>height</strong>，不设置宽度（可能还有其他内容）</li>
+<li>左右设置<strong>padding</strong>实现间隔</li>
+</ol>
+<p><img src="/CSS.assets/image-20220325114354046.png" srcset="/img/loading.gif" lazyload alt="image-20220325114354046"></p>
+<p><img src="/CSS.assets/image-20220325114824915.png" srcset="/img/loading.gif" lazyload alt="image-20220325114824915"></p>
+<h3 id="x3D-x3D-使得文字居中-x3D-x3D"><a href="#x3D-x3D-使得文字居中-x3D-x3D" class="headerlink" title="&#x3D;&#x3D;使得文字居中&#x3D;&#x3D;"></a>&#x3D;&#x3D;使得文字居中&#x3D;&#x3D;</h3><p><img src="/CSS.assets/image-20220325114834268.png" srcset="/img/loading.gif" lazyload alt="image-20220325114834268"></p>
+<p>直接设置line-height,而不是height</p>
+<p><img src="/CSS.assets/image-20220325115008405.png" srcset="/img/loading.gif" lazyload alt="image-20220325115008405"></p>
+<h2 id="表单"><a href="#表单" class="headerlink" title="表单"></a>表单</h2><p><img src="/CSS.assets/image-20220325152737754.png" srcset="/img/loading.gif" lazyload alt="image-20220325152737754"></p>
+<ul>
+<li>一个表单包含左边输入框和右边搜索</li>
+</ul>
+<p><img src="/CSS.assets/image-20220325152851559.png" srcset="/img/loading.gif" lazyload alt="image-20220325152851559"></p>
+<h2 id="定位"><a href="#定位" class="headerlink" title="定位"></a>定位</h2><p><img src="/CSS.assets/image-20220408113713722.png" srcset="/img/loading.gif" lazyload alt="image-20220408113713722"></p>
+<p> <img src="/CSS.assets/image-20220408113723086.png" srcset="/img/loading.gif" lazyload alt="image-20220408113723086"></p>
+<p><img src="/CSS.assets/image-20220408113730790.png" srcset="/img/loading.gif" lazyload alt="image-20220408113730790"></p>
+<p><strong>固定在屏幕中的某个位置</strong></p>
+<p><img src="/CSS.assets/image-20220408113820621.png" srcset="/img/loading.gif" lazyload alt="image-20220408113820621"></p>
+<p>&#x3D;&#x3D;定位&#x3D;定位模式+边偏移&#x3D;&#x3D;</p>
+<p><img src="/CSS.assets/image-20220408114010937.png" srcset="/img/loading.gif" lazyload alt="image-20220408114010937"></p>
+<p><strong>移动位置</strong>：</p>
+<p><img src="/CSS.assets/image-20220408114049335.png" srcset="/img/loading.gif" lazyload alt="image-20220408114049335"></p>
+<ul>
+<li><p>静态定位：标准流</p>
+</li>
+<li><h3 id="相对定位relative：-x3D-x3D-根据原来的位置-x3D-x3D"><a href="#相对定位relative：-x3D-x3D-根据原来的位置-x3D-x3D" class="headerlink" title="相对定位relative：&#x3D;&#x3D;根据原来的位置&#x3D;&#x3D;"></a>相对定位relative：&#x3D;&#x3D;<strong>根据原来的位置</strong>&#x3D;&#x3D;</h3></li>
+</ul>
+<p><img src="/CSS.assets/image-20220408114309509.png" srcset="/img/loading.gif" lazyload alt="image-20220408114309509"></p>
+<ul>
+<li>不会影响其他盒子</li>
+</ul>
+<p><img src="/CSS.assets/image-20220408114627020.png" srcset="/img/loading.gif" lazyload alt="image-20220408114627020"></p>
+<p>（不脱标）</p>
+<ul>
+<li><h3 id="绝对定位-absolute：-x3D-x3D-根据父元素-x3D-x3D"><a href="#绝对定位-absolute：-x3D-x3D-根据父元素-x3D-x3D" class="headerlink" title="绝对定位 absolute：&#x3D;&#x3D;根据父元素&#x3D;&#x3D;"></a>绝对定位 absolute：&#x3D;&#x3D;根据父元素&#x3D;&#x3D;</h3></li>
+</ul>
+<p><strong>&#x3D;&#x3D;没有父元素：&#x3D;&#x3D;</strong></p>
+<ul>
+<li>以浏览器为标准定位</li>
+</ul>
+<p>&#x3D;&#x3D;<strong>有父元素，但父元素没定位：</strong>&#x3D;&#x3D;</p>
+<ul>
+<li>以浏览器为标准定位</li>
+</ul>
+<p><strong>&#x3D;&#x3D;有父元素，父元素有定位：&#x3D;&#x3D;</strong></p>
+<ul>
+<li>以最近的有定位的父元素为标准</li>
+</ul>
+<p>​													&#x3D;&#x3D;<em><strong>绝对定位会脱标</strong></em>&#x3D;&#x3D;</p>
+<p><img src="/CSS.assets/image-20220408121017846.png" srcset="/img/loading.gif" lazyload alt="image-20220408121017846"></p>
+<p><img src="/CSS.assets/image-20220408121303285.png" srcset="/img/loading.gif" lazyload alt="image-20220408121303285"></p>
+<p>一个图片上面的两个绝对定位：不会影响背景图的展示（脱标了）</p>
+<h2 id="子绝父相"><a href="#子绝父相" class="headerlink" title="子绝父相"></a>子绝父相</h2><p><img src="/CSS.assets/image-20220408121829253.png" srcset="/img/loading.gif" lazyload alt="image-20220408121829253"></p>
+<p><strong>子元素绝对，不占位置，脱标，就不会影响其他兄弟盒子</strong></p>
+<p>父盒子相对定位：</p>
+<ul>
+<li>绝对定位会导致父盒子也脱标，不能保留原来的位置，但是父盒子一定要保留原来的位置！</li>
+</ul>
+<p><img src="/CSS.assets/image-20220408122032338.png" srcset="/img/loading.gif" lazyload alt="image-20220408122032338"></p>
+<h2 id="固定定位fiexd"><a href="#固定定位fiexd" class="headerlink" title="固定定位fiexd"></a>固定定位fiexd</h2><p><img src="/CSS.assets/image-20220408122125977.png" srcset="/img/loading.gif" lazyload alt="image-20220408122125977"></p>
+<p><img src="/CSS.assets/image-20220408122135419.png" srcset="/img/loading.gif" lazyload alt="image-20220408122135419"></p>
+<p><img src="/CSS.assets/image-20220408122838245.png" srcset="/img/loading.gif" lazyload alt="image-20220408122838245"></p>
+<ul>
+<li>固定定位不占有原先的位置</li>
+<li>也是脱标的，一种特殊的绝对定位</li>
+</ul>
+<p><img src="/CSS.assets/image-20220408123100980.png" srcset="/img/loading.gif" lazyload alt="image-20220408123100980"></p>
+<h4 id="固定定位跟着版心对齐"><a href="#固定定位跟着版心对齐" class="headerlink" title="固定定位跟着版心对齐"></a>固定定位跟着版心对齐</h4><p><img src="/CSS.assets/image-20220408123237940.png" srcset="/img/loading.gif" lazyload alt="image-20220408123237940"></p>
+<ul>
+<li>**&#x3D;&#x3D;left&#x3D;&#x3D;**走50%（如果父盒子在正中间）</li>
+<li>**&#x3D;&#x3D;margin-left：&#x3D;&#x3D;**再多走版心宽度的一半</li>
+</ul>
+<h2 id="绝对定位盒子使得水平垂直居中"><a href="#绝对定位盒子使得水平垂直居中" class="headerlink" title="绝对定位盒子使得水平垂直居中"></a>绝对定位盒子使得水平垂直居中</h2><p><img src="/CSS.assets/image-20220408123757684.png" srcset="/img/loading.gif" lazyload alt="image-20220408123757684"></p>
+<ul>
+<li>**&#x3D;&#x3D;left&#x3D;&#x3D;**走50%</li>
+<li><strong>&#x3D;&#x3D;marigin-left&#x3D;负值&#x3D;&#x3D;</strong></li>
+</ul>
+<h1 id="媒体查询"><a href="#媒体查询" class="headerlink" title="媒体查询"></a>媒体查询</h1><blockquote>
+<p>为不同尺寸的屏幕设定不同的CSS样式</p>
+</blockquote>
+<p><img src="/CSS.assets/image-20220408095319203.png" srcset="/img/loading.gif" lazyload alt="image-20220408095319203"></p>
+<p><img src="/CSS.assets/image-20220408095413348.png" srcset="/img/loading.gif" lazyload alt="image-20220327203747892"></p>
+<p><img src="/CSS.assets/image-20220327204154120.png" srcset="/img/loading.gif" lazyload alt="image-20220327204154120"></p>
+<h2 id="背景颜色变色"><a href="#背景颜色变色" class="headerlink" title="背景颜色变色"></a>背景颜色变色</h2><p><img src="/CSS.assets/image-20220408101228577.png" srcset="/img/loading.gif" lazyload alt="image-20220408101228577"></p>
+<ul>
+<li>绿色高度变高</li>
+<li>文字字体变大</li>
+</ul>
+<h2 id="media常用参数"><a href="#media常用参数" class="headerlink" title="@media常用参数"></a>@media常用参数</h2><p><img src="/CSS.assets/image-20220328111520155.png" srcset="/img/loading.gif" lazyload alt="image-20220328111520155"></p>
+<p>device没有：浏览器</p>
+<p>有device：手机设备</p>
+<h2 id="media引用方式1"><a href="#media引用方式1" class="headerlink" title="@media引用方式1"></a>@media引用方式1</h2><p><img src="/CSS.assets/image-20220329195005424.png" srcset="/img/loading.gif" lazyload alt="image-20220329195005424"></p>
+<h2 id="media引用方式2"><a href="#media引用方式2" class="headerlink" title="@media引用方式2"></a>@media引用方式2</h2><p><img src="/CSS.assets/image-20220329195035018.png" srcset="/img/loading.gif" lazyload alt="image-20220329195035018"></p>
+<h3 id="缩略图示例"><a href="#缩略图示例" class="headerlink" title="缩略图示例"></a>缩略图示例</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-comment">/* 媒体查询 */</span><br><span class="hljs-keyword">@media</span>(max-width:600px)&#123;<br>  <span class="hljs-comment">/* 宽度&lt;600时 */</span><br>  <span class="hljs-selector-class">.sub-imgs</span>&#123;<br>    <span class="hljs-comment">/* 子图容器设置为2列 */</span><br>    <span class="hljs-attribute">grid-template-columns</span>: <span class="hljs-number">1</span>fr <span class="hljs-number">1</span>fr;<br>  &#125;<br>&#125; <br></code></pre></td></tr></table></figure>
+
+<p><img src="/CSS.assets/image-20220331103341806.png" srcset="/img/loading.gif" lazyload alt="image-20220331103341806"></p>
+<ul>
+<li>其他时候都是4个一行</li>
+</ul>
+<h1 id="flex"><a href="#flex" class="headerlink" title="flex"></a>flex</h1><img src="CSS.assets/image-20220329195332550.png" srcset="/img/loading.gif" lazyload alt="image-20220329195332550" style="zoom:100%;" />
+
+<h2 id="子元素伸缩比"><a href="#子元素伸缩比" class="headerlink" title="子元素伸缩比"></a>子元素伸缩比</h2><p><img src="/CSS.assets/image-20220329201106877.png" srcset="/img/loading.gif" lazyload alt="image-20220329201106877"></p>
+<h3 id="basis："><a href="#basis：" class="headerlink" title="basis："></a>basis：</h3><p>宽度 覆盖width</p>
+<h3 id="grow："><a href="#grow：" class="headerlink" title="grow："></a>grow：</h3><p>子对象没填满父对象时（有剩余空间时）</p>
+<p>每个子对象按grow比例扩充大小</p>
+<p><img src="/CSS.assets/image-20220329201742387.png" srcset="/img/loading.gif" lazyload alt="image-20220329201742387"></p>
+<h3 id="shrink"><a href="#shrink" class="headerlink" title="shrink"></a>shrink</h3><p>不允许缩小</p>
+<h3 id="flex-1"><a href="#flex-1" class="headerlink" title="flex"></a>flex</h3><p>扩大 缩小 宽</p>
+<h2 id="简写"><a href="#简写" class="headerlink" title="简写"></a>简写</h2><p><img src="/CSS.assets/image-20220329202346172.png" srcset="/img/loading.gif" lazyload alt="image-20220329202346172"></p>
+<h1 id="rem单位"><a href="#rem单位" class="headerlink" title="rem单位"></a>rem单位</h1><ul>
+<li>文字大小随屏幕大小变化而变化</li>
+<li>高度不要定死，随屏幕变化等比例缩放</li>
+</ul>
+<p><img src="/CSS.assets/image-20220329203126026.png" srcset="/img/loading.gif" lazyload alt="image-20220329203126026"></p>
+<p><img src="/CSS.assets/image-20220329204321057.png" srcset="/img/loading.gif" lazyload alt="image-20220329204321057"></p>
+<ul>
+<li>单位：<ul>
+<li>相对单位 类似em（父元素字体大小）</li>
+<li>em：<img src="/CSS.assets/image-20220408094435210.png" srcset="/img/loading.gif" lazyload alt="image-20220408094435210"></li>
+<li><img src="/CSS.assets/image-20220408094545844.png" srcset="/img/loading.gif" lazyload alt="image-20220408094545844"></li>
+</ul>
+</li>
+</ul>
+<h3 id="em"><a href="#em" class="headerlink" title="em"></a>em</h3><p>与父一级字体 </p>
+<ul>
+<li>父元素是10px，<strong>子元素10em&#x3D;10*10&#x3D;100px</strong></li>
+</ul>
+<h3 id="rem"><a href="#rem" class="headerlink" title="rem"></a>rem</h3><p>只用改一个html的文字大小，随着屏幕只用改变一个值，其他值也会跟着变</p>
+<p><strong>优势：</strong></p>
+<ul>
+<li>可以通过<strong>修改html里的文字大小</strong>来改变<strong>页面中元素大小</strong></li>
+</ul>
+<h1 id="响应式布局"><a href="#响应式布局" class="headerlink" title="响应式布局"></a>响应式布局</h1><p><img src="/CSS.assets/image-20220329210536961.png" srcset="/img/loading.gif" lazyload alt="image-20220329210536961"></p>
+<p><img src="/CSS.assets/image-20220329210552057.png" srcset="/img/loading.gif" lazyload alt="image-20220329210552057"></p>
+<p><img src="/CSS.assets/image-20220408110803082.png" srcset="/img/loading.gif" lazyload alt="image-20220408110803082"></p>
+<p><strong>通过media查询改变布局容器的大小，再改变子元素的排列方式和大小</strong></p>
+<h2 id="响应式导航"><a href="#响应式导航" class="headerlink" title="响应式导航"></a>响应式导航</h2><p><img src="/CSS.assets/image-20220408111725777.png" srcset="/img/loading.gif" lazyload alt="image-20220408111725777"></p>
+<ul>
+<li>大屏幕时：一排li</li>
+<li>小屏幕时：宽度变化100%，li一排只有几个，33.33%</li>
+</ul>
+<h1 id="CSS菜鸟教程"><a href="#CSS菜鸟教程" class="headerlink" title="CSS菜鸟教程"></a>CSS菜鸟教程</h1><h1 id="盒子模型"><a href="#盒子模型" class="headerlink" title="盒子模型"></a>盒子模型</h1><p>完整大小的元素，你还必须添加<strong>内边距</strong>，<strong>边框和外边距</strong>。</p>
+<p><img src="/CSS.assets/image-20220324210307503.png" srcset="/img/loading.gif" lazyload alt="image-20220324210307503"></p>
+<ul>
+<li>content+padding左右+border&#x3D;内容</li>
+</ul>
+<h2 id="网格布局"><a href="#网格布局" class="headerlink" title="网格布局"></a>网格布局</h2><ul>
+<li>容器添加 <strong>display：grid</strong></li>
+<li>容器设置摆放： <strong>grid-template-columns: 1fr 1fr;  &#x2F;&#x2F;2列</strong><ul>
+<li>​					 <strong>grid-template-columns: 1fr 1fr 1fr 1fr;&#x2F;&#x2F;4列</strong></li>
+</ul>
+</li>
+</ul>
+<p><img src="/CSS.assets/image-20220331103505142.png" srcset="/img/loading.gif" lazyload alt="image-20220331103505142"></p>
+<h2 id="【几种改变】"><a href="#【几种改变】" class="headerlink" title="【几种改变】"></a>【几种改变】</h2><h3 id="改变类："><a href="#改变类：" class="headerlink" title="改变类："></a>改变类：</h3><p>js:</p>
+<ul>
+<li>addClass</li>
+<li>ClassList</li>
+<li>ClassName</li>
+</ul>
+<p>jquery:</p>
+<p>- </p>
+<h3 id="改变属性："><a href="#改变属性：" class="headerlink" title="改变属性："></a>改变属性：</h3><p>js:</p>
+<ul>
+<li>xxx**.src**&#x3D;’’</li>
+<li>xxx.checked&#x3D;’’</li>
+<li>document.getElementById(‘img’)<strong>.src</strong>&#x3D;’..&#x2F;图片切换&#x2F;images&#x2F;2.jpg’</li>
+</ul>
+<p>jquery:</p>
+<ul>
+<li>$(‘#img’)<strong>.attr</strong>(‘src’,’xxxx’)</li>
+</ul>
+<h3 id="改变css："><a href="#改变css：" class="headerlink" title="改变css："></a>改变css：</h3><p>js:</p>
+<ul>
+<li>document.getElementById(“p2”)**.style.**color&#x3D;”blue”;</li>
+</ul>
+<h3 id="绑定事件："><a href="#绑定事件：" class="headerlink" title="绑定事件："></a>绑定事件：</h3><p>js：</p>
+<ul>
+<li>document.getElementById(“myBtn”)<strong>.onclick&#x3D;function()</strong>{<strong>displayDate()</strong>};</li>
+<li>&lt;button **onclick**&#x3D;”**displayDate()**”&gt;</li>
+</ul>
+<p>jquery：</p>
+<ul>
+<li>$(‘#id’).click&#x3D;function(){ }</li>
+<li>$(‘#id’).focus&#x3D;function(){}</li>
+</ul>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%89%8D%E7%AB%AF/">#前端</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>CSS</div>
+      <div>http://example.com/2022/04/22/CSS/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>John Doe</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>April 22, 2022</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>Licensed under</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/04/22/CV%E7%82%BC%E4%B8%B9%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93/" title="CV炼丹技巧总结">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">CV炼丹技巧总结</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/04/22/JavaScript/" title="JavaScript">
+                        <span class="hidden-mobile">JavaScript</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'http://example.com/2022/04/22/CSS/';
+          this.page.identifier = '/2022/04/22/CSS/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <i class="iconfont icon-love"></i> <a href="" target="_blank" rel="nofollow noopener"><span>武汉大学杨淇雅</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

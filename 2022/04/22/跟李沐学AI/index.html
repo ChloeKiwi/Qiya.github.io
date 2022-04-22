@@ -1,0 +1,1348 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.png">
+  <link rel="icon" href="/img/avatar.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Dive Into DL1. 前言1.1. 日常生活中的机器学习1.2. 关键组件1.2.1. 数据每个数据集由一个个样本（example, sample）组成 通常每个样本由一组称为特征（features，或协变量（covariates））的属性组成 要预测的是一个特殊的属性，它被称为标签 2.1. 数据操作（1）获取数据；（2）将数据读入计算机后对其进行处理  n维数组，也称为张量（tenso">
+<meta property="og:type" content="article">
+<meta property="og:title" content="跟李沐学AI">
+<meta property="og:url" content="http://example.com/2022/04/22/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Dive Into DL1. 前言1.1. 日常生活中的机器学习1.2. 关键组件1.2.1. 数据每个数据集由一个个样本（example, sample）组成 通常每个样本由一组称为特征（features，或协变量（covariates））的属性组成 要预测的是一个特殊的属性，它被称为标签 2.1. 数据操作（1）获取数据；（2）将数据读入计算机后对其进行处理  n维数组，也称为张量（tenso">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/ee2ab83add03b31bb076140fb6780c38.svg">
+<meta property="og:image" content="http://example.com/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/a25495da6d0d038829fed794c8378d2d.svg">
+<meta property="og:image" content="http://example.com/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220131145533639.png">
+<meta property="og:image" content="http://example.com/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220131145851232.png">
+<meta property="og:image" content="http://example.com/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220131150140026.png">
+<meta property="og:image" content="http://example.com/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220131154920248.png">
+<meta property="og:image" content="http://example.com/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220131160420347.png">
+<meta property="og:image" content="http://example.com/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220201115012265.png">
+<meta property="og:image" content="http://example.com/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220201115239453.png">
+<meta property="og:image" content="http://example.com/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220201123907161.png">
+<meta property="og:image" content="http://example.com/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220201120758704.png">
+<meta property="og:image" content="http://example.com/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220201121038926.png">
+<meta property="og:image" content="http://example.com/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220201121413306.png">
+<meta property="og:image" content="http://example.com/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220201122253477.png">
+<meta property="og:image" content="http://example.com/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220201122349833.png">
+<meta property="og:image" content="http://example.com/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220201124310314.png">
+<meta property="og:image" content="http://example.com/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220201125756294.png">
+<meta property="og:image" content="http://example.com/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220201151237761.png">
+<meta property="og:image" content="http://example.com/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220201151424300.png">
+<meta property="og:image" content="http://example.com/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220201152109456.png">
+<meta property="og:image" content="http://example.com/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220201152552575.png">
+<meta property="og:image" content="http://example.com/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220207162814512.png">
+<meta property="og:image" content="http://example.com/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220207172206110.png">
+<meta property="og:image" content="http://example.com/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220209164247749.png">
+<meta property="og:image" content="http://example.com/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220209164343783.png">
+<meta property="og:image" content="http://example.com/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220209165545414.png">
+<meta property="og:image" content="http://example.com/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220209170001796.png">
+<meta property="og:image" content="https://tangshusen.me/Dive-into-DL-PyTorch/img/chapter03/3.1_linreg.svg">
+<meta property="og:image" content="http://example.com/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220302233039947.png">
+<meta property="og:image" content="http://example.com/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220302233621062.png">
+<meta property="og:image" content="http://example.com/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220302234005970.png">
+<meta property="og:image" content="http://example.com/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220303093030092.png">
+<meta property="og:image" content="http://example.com/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220303093127549.png">
+<meta property="article:published_time" content="2022-04-22T09:21:33.000Z">
+<meta property="article:modified_time" content="2022-04-22T09:21:54.552Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="深度学习">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/ee2ab83add03b31bb076140fb6780c38.svg">
+  
+  
+  <title>跟李沐学AI - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Qiya</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="跟李沐学AI"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-04-22 17:21" pubdate>
+          April 22, 2022 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          10k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          88 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">跟李沐学AI</h1>
+            
+            <div class="markdown-body">
+              
+              <h1 id="Dive-Into-DL"><a href="#Dive-Into-DL" class="headerlink" title="Dive Into DL"></a>Dive Into DL</h1><h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h1><h2 id="1-1-日常生活中的机器学习"><a href="#1-1-日常生活中的机器学习" class="headerlink" title="1.1. 日常生活中的机器学习"></a>1.1. 日常生活中的机器学习</h2><h2 id="1-2-关键组件"><a href="#1-2-关键组件" class="headerlink" title="1.2. 关键组件"></a>1.2. 关键组件</h2><h3 id="1-2-1-数据"><a href="#1-2-1-数据" class="headerlink" title="1.2.1. 数据"></a>1.2.1. 数据</h3><p>每个数据集由一个个<em><strong>样本</strong></em>（example, sample）组成</p>
+<p>通常每个样本由一组称为<em><strong>特征</strong></em>（features，或<em>协变量</em>（covariates））的属性组成</p>
+<p>要预测的是一个特殊的属性，它被称为<em><strong>标签</strong></em></p>
+<h1 id="2-1-数据操作"><a href="#2-1-数据操作" class="headerlink" title="2.1. 数据操作"></a>2.1. 数据操作</h1><p>（1）获取数据；（2）将数据读入计算机后对其进行处理</p>
+<p> <strong>n维数组</strong>，也称为<em><strong>张量</strong></em>（tensor）</p>
+<p>与Numpy的<code>ndarray</code>类似</p>
+<ul>
+<li>GPU很好地支持加速计算，而NumPy仅支持CPU计算</li>
+<li>张量类支持自动微分</li>
+<li>tensor比ndarray更适合深度学习</li>
+</ul>
+<h2 id="2-1-1-入门"><a href="#2-1-1-入门" class="headerlink" title="2.1.1. 入门"></a>2.1.1. 入门</h2><p>导入<code>torch</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> torch<br></code></pre></td></tr></table></figure>
+
+<p><strong>Tensor张量</strong>表示由一个数值组成的<strong>数组</strong></p>
+<p><code>Tensor</code>提供<strong>GPU计算和自动求梯度</strong>等更多功能</p>
+<blockquote>
+<p>A<a target="_blank" rel="noopener" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor"><code>torch.Tensor</code></a>是包含单一数据类型元素的<strong>多维矩阵</strong></p>
+</blockquote>
+<p>这个数组可能有<strong>多个维度</strong></p>
+<blockquote>
+<p>具有<strong>一个轴的张量</strong>对应数学上的***&#x3D;&#x3D;向量&#x3D;&#x3D;***</p>
+<p><img src="/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/ee2ab83add03b31bb076140fb6780c38.svg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>具有<strong>两个轴的张量</strong>对应数学上的***&#x3D;&#x3D;矩阵&#x3D;&#x3D;***</p>
+<p><img src="/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/a25495da6d0d038829fed794c8378d2d.svg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>具有<strong>两个轴以上的张量</strong>没有特殊的数学名称</p>
+</blockquote>
+<h3 id="创建Tensor"><a href="#创建Tensor" class="headerlink" title="创建Tensor"></a>创建Tensor</h3><p>x&#x3D;torch.empty(4,2) 未初始化</p>
+<p>x&#x3D;torch.rand(3,1)</p>
+<p>x&#x3D;torch.zeros(5,3,dtype&#x3D;torch.int)</p>
+<p>x&#x3D;torch.tensor([5,3])</p>
+<p>x&#x3D;x.new_ones(5,3,dtype&#x3D;torch.float64)</p>
+<h3 id="创建行向量"><a href="#创建行向量" class="headerlink" title="创建行向量"></a>创建行向量</h3><p>使用 <code>arange</code> 创建一个行向量 <code>x</code></p>
+<h5 id="参数："><a href="#参数：" class="headerlink" title="参数："></a>参数：</h5><ul>
+<li><p><strong>start</strong> (<em>Number</em>) – the <strong>starting value</strong> for the set of points. Default: <code>0</code>.</p>
+</li>
+<li><p><strong>end</strong> (<em>Number</em>) – the <strong>ending value</strong> for the set of points</p>
+</li>
+<li><p><strong>step</strong> (<em>Number</em>) – the <strong>gap</strong> between each pair of adjacent points. Default: <code>1</code>.</p>
+</li>
+<li><blockquote>
+<p>torch.arange(5) 0-4<br>torch.arange(1, 4) 1-3<br>torch.arange(1, 2.5, 0.5) 1-2.5</p>
+</blockquote>
+</li>
+</ul>
+<p>除非额外指定，<strong>新的张量将存储在内存中</strong>，并采用基于CPU的计算</p>
+<h3 id="访问张量形状（一条轴上个数）"><a href="#访问张量形状（一条轴上个数）" class="headerlink" title="访问张量形状（一条轴上个数）"></a>访问张量形状（一条轴上个数）</h3><p>通过张量的<code>shape</code>属性来访问张量（沿每个轴的长度）的<em>形状</em> </p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs abnf"><span class="hljs-attribute">x</span> <span class="hljs-operator">=</span> torch.arange(<span class="hljs-number">12</span>)<br>x<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">x.shape<br></code></pre></td></tr></table></figure>
+
+<p><img src="/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220131145533639.png" srcset="/img/loading.gif" lazyload alt="image-20220131145533639"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-built_in">print</span>(k.shape[<span class="hljs-number">0</span>])        <span class="hljs-comment"># shape[0]输出3，为矩阵的行数</span><br><span class="hljs-built_in">print</span>(k.shape[<span class="hljs-number">1</span>])        <span class="hljs-comment"># 同理shape[1]输出列数</span><br></code></pre></td></tr></table></figure>
+
+<p>&#x3D;&#x3D;shape[0]:行数&#x3D;&#x3D;</p>
+<p>&#x3D;&#x3D;shape[1]:列数&#x3D;&#x3D;</p>
+<h3 id="张量中元素的总数（所有轴上个数）"><a href="#张量中元素的总数（所有轴上个数）" class="headerlink" title="张量中元素的总数（所有轴上个数）"></a>张量中元素的总数（所有轴上个数）</h3><p>因为这里在处理的是一个<strong>向量</strong>，所以它的<code>shape</code>与它的<code>size/numel</code>相同</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">x.numel()<br></code></pre></td></tr></table></figure>
+
+<p><img src="/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220131145851232.png" srcset="/img/loading.gif" lazyload alt="image-20220131145851232"></p>
+<h3 id="改变一个张量的形状"><a href="#改变一个张量的形状" class="headerlink" title="改变一个张量的形状"></a>改变一个张量的形状</h3><p>改变一个张量的<strong>形状</strong>而不改变元素<strong>数量和元素值</strong></p>
+<h4 id="用view-来改变Tensor的形状"><a href="#用view-来改变Tensor的形状" class="headerlink" title="用view()来改变Tensor的形状"></a>用<code>view()</code>来改变<code>Tensor</code>的形状</h4><p>y &#x3D; x.view(15)</p>
+<p>z &#x3D; x.view(-1, 5) </p>
+<p>【<strong>view仅仅是改变了对这个张量的观察角度，内部数据并未改变</strong>】</p>
+<h4 id="先clone后view"><a href="#先clone后view" class="headerlink" title="先clone后view"></a>先clone后view</h4><p>先用<code>clone</code>创造一个副本然后再使用<code>view</code></p>
+<blockquote>
+<p>使用<code>clone</code>还有一个好处是会被记录在计算图中，即梯度回传到副本时也会传到源<code>Tensor</code>。？？？？？？？</p>
+</blockquote>
+<h4 id="调用reshape函数"><a href="#调用reshape函数" class="headerlink" title="调用reshape函数"></a>调用<code>reshape</code>函数</h4><ul>
+<li>把张量<code>x</code>从形状为（12,）的行向量转换为形状为（3,4）的矩阵</li>
+</ul>
+<blockquote>
+<p>注意，通过改变张量的形状，张量的大小不会改变。（数量没变）</p>
+</blockquote>
+<p><img src="/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220131150140026.png" srcset="/img/loading.gif" lazyload alt="image-20220131150140026"></p>
+<ul>
+<li>把1x4变成2x2矩阵</li>
+</ul>
+<h4 id="还可以通过-1来调用此自动计算出维度"><a href="#还可以通过-1来调用此自动计算出维度" class="headerlink" title="还可以通过-1来调用此自动计算出维度"></a>还可以通过<code>-1</code>来调用此自动计算出维度</h4><p>用<code>x.reshape(-1,4)</code>或<code>x.reshape(3,-1)</code>来取代<code>x.reshape(3,4)</code></p>
+<h3 id="使用全0、全1、其他常量"><a href="#使用全0、全1、其他常量" class="headerlink" title="使用全0、全1、其他常量"></a>使用全0、全1、其他常量</h3><h4 id="zero函数"><a href="#zero函数" class="headerlink" title="zero函数"></a>zero函数</h4><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">torch</span>.zeros((<span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>))<br></code></pre></td></tr></table></figure>
+
+<h4 id="ones函数"><a href="#ones函数" class="headerlink" title="ones函数"></a>ones函数</h4><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">torch</span>.ones((<span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>))<br></code></pre></td></tr></table></figure>
+
+<h3 id="创建一个形状为（2-3-4）的张量"><a href="#创建一个形状为（2-3-4）的张量" class="headerlink" title="创建一个形状为（2,3,4）的张量"></a>创建一个形状为（2,3,4）的张量</h3><p>torch.ones&#x2F;zeros((x,x,x))   <strong>两个括号</strong></p>
+<p><img src="/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220131154920248.png" srcset="/img/loading.gif" lazyload alt="image-20220131154920248"></p>
+<h3 id="从某个特定的概率分布中随机采样来得到张量中每个元素的值"><a href="#从某个特定的概率分布中随机采样来得到张量中每个元素的值" class="headerlink" title="从某个特定的概率分布中随机采样来得到张量中每个元素的值"></a>从某个特定的概率分布中随机采样来得到张量中每个元素的值</h3><p>以下代码创建一个形状为（3,4）的张量。 其中的每个元素都从<strong>均值为0、标准差为1的标准高斯分布</strong>（<strong>正态分布</strong>）中随机采样</p>
+<blockquote>
+<p>当我们构造数组来作为神经网络中的参数时，我们通常会<strong>随机初始化参数的值</strong></p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">torch.randn(<span class="hljs-number">3</span>, <span class="hljs-number">4</span>)<br></code></pre></td></tr></table></figure>
+
+<p><img src="/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220131160420347.png" srcset="/img/loading.gif" lazyload alt="image-20220131160420347"></p>
+<p>2x4的矩阵</p>
+<h2 id="2-1-2-运算符"><a href="#2-1-2-运算符" class="headerlink" title="2.1.2. 运算符"></a>2.1.2. 运算符</h2><p>最简单且最有用的操作是<em><strong>按元素</strong></em>（elementwise）运算</p>
+<p>将标准标量运算符应用于<strong>数组的每个元素</strong></p>
+<p>可以基于任何<strong>从标量到标量</strong>的函数来创建按元素函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python">x = torch.tensor([<span class="hljs-number">1.0</span>, <span class="hljs-number">2</span>, <span class="hljs-number">4</span>, <span class="hljs-number">8</span>])<br>y = torch.tensor([<span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>])<br>x + y, x - y, x * y, x / y, x ** y  <span class="hljs-comment"># **运算符是求幂运算</span><br></code></pre></td></tr></table></figure>
+
+<p>常见的标准算术运算符（<code>+</code>、<code>-</code>、<code>*</code>、<code>/</code>和<code>**</code>）都可以被升级为按元素运算</p>
+<p>可以在<strong>同一形状的任意两个张量上</strong>调用按元素操作</p>
+<h3 id="求幂"><a href="#求幂" class="headerlink" title="求幂"></a>求幂</h3><figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs 1c">torch.<span class="hljs-built_in">exp</span>(x)<br></code></pre></td></tr></table></figure>
+
+<h3 id="线性代数运算"><a href="#线性代数运算" class="headerlink" title="线性代数运算"></a>线性代数运算</h3><p>包括<strong>向量点积</strong>和<strong>矩阵乘法</strong></p>
+<h3 id="张量连结"><a href="#张量连结" class="headerlink" title="张量连结"></a>张量连结</h3><p>可以把<strong>多个张量</strong><em>连结</em>（concatenate）在一起</p>
+<p>把它们端对端地叠起来形成一个<strong>更大的张量</strong></p>
+<p>只需要提供张量列表，并给出沿哪个轴连结</p>
+<p>&#x3D;&#x3D;沿行（轴-0，形状的第一个元素）&#x3D;&#x3D;</p>
+<p>&#x3D;&#x3D;按列（轴-1，形状的第二个元素）&#x3D;&#x3D;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python">X = torch.arange(<span class="hljs-number">12</span>, dtype=torch.float32).reshape((<span class="hljs-number">3</span>,<span class="hljs-number">4</span>))<br>Y = torch.tensor([[<span class="hljs-number">2.0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">4</span>, <span class="hljs-number">3</span>], [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>], [<span class="hljs-number">4</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>]])<br>torch.cat((X, Y), dim=<span class="hljs-number">0</span>), torch.cat((X, Y), dim=<span class="hljs-number">1</span>)<br></code></pre></td></tr></table></figure>
+
+<p><img src="/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220201115012265.png" srcset="/img/loading.gif" lazyload alt="image-20220201115012265"></p>
+<p>dim&#x3D;0：共有3+3&#x3D;6行，4列（不变）</p>
+<p>dim&#x3D;-1：共有4+4&#x3D;8列，3行（不变）</p>
+<h3 id="通过逻辑运算符构建二元张量"><a href="#通过逻辑运算符构建二元张量" class="headerlink" title="通过逻辑运算符构建二元张量"></a>通过<em>逻辑运算符</em>构建二元张量</h3><p> 以<code>X == Y</code>为例： 对于每个位置，如果<code>X</code>和<code>Y</code>在该位置相等，则新张量中相应项的值为1</p>
+<p><img src="/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220201115239453.png" srcset="/img/loading.gif" lazyload alt="image-20220201115239453"></p>
+<h3 id="元素求和"><a href="#元素求和" class="headerlink" title="元素求和"></a>元素求和</h3><p>对张量中的所有元素进行求和，会产生<strong>一个单元素张量</strong></p>
+<ul>
+<li><p>直接相加每个元素</p>
+</li>
+<li><pre><code class="python">X.sum()
+<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs mel"><br>  ![<span class="hljs-keyword">image</span><span class="hljs-number">-20220201115359787</span>](%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/<span class="hljs-keyword">image</span><span class="hljs-number">-20220201115359787.</span>png)<br><br>## <span class="hljs-number">2.1</span><span class="hljs-number">.3</span>. 广播机制<br><br>**形状不同**，我们仍然可以通过**触发 *广播机制***（broadcasting mechanism）来执行**按元素操作**<br><br>- 适当**复制元素**来扩展一个或两个数组<br><br>  - <span class="hljs-string">``</span><span class="hljs-string">`python</span><br><span class="hljs-string">    a = torch.arange(3).reshape((3, 1))</span><br><span class="hljs-string">    b = torch.arange(2).reshape((1, 2))</span><br><span class="hljs-string">    a, b</span><br><span class="hljs-string">    </span><br><span class="hljs-string">    (tensor([[0],</span><br><span class="hljs-string">             [1],</span><br><span class="hljs-string">             [2]]),</span><br><span class="hljs-string">     tensor([[0, 1]]))</span><br></code></pre></td></tr></table></figure>
+
+  
+
+- ```python
+  a + b
+  <figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs autohotkey"><br>  - 矩阵`a`将复制列， 矩阵`b`将复制行<br><br>- 在转换之后，两个张量具有**相同的形状**<br><br>  - ```python<br>    tensor([[<span class="hljs-number">0</span>, <span class="hljs-number">1</span>],<br>            [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>],<br>            [<span class="hljs-number">2</span>, <span class="hljs-number">3</span>]])<br></code></pre></td></tr></table></figure>
+
+    
+</code></pre>
+</li>
+<li><p>对<strong>生成的数组</strong>执行按元素操作</p>
+</li>
+</ul>
+<p><strong>做运算即可，会自动复制使得可以运算</strong></p>
+<p><strong>a和b应该分别需要复制行或列！</strong></p>
+<p><img src="/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220201123907161.png" srcset="/img/loading.gif" lazyload alt="image-20220201123907161"></p>
+<h2 id="2-1-4-索引和切片"><a href="#2-1-4-索引和切片" class="headerlink" title="2.1.4. 索引和切片"></a>2.1.4. 索引和切片</h2><h4 id="张量中的元素可以通过索引访问"><a href="#张量中的元素可以通过索引访问" class="headerlink" title="张量中的元素可以通过索引访问"></a>张量中的元素可以通过<strong>索引</strong>访问</h4><ul>
+<li>just like 数组</li>
+<li>&#x3D;&#x3D;第一个元素的索引是0，最后一个元素索引是-1&#x3D;&#x3D;<ul>
+<li>与任何Python数组一样</li>
+</ul>
+</li>
+<li>可以指定范围以包含<strong>第一个元素和最后一个之前</strong>的元素</li>
+<li><strong>索引出来的结果与原数据&#x3D;&#x3D;共享内存&#x3D;&#x3D;，也即修改一个，另一个会跟着修改。</strong></li>
+</ul>
+<p><strong>x[-1]：</strong>最后一个元素</p>
+<p><strong>x[1:3]：</strong>第二个到第三个元素（1、2）</p>
+<p><strong>x[0:-1]：</strong>第一个到倒数第二个元素（0、1…）</p>
+<p><img src="/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220201120758704.png" srcset="/img/loading.gif" lazyload alt="image-20220201120758704"></p>
+<p>&#x3D;&#x3D;一个方框[]内为一个元素&#x3D;&#x3D;</p>
+<h4 id="指定索引来将元素写入矩阵"><a href="#指定索引来将元素写入矩阵" class="headerlink" title="指定索引来将元素写入矩阵"></a>指定索引来将元素写入矩阵</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">X[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>] = <span class="hljs-number">9</span>   //x[行号，列号]=数据<br>X<br></code></pre></td></tr></table></figure>
+
+<p><img src="/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220201121038926.png" srcset="/img/loading.gif" lazyload alt="image-20220201121038926"></p>
+<h4 id="想为多个元素赋值相同的值"><a href="#想为多个元素赋值相同的值" class="headerlink" title="想为多个元素赋值相同的值"></a>想为多个元素赋值相同的值</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">X[<span class="hljs-number">0</span>:<span class="hljs-number">2</span>, :] = <span class="hljs-number">12</span>//[<span class="hljs-number">0</span>:<span class="hljs-number">2</span>, :]访问第<span class="hljs-number">1</span>行和第<span class="hljs-number">2</span>行<br>X<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>0：2—》0-1之间（2之前）</li>
+<li>“:”代表沿轴1（列）的所有元素</li>
+</ul>
+<p><img src="/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220201121413306.png" srcset="/img/loading.gif" lazyload alt="image-20220201121413306"></p>
+<h2 id="2-1-5-节省内存"><a href="#2-1-5-节省内存" class="headerlink" title="2.1.5. 节省内存"></a>2.1.5. 节省内存</h2><figure class="highlight tp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs tp">before = id(<span class="hljs-keyword">Y</span>)<br><span class="hljs-keyword">Y</span> = <span class="hljs-keyword">Y</span> + <span class="hljs-keyword">X</span><br>id(<span class="hljs-keyword">Y</span>) == before<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>我们希望<strong>原地执行</strong>这些更新</li>
+<li>如果我们不原地更新，<strong>其他引用仍然会指向旧的内存位置</strong><ul>
+<li>某些代码可能会无意中引用旧的参数</li>
+</ul>
+</li>
+</ul>
+<h3 id="切片表示法"><a href="#切片表示法" class="headerlink" title="切片表示法"></a>切片表示法</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs stylus">Z = torch<span class="hljs-selector-class">.zeros_like</span>(Y)<br><span class="hljs-function"><span class="hljs-title">print</span><span class="hljs-params">(<span class="hljs-string">&#x27;id(Z):&#x27;</span>, id(Z)</span></span>)<br>Z<span class="hljs-selector-attr">[:]</span> = X + Y<br><span class="hljs-function"><span class="hljs-title">print</span><span class="hljs-params">(<span class="hljs-string">&#x27;id(Z):&#x27;</span>, id(Z)</span></span>)<br></code></pre></td></tr></table></figure>
+
+<p>&#x3D;&#x3D;Y[:] &#x3D; <expression>&#x3D;&#x3D;</p>
+<ul>
+<li>使用<strong>切片表示法</strong>将操作的结果<strong>分配给先前分配的数组</strong></li>
+<li><img src="/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220201122253477.png" srcset="/img/loading.gif" lazyload alt="image-20220201122253477"></li>
+<li>两次y&#x3D;不同的表达式，但是id都相同</li>
+</ul>
+<h3 id="x3D-法"><a href="#x3D-法" class="headerlink" title="+&#x3D;法"></a>+&#x3D;法</h3><p>如果在后续计算中<strong>没有重复</strong>使用<code>X</code></p>
+<p>也可以使用<code>X += Y</code>来减少操作的内存开销</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs applescript"><span class="hljs-keyword">before</span> = <span class="hljs-built_in">id</span>(X)<br>X += Y<br><span class="hljs-built_in">id</span>(X) == <span class="hljs-keyword">before</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220201122349833.png" srcset="/img/loading.gif" lazyload alt="image-20220201122349833"></p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>赋值的时候表达式：y+&#x3D;x或z[:]&#x3D;x+y</p>
+<h2 id="2-1-6-转换为其他Python对象"><a href="#2-1-6-转换为其他Python对象" class="headerlink" title="2.1.6. 转换为其他Python对象"></a>2.1.6. 转换为其他Python对象</h2><h3 id="张量tensor-数组numpy"><a href="#张量tensor-数组numpy" class="headerlink" title="张量tensor 数组numpy"></a>张量tensor 数组numpy</h3><ul>
+<li>torch张量和numpy数组共享底层内存</li>
+<li><strong>就地操作</strong>更改一个张量也会同时更改另一个张量</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python">A = X.numpy()<br>B = torch.tensor(A)<br><span class="hljs-built_in">type</span>(A), <span class="hljs-built_in">type</span>(B)<br></code></pre></td></tr></table></figure>
+
+<h3 id="张量tensor-标量item"><a href="#张量tensor-标量item" class="headerlink" title="张量tensor 标量item"></a>张量tensor 标量item</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">a = torch.tensor([<span class="hljs-number">3.5</span>])<br>a, a.item(), <span class="hljs-built_in">float</span>(a), <span class="hljs-built_in">int</span>(a)<br></code></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">(tensor([<span class="hljs-number">3.5000</span>]), <span class="hljs-number">3.5</span>, <span class="hljs-number">3.5</span>, <span class="hljs-number">3</span>)<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>a是自己，tensor</li>
+<li><strong>a.item</strong>是标量，数字</li>
+</ul>
+<h2 id="2-1-7-小结"><a href="#2-1-7-小结" class="headerlink" title="2.1.7. 小结"></a>2.1.7. 小结</h2><p>张量 ：n维数组，不管几维都是张量！</p>
+<p><img src="/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220201124310314.png" srcset="/img/loading.gif" lazyload alt="image-20220201124310314"></p>
+<p>随便赋值：torch.arange(12)   是一个行向量</p>
+<p>指定赋值：torch.tensor([1,2,3])</p>
+<p>一条轴上个数：x.shape()</p>
+<p>所有轴的总元素个数：x.numel()</p>
+<p>求所有元素值：x.sum()</p>
+<p>连接张量：torch.cat((x,y),dim&#x3D;0&#x2F;-1) 分别沿横轴、纵轴</p>
+<p>索引访问张量：x[1:-1] x[2] x[0:2] x[-1]</p>
+<p>改写元素：x[2,3]&#x3D;12</p>
+<p>为多个元素赋值：x[0:1, :] 第1行所有列</p>
+<p><img src="/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220201125756294.png" srcset="/img/loading.gif" lazyload alt="image-20220201125756294"></p>
+<p>要更新一个值，不要写新的z&#x3D;x+y或y&#x3D;x+y，写y+&#x3D;x或切片表示z[:]&#x3D;x+y，不会开辟新的内存</p>
+<p>tensor-&gt;numpy：y&#x3D;x.numpy()</p>
+<p>numpy-&gt;tensor：&#x3D;torch.tensor(xxx)</p>
+<p>tensor-&gt;item：a&#x3D;torch.tensor() ; a.item()</p>
+<h1 id="2-2-数据预处理"><a href="#2-2-数据预处理" class="headerlink" title="2.2. 数据预处理"></a>2.2. 数据预处理</h1><p>在Python中常用的数据分析工具中，我们通常使用<code>pandas</code>软件包</p>
+<p><code>pandas</code>可以与张量兼容</p>
+<ul>
+<li>使用<code>pandas</code>预处理原始数据</li>
+<li>将原始数据转换为张量格式</li>
+</ul>
+<h2 id="2-2-1-读取数据集"><a href="#2-2-1-读取数据集" class="headerlink" title="2.2.1. 读取数据集"></a>2.2.1. 读取数据集</h2><p>创建一个人工数据集：</p>
+<p>存储在&#x3D;&#x3D;CSV（逗号分隔值）&#x3D;&#x3D;文件</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">os.makedirs(os.path.join(<span class="hljs-string">&#x27;..&#x27;</span>, <span class="hljs-string">&#x27;data&#x27;</span>), exist_ok=<span class="hljs-literal">True</span>)<br>data_file = os.path.join(<span class="hljs-string">&#x27;..&#x27;</span>, <span class="hljs-string">&#x27;data&#x27;</span>, <span class="hljs-string">&#x27;house_tiny.csv&#x27;</span>)<br></code></pre></td></tr></table></figure>
+
+<h3 id="os-makedirs-方法"><a href="#os-makedirs-方法" class="headerlink" title="os.makedirs() 方法"></a>os.makedirs() 方法</h3><p>用于递归创建目录</p>
+<p>文件地址：data_file &#x3D; os.path.join(‘..’, ‘data’, ‘house_tiny.csv’)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(data_file,<span class="hljs-string">&#x27;w&#x27;</span>)<span class="hljs-keyword">as</span> f: <span class="hljs-comment">#open操作，打开上面的csv文件并写入</span><br>    f.write(<span class="hljs-string">&#x27;NumRooms,Alley,Price\n&#x27;</span>) <span class="hljs-comment">#写入第一行</span><br>    f.write(<span class="hljs-string">&#x27;NA,PAVE,127500\n&#x27;</span>)<br>    f.write(<span class="hljs-string">&#x27;2,NA,106000\n&#x27;</span>)<br>    f.write(<span class="hljs-string">&#x27;4,NA,178100\n&#x27;</span>)<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">data=pd.read_csv(data_file) <span class="hljs-comment">#使用pandas包中的readcsv函数读取这个文件</span><br><span class="hljs-built_in">print</span>(data) <span class="hljs-comment">#打印所有写入的数据</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="读取写入的csv文件"><a href="#读取写入的csv文件" class="headerlink" title="读取写入的csv文件"></a>读取写入的csv文件</h3><p>pandas.read_csv(地址)</p>
+<h2 id="分割输入输出"><a href="#分割输入输出" class="headerlink" title="分割输入输出"></a>分割输入输出</h2><h3 id="位置索引iloc"><a href="#位置索引iloc" class="headerlink" title="位置索引iloc"></a>位置索引<code>iloc</code></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#分割出输入输出</span><br>inputs,outputs=data.iloc[:,<span class="hljs-number">0</span>:<span class="hljs-number">2</span>],data.iloc[:,-<span class="hljs-number">1</span>] <span class="hljs-comment">#inputs：所有行，0-1列，outputs：所有行，最后一行</span><br><br><span class="hljs-comment">#处理缺失值</span><br>inputs=inputs.fillna(inputs.mean()) <span class="hljs-comment">#fillna函数填充缺失值，mean函数求平均</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220201151237761.png" srcset="/img/loading.gif" lazyload alt="image-20220201151237761"></p>
+<h2 id="2-2-2-处理缺失值"><a href="#2-2-2-处理缺失值" class="headerlink" title="2.2.2. 处理缺失值"></a>2.2.2. 处理缺失值</h2><h3 id="插值法"><a href="#插值法" class="headerlink" title="插值法"></a>插值法</h3><p>用一个替代值弥补缺失值</p>
+<h4 id="fillna函数"><a href="#fillna函数" class="headerlink" title="fillna函数"></a>fillna函数</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python">inputs,outputs=data.iloc[:,<span class="hljs-number">0</span>:<span class="hljs-number">2</span>],data.iloc[:,-<span class="hljs-number">1</span>] <span class="hljs-comment">#inputs：所有行，0-1列，outputs：所有行，最后一行</span><br><span class="hljs-comment">#处理缺失值</span><br>inputs=inputs.fillna(inputs.mean()) <span class="hljs-comment">#fillna函数填充缺失值，mean函数求平均</span><br><br></code></pre></td></tr></table></figure>
+
+<p><img src="/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220201151424300.png" srcset="/img/loading.gif" lazyload alt="image-20220201151424300"></p>
+<h4 id="对alley中NaN的处理"><a href="#对alley中NaN的处理" class="headerlink" title="对alley中NaN的处理"></a>对alley中NaN的处理</h4><p>对于<code>inputs</code>中的<strong>类别值或离散值</strong>，我们将“NaN”视为一个类别</p>
+<h5 id="get-dummies函数"><a href="#get-dummies函数" class="headerlink" title="get_dummies函数"></a>get_dummies函数</h5><p> <code>pandas</code>可以自动将此列转换为两列“Alley_Pave”和“Alley_nan”</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python">pd.get_dummies(s1, dummy_na=<span class="hljs-literal">True</span>)<br>   a  b  NaN<br><span class="hljs-number">0</span>  <span class="hljs-number">1</span>  <span class="hljs-number">0</span>    <span class="hljs-number">0</span><br><span class="hljs-number">1</span>  <span class="hljs-number">0</span>  <span class="hljs-number">1</span>    <span class="hljs-number">0</span><br><span class="hljs-number">2</span>  <span class="hljs-number">0</span>  <span class="hljs-number">0</span>    <span class="hljs-number">1</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220201152109456.png" srcset="/img/loading.gif" lazyload alt="image-20220201152109456"></p>
+<h3 id="删除法"><a href="#删除法" class="headerlink" title="删除法"></a>删除法</h3><p>直接<strong>忽略</strong>缺失值</p>
+<h2 id="2-2-3-转换为张量格式"><a href="#2-2-3-转换为张量格式" class="headerlink" title="2.2.3. 转换为张量格式"></a>2.2.3. 转换为张量格式</h2><p>👆以上inputs、outputs都是数值类型</p>
+<p>可以转换为<strong>张量格式</strong></p>
+<p><strong>&#x3D;&#x3D;&#x3D;torch.tensor(x.values)&#x3D;&#x3D;</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#将输入输出由数值转换成张量</span><br><span class="hljs-keyword">import</span> torch<br>x,y=torch.tensor(inputs.values),torch.tensor(outputs.values)<br></code></pre></td></tr></table></figure>
+
+<p><img src="/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220201152552575.png" srcset="/img/loading.gif" lazyload alt="image-20220201152552575"></p>
+<p>原数据按照格式变成矩阵（张量）</p>
+<p>输入是3x3</p>
+<p>输出是1x3</p>
+<h2 id="2-2-4-小结"><a href="#2-2-4-小结" class="headerlink" title="2.2.4. 小结"></a>2.2.4. 小结</h2><p><code>pandas</code>可以与张量兼容</p>
+<ul>
+<li>自创数据集：<ul>
+<li>import os</li>
+<li><strong>os.makedirs</strong>(<strong>os.path.join</strong>(‘..’, ‘data’), exist_ok&#x3D;True)</li>
+</ul>
+</li>
+<li>文件地址<ul>
+<li>data_file &#x3D; <strong>os.path.join</strong>(‘..’, ‘data’, ‘house_tiny.csv’)   分级创建</li>
+</ul>
+</li>
+<li>打开文件，准备写入<ul>
+<li>with <strong>open</strong>(data_file,’w’)as f: #open操作，打开上面的csv文件并写入</li>
+</ul>
+</li>
+<li>写入<ul>
+<li>f.<strong>write</strong>(‘NumRooms,Alley,Price\n’) #写入第一行</li>
+</ul>
+</li>
+<li>读取csv<ul>
+<li>import <strong>pandas</strong> as pd</li>
+<li>data&#x3D;<strong>pd.read_csv</strong>(data_file)&#x2F;&#x2F;参数：文件地址</li>
+</ul>
+</li>
+<li>分割输入输出<ul>
+<li>input&#x3D;data.<strong>iloc[:,0:-1]</strong></li>
+<li>outputs&#x3D;data.<strong>iloc[:,-1]</strong></li>
+</ul>
+</li>
+<li>求列的平均值<ul>
+<li>inputs**.mean()**</li>
+</ul>
+</li>
+<li>替换NaN<ul>
+<li>inputs.<strong>fllna(替代值)</strong></li>
+</ul>
+</li>
+<li>将csv数值转换成张量<ul>
+<li>import <strong>torch</strong></li>
+<li>inputs&#x3D;<strong>torch.tensor</strong>(inputs.values)<ul>
+<li>不要忘了values！</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="2-3-线性代数"><a href="#2-3-线性代数" class="headerlink" title="2.3. 线性代数"></a>2.3. 线性代数</h1><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>trace</td>
+<td><strong>对角线元素之和</strong>(矩阵的迹)</td>
+</tr>
+<tr>
+<td>diag</td>
+<td><strong>对角线元素</strong></td>
+</tr>
+<tr>
+<td>triu&#x2F;tril</td>
+<td>矩阵的<strong>上三角&#x2F;下三角</strong>，可指定偏移量</td>
+</tr>
+<tr>
+<td>mm&#x2F;bmm</td>
+<td>矩阵<strong>乘法</strong>，batch的矩阵乘法</td>
+</tr>
+<tr>
+<td>addmm&#x2F;addbmm&#x2F;addmv&#x2F;addr&#x2F;baddbmm..</td>
+<td>矩阵运算</td>
+</tr>
+<tr>
+<td>t</td>
+<td><strong>转置</strong></td>
+</tr>
+<tr>
+<td>dot&#x2F;cross</td>
+<td><strong>内积&#x2F;外积</strong></td>
+</tr>
+<tr>
+<td>inverse</td>
+<td>求<strong>逆矩阵</strong></td>
+</tr>
+<tr>
+<td>svd</td>
+<td>奇异值分解</td>
+</tr>
+</tbody></table>
+<h1 id="2-3-自动求梯度"><a href="#2-3-自动求梯度" class="headerlink" title="2.3 自动求梯度"></a><a target="_blank" rel="noopener" href="https://tangshusen.me/Dive-into-DL-PyTorch/#/chapter02_prerequisite/2.3_autograd?id=_23-%E8%87%AA%E5%8A%A8%E6%B1%82%E6%A2%AF%E5%BA%A6">2.3 自动求梯度</a></h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://pytorch.org/docs/stable/autograd.html">autograd</a>包能够根据<strong>输入</strong>和<strong>前向传播</strong>过程&#x3D;&#x3D;自动构建计算图&#x3D;&#x3D;，并执行&#x3D;&#x3D;反向传播&#x3D;&#x3D;</p>
+</blockquote>
+<h3 id="requires-grad"><a href="#requires-grad" class="headerlink" title=".requires_grad"></a>.requires_grad</h3><p>追踪(track)在Tensor上的所有操作</p>
+<ul>
+<li>将其属性<code>.requires_grad</code>设置为<code>True</code><ul>
+<li><strong>a.requires_grad_(True)</strong></li>
+<li><strong>x&#x3D;torch.ones(2,2,requires_grad&#x3D;True)</strong></li>
+</ul>
+</li>
+<li>a &#x3D; torch.randn(2, 2) <strong>#</strong> <strong>缺失情况下默认 requires_grad &#x3D; False</strong></li>
+</ul>
+<h3 id="梯度计算-backward"><a href="#梯度计算-backward" class="headerlink" title="梯度计算.backward()"></a>梯度计算.backward()</h3><ul>
+<li><p>.backward()</p>
+</li>
+<li><p>标量：</p>
+<ul>
+<li><p>计算梯度不需要指定对谁求导（不需要传参）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">out.backward() <span class="hljs-comment"># 等价于 out.backward(torch.tensor(1.))</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><code>out</code>关于<code>x</code>的梯度<strong>d(out)&#x2F;dx</strong></p>
+</li>
+</ul>
+</li>
+<li><p>否则，需要传入一个与<code>out</code>同形的<code>Tensor</code></p>
+</li>
+<li><p>此<code>Tensor</code>的梯度将累积到<code>.grad</code>属性中</p>
+<ul>
+<li>grad在反向传播过程中是<strong>累加的</strong>(accumulated)</li>
+<li>每一次运行反向传播，梯度都会<strong>累加之前的梯度</strong></li>
+<li>所以一般<strong>在反向传播之前需把梯度清零</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="不想计算梯度"><a href="#不想计算梯度" class="headerlink" title="不想计算梯度"></a>不想计算梯度</h3><ul>
+<li>with torch.no_grad()</li>
+<li>评估模型的时候很常用（val、test）<ul>
+<li>因为并不需要计算<strong>可训练参数</strong>（<code>requires_grad=True</code>）<strong>的梯度</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h3><blockquote>
+<p><code>Tensor</code>和<code>Function</code>互相结合：</p>
+<ul>
+<li>构建一个<strong>记录有整个计算过程</strong>的&#x3D;&#x3D;有向无环图（DAG）&#x3D;&#x3D;？？？？</li>
+</ul>
+</blockquote>
+<p>每个<code>Tensor</code>都有一个<code>.grad_fn</code><strong>属性</strong></p>
+<ul>
+<li><p>该<code>Tensor</code>是不是通过某些运算得到的</p>
+</li>
+<li><p>是：</p>
+<ul>
+<li><p><code>grad_fn</code>返回一个与这些运算相关的对象</p>
+</li>
+<li><p>&#96;&#96;&#96;python<br>y &#x3D; x + 2<br>print(y)<br>print(y.grad_fn)&#x2F;&#x2F;grad_fn&#x3D;<AddBackward>)<br>&lt;AddBackward object at 0x1100477b8&gt;</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><br>- 否：<br><br>  - 返回<span class="hljs-attribute">none</span><br><br>  - ```python<br>    x = torch<span class="hljs-selector-class">.ones</span>(<span class="hljs-number">2</span>, <span class="hljs-number">2</span>, requires_grad=True)<br>    <span class="hljs-built_in">print</span>(x)<br>    <span class="hljs-built_in">print</span>(x.grad_fn)<span class="hljs-comment">//none</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h2 id="雅可比矩阵"><a href="#雅可比矩阵" class="headerlink" title="雅可比矩阵"></a>雅可比矩阵</h2><p>函数值y和自变量x都为向量</p>
+<p><img src="/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220207162814512.png" srcset="/img/loading.gif" lazyload alt="image-20220207162814512"></p>
+<p>【<strong>y关于x的梯度</strong>：雅阁比矩阵】</p>
+<h3 id="torch-autograd"><a href="#torch-autograd" class="headerlink" title="torch.autograd"></a>torch.autograd</h3><blockquote>
+<p>计算<strong>雅克比矩阵的乘积</strong></p>
+</blockquote>
+<h1 id="3-1-线性回归"><a href="#3-1-线性回归" class="headerlink" title="3.1. 线性回归"></a>3.1. 线性回归</h1><p>回归经常用来表示输入和输出之间的关系</p>
+<ul>
+<li>1……N个自变量</li>
+<li>因变量</li>
+</ul>
+<p>机器学习中大多数任务通常都与<em>预测</em>（prediction）有关</p>
+<h3 id="预测类问题"><a href="#预测类问题" class="headerlink" title="预测类问题"></a>预测类问题</h3><ul>
+<li>预测价格（房屋、股票等）</li>
+<li>预测住院时间（针对住院病人等）</li>
+<li>预测需求（零售销量等）</li>
+</ul>
+<h3 id="预测类常用办法："><a href="#预测类常用办法：" class="headerlink" title="预测类常用办法："></a>预测类常用办法：</h3><ul>
+<li>回归问题<ul>
+<li>线性回归：最简单而且最流行</li>
+</ul>
+</li>
+<li>分类问题<ul>
+<li>分类问题的目标是<strong>预测</strong>数据<strong>属于一组类别中的哪一个</strong></li>
+</ul>
+</li>
+</ul>
+<h2 id="3-1-1-线性回归"><a href="#3-1-1-线性回归" class="headerlink" title="3.1.1. 线性回归"></a>3.1.1. 线性回归</h2><ul>
+<li>自变量xx和因变量yy之间的关系是线性的</li>
+<li>yy可以表示为xx中元素的加权和</li>
+<li>允许包含观测值(已知的x和y??)的一些噪声<ul>
+<li>假设任何噪声都比较正常，如噪声遵循正态分布</li>
+</ul>
+</li>
+</ul>
+<h2 id="预测房价的模型"><a href="#预测房价的模型" class="headerlink" title="预测房价的模型"></a>预测房价的模型</h2><h4 id="1-训练（数据）集"><a href="#1-训练（数据）集" class="headerlink" title="1 训练（数据）集"></a>1 训练（数据）集</h4><p>数据集包括了房屋的<strong>销售价格、面积和房龄</strong></p>
+<h4 id="2-样本-数据点-数据样本"><a href="#2-样本-数据点-数据样本" class="headerlink" title="2 样本  数据点  数据样本"></a>2 样本  数据点  数据样本</h4><p><strong>每行数据</strong>（比如一次房屋交易相对应的数据）称为<em>样本</em></p>
+<h4 id="3-特征-x2F-协变量-x3D-自变量"><a href="#3-特征-x2F-协变量-x3D-自变量" class="headerlink" title="3 特征&#x2F;协变量&#x3D;自变量"></a>3 特征&#x2F;协变量&#x3D;自变量</h4><p>预测所依据的<strong>自变量</strong>（面积和房龄）</p>
+<p>用来预测标签的多个因素叫作特征</p>
+<p>特征用来表征样本的特点</p>
+<h4 id="4-标签-目标-x3D-预测值"><a href="#4-标签-目标-x3D-预测值" class="headerlink" title="4 标签 目标&#x3D;预测值"></a>4 标签 目标&#x3D;预测值</h4><p>试图预测的<strong>目标</strong>（比如预测房屋价格）</p>
+<h3 id="线性模型"><a href="#线性模型" class="headerlink" title="线性模型"></a>线性模型</h3><blockquote>
+<p>假设目标（房屋价格）可以表示为特征（面积和房龄）的<strong>加权和</strong></p>
+</blockquote>
+<p><img src="/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220207172206110.png" srcset="/img/loading.gif" lazyload alt="image-20220207172206110"></p>
+<h4 id="权重："><a href="#权重：" class="headerlink" title="权重："></a><strong>权重：</strong></h4><p>决定了<strong>每个特征对我们预测值的影响</strong></p>
+<h4 id="偏置（bias）："><a href="#偏置（bias）：" class="headerlink" title="偏置（bias）："></a><strong>偏置（bias）：</strong></h4><p>当所有特征都取值为0时，预测值应该为多少</p>
+<blockquote>
+<p>如果没有偏置项，我们模型的表达能力将受到限制</p>
+</blockquote>
+<p>给定一个数据集，我们的目标是<strong>寻找模型的权重w 和偏置b</strong> </p>
+<ul>
+<li><p>在机器学习领域，我们通常使用的是<strong>高维数据集</strong></p>
+<ul>
+<li><strong>X∈Rn×d：整个数据集的 n个样本</strong><ul>
+<li>&#x3D;&#x3D;X的每一行&#x3D;&#x3D;：一个样本（一次房屋交易相对应的数据）</li>
+<li>&#x3D;&#x3D;X的每一列&#x3D;&#x3D;：一种特征（面积和房龄）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>建模时采用<strong>线性代数表示法</strong>会比较方便</p>
+</li>
+<li><p>输入包含d个特征时：</p>
+<ul>
+<li><p>预测结果y：<img src="/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220209164247749.png" srcset="/img/loading.gif" lazyload alt="image-20220209164247749"></p>
+</li>
+<li><p>不同的特征（自变量）分配不同的权重，相乘</p>
+</li>
+</ul>
+</li>
+<li><p>可以用<strong>点积形式</strong>来简洁地表达模型：<img src="/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220209164343783.png" srcset="/img/loading.gif" lazyload alt="image-20220209164343783"></p>
+</li>
+<li><p>无论我们使用什么手段来观察特征 X和标签 y， 都可能会出现少量的观测误差。</p>
+<ul>
+<li>会加入一个<strong>噪声项</strong>来考虑观测误差带来的影响</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-1-1-2-损失函数"><a href="#3-1-1-2-损失函数" class="headerlink" title="3.1.1.2. 损失函数"></a>3.1.1.2. 损失函数</h3><blockquote>
+<p>拟合程度的度量</p>
+</blockquote>
+<p>通常我们会选取一个<strong>非负数</strong>&gt;&#x3D;0作为误差</p>
+<p>数值越小表示误差越小</p>
+<p><strong>回归问题</strong>中最常用的损失函数是<strong>平方误差函数</strong>（平方损失（square loss））</p>
+<p><img src="/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220209165545414.png" srcset="/img/loading.gif" lazyload alt="image-20220209165545414"></p>
+<ul>
+<li>常数 1&#x2F;2 使对平方项<strong>求导后的常数系数为1</strong></li>
+<li>形式上稍微简单一些</li>
+</ul>
+<p>👆每个样本训练都有一个误差</p>
+<p>👇</p>
+<p>用训练数据集中<strong>所有样本误差的平均</strong>来衡量模型预测的质量</p>
+<p><img src="/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220209170001796.png" srcset="/img/loading.gif" lazyload alt="image-20220209170001796"></p>
+<h3 id="优化算法"><a href="#优化算法" class="headerlink" title="优化算法"></a><a target="_blank" rel="noopener" href="https://tangshusen.me/Dive-into-DL-PyTorch/#/chapter03_DL-basics/3.1_linear-regression?id=_3-%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95">优化算法</a></h3><blockquote>
+<p>无法得到解析解的情况下</p>
+<p>只能<strong>通过优化算法</strong>有限次<strong>迭代模型参数</strong>来尽可能<strong>降低损失函数的值</strong>。这类解叫作数值解</p>
+</blockquote>
+<h4 id="随机梯度下降"><a href="#随机梯度下降" class="headerlink" title="随机梯度下降"></a>随机梯度下降</h4><ul>
+<li><p>几乎可以优化所有深度学习模型</p>
+</li>
+<li><p>不断地<strong>在损失函数递减的方向</strong>上<strong>更新参数</strong>来降低误差</p>
+</li>
+<li><p>用法：</p>
+<ul>
+<li><p>计算<strong>损失函数</strong>（数据集中<u>所有样本的损失均值</u>） 关于模型<strong>参数</strong>的导数—&gt;【梯度】</p>
+<ul>
+<li><u>所有样本</u>：导致执行可能会非常慢，在每一次更新参数之前，我们必须<strong>遍历整个数据集</strong>（计算所有样本的loss）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>👇<em>每次需要计算更新的时候随机抽取一小批样本：</em></p>
+<h4 id="小批量随机梯度下降（mini-batch-stochastic-gradient-descent）"><a href="#小批量随机梯度下降（mini-batch-stochastic-gradient-descent）" class="headerlink" title="小批量随机梯度下降（mini-batch stochastic gradient descent）"></a>小批量随机梯度下降（mini-batch stochastic gradient descent）</h4><p>由固定数量的训练样本组成</p>
+<p>对参数进行多次迭代，使<strong>每次迭代都可能降低损失函数的值</strong></p>
+<h4 id="超参数"><a href="#超参数" class="headerlink" title="超参数"></a>超参数</h4><blockquote>
+<p>人为设定的，并不是通过模型训练学出的</p>
+</blockquote>
+<p>批量大小，batch size</p>
+<p>学习率（learning rate）</p>
+<h4 id="“调参”"><a href="#“调参”" class="headerlink" title="“调参”"></a>“调参”</h4><p>调节超参数👆</p>
+<p>反复试错来找到超参数合适的值</p>
+<ul>
+<li>少数情况下，超参数也可以通过模型训练学出</li>
+</ul>
+<h3 id="3-1-1-2-模型训练"><a href="#3-1-1-2-模型训练" class="headerlink" title="3.1.1.2 模型训练"></a><a target="_blank" rel="noopener" href="https://tangshusen.me/Dive-into-DL-PyTorch/#/chapter03_DL-basics/3.1_linear-regression?id=_3112-%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83">3.1.1.2 模型训练</a></h3><p>模型训练：</p>
+<ul>
+<li><p>通过数据来寻找特定的模型参数值</p>
+</li>
+<li><p>模型在数据上的误差尽可能小</p>
+</li>
+</ul>
+<h3 id="3-1-1-3-模型预测-模型测试"><a href="#3-1-1-3-模型预测-模型测试" class="headerlink" title="3.1.1.3 模型预测 模型测试"></a><a target="_blank" rel="noopener" href="https://tangshusen.me/Dive-into-DL-PyTorch/#/chapter03_DL-basics/3.1_linear-regression?id=_3113-%E6%A8%A1%E5%9E%8B%E9%A2%84%E6%B5%8B">3.1.1.3 模型预测 </a>模型测试</h3><p><strong>优化算法停止时的值</strong>–》新的w、b</p>
+<p>用此wb计算训练集以外任一样本的目标值</p>
+<h2 id="3-1-2-线性回归与神经网络的联系"><a href="#3-1-2-线性回归与神经网络的联系" class="headerlink" title="3.1.2 线性回归与神经网络的联系"></a><a target="_blank" rel="noopener" href="https://tangshusen.me/Dive-into-DL-PyTorch/#/chapter03_DL-basics/3.1_linear-regression?id=_312-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E7%9A%84%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95">3.1.2 </a>线性回归与神经网络的联系</h2><h4 id="3-1-2-1-神经网络图"><a href="#3-1-2-1-神经网络图" class="headerlink" title="3.1.2.1 神经网络图"></a><a target="_blank" rel="noopener" href="https://tangshusen.me/Dive-into-DL-PyTorch/#/chapter03_DL-basics/3.1_linear-regression?id=_3121-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%9B%BE">3.1.2.1 神经网络图</a></h4><p>使用神经网络图直观地<strong>表现模型结构</strong></p>
+<h5 id="线性回归是一个单层神经网络"><a href="#线性回归是一个单层神经网络" class="headerlink" title="线性回归是一个单层神经网络"></a>线性回归是一个单层神经网络</h5><p><img src="https://tangshusen.me/Dive-into-DL-PyTorch/img/chapter03/3.1_linreg.svg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<ul>
+<li>神经网络图<strong>隐去了模型参数权重w和偏差b</strong></li>
+<li>输入：<ul>
+<li>特征、x</li>
+</ul>
+</li>
+<li>输出<ul>
+<li>预测值、y</li>
+</ul>
+</li>
+<li>o的计算<strong>依赖于</strong> x1和 x2<ul>
+<li>o和每个输入<strong>完全连接</strong></li>
+<li>【输出层：&#x3D;&#x3D;全连接层&#x3D;&#x3D;或稠密层】</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-1-2-2-矢量计算表达式（向量计算）"><a href="#3-1-2-2-矢量计算表达式（向量计算）" class="headerlink" title="3.1.2.2 矢量计算表达式（向量计算）"></a><a target="_blank" rel="noopener" href="https://tangshusen.me/Dive-into-DL-PyTorch/#/chapter03_DL-basics/3.1_linear-regression?id=_3122-%E7%9F%A2%E9%87%8F%E8%AE%A1%E7%AE%97%E8%A1%A8%E8%BE%BE%E5%BC%8F">3.1.2.2 矢量计算表达式</a>（向量计算）</h4><p><strong>向量相加</strong></p>
+<ol>
+<li><p>按元素逐一做标量加法</p>
+<ol>
+<li><p>&#96;&#96;&#96;python<br>import torch<br>from time import time</p>
+<p>a &#x3D; torch.ones(1000)<br>b &#x3D; torch.ones(1000)</p>
+<p>start &#x3D; time()<br>c &#x3D; torch.zeros(1000)<br>for i in range(1000):<br>c[i] &#x3D; a[i] + b[i]<br>print(time() - start)</p>
+<figure class="highlight isbl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs isbl"><br><span class="hljs-number">2</span>. 直接做矢量加法<br><br>   <span class="hljs-number">1</span>. ```<span class="hljs-variable">python</span><br>      <span class="hljs-variable">start</span> = <span class="hljs-function"><span class="hljs-title"><span class="hljs-built_in">time</span></span>()</span><br>      <span class="hljs-variable">d</span> = <span class="hljs-variable">a</span> + <span class="hljs-variable">b</span><br>      <span class="hljs-function"><span class="hljs-title">print</span>(<span class="hljs-title"><span class="hljs-built_in">time</span></span>() - <span class="hljs-variable">start</span>)</span><br></code></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ol>
+<p><strong>后者比前者更省时</strong>—&gt;尽可能采用矢量计算</p>
+<h1 id="3-4-softmax回归"><a href="#3-4-softmax回归" class="headerlink" title="3.4. softmax回归"></a>3.4. softmax回归</h1><blockquote>
+<p>softmax回归也是一个<strong>单层神经网络</strong></p>
+<p>softmax回归的<strong>输出层也是全连接层</strong></p>
+</blockquote>
+<h2 id="3-4-1-分类问题"><a href="#3-4-1-分类问题" class="headerlink" title="3.4.1. 分类问题"></a>3.4.1. 分类问题</h2><p>2x2灰度图像：2x2&#x3D;4，即&#x3D;&#x3D;4个特征&#x3D;&#x3D;</p>
+<h3 id="表示分类数据的简单方法：独热编码（one-hot-encoding）"><a href="#表示分类数据的简单方法：独热编码（one-hot-encoding）" class="headerlink" title="表示分类数据的简单方法：独热编码（one-hot encoding）"></a>表示分类数据的简单方法：<em>独热编码</em>（one-hot encoding）</h3><ul>
+<li>是一个<strong>向量</strong></li>
+<li><strong>分量和类别一样多</strong></li>
+<li>分别对应的分量设置为1</li>
+</ul>
+<p><img src="/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220302233039947.png" srcset="/img/loading.gif" lazyload alt="image-20220302233039947"></p>
+<ul>
+<li>&#x3D;&#x3D;三维向量（x,y,z）&#x3D;&#x3D;<ul>
+<li>每一维表示一个种类</li>
+</ul>
+</li>
+<li>3个可能的输出类别</li>
+</ul>
+<blockquote>
+<p>一共4个特征+3个可能的输出类别</p>
+</blockquote>
+<h2 id="3-4-2-网络架构"><a href="#3-4-2-网络架构" class="headerlink" title="3.4.2. 网络架构"></a>3.4.2. 网络架构</h2><ul>
+<li><p>估计<strong>所有可能类别</strong>的条件概率</p>
+</li>
+<li><p>需要一个有<strong>多个输出</strong>的模型</p>
+</li>
+<li><p>每个类别对应一个输出—》3个输出o1 o2和o3</p>
+<ul>
+<li><p><img src="/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220302233621062.png" srcset="/img/loading.gif" lazyload alt="image-20220302233621062"></p>
+</li>
+<li><p>12个权重w，分别对每个输出o和每个特征x起作用</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-4-3-全连接层的参数开销"><a href="#3-4-3-全连接层的参数开销" class="headerlink" title="3.4.3. 全连接层的参数开销"></a>3.4.3. 全连接层的参数开销</h2><p>有d 个输入和q 个输出的全连接层</p>
+<p>参数开销为<img src="/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220302234005970.png" srcset="/img/loading.gif" lazyload alt="image-20220302234005970"></p>
+<h3 id="平衡参数节约和模型有效性："><a href="#平衡参数节约和模型有效性：" class="headerlink" title="平衡参数节约和模型有效性："></a>平衡参数节约和模型有效性：</h3><p>将d 个输入转换为q 个输出的成本可以减少到O(dq&#x2F;n)   （参数变少？？）</p>
+<ul>
+<li>超参数nn可以由我们灵活指定</li>
+</ul>
+<h2 id="3-4-4-softmax运算"><a href="#3-4-4-softmax运算" class="headerlink" title="3.4.4. softmax运算"></a>3.4.4. softmax运算</h2><blockquote>
+<p>每个<strong>求幂</strong>后的结果除以它们的<strong>总和</strong></p>
+</blockquote>
+<p><img src="/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220303093030092.png" srcset="/img/loading.gif" lazyload alt="image-20220303093030092"></p>
+<p>softmax运算<strong>不会改变未规范化的预测o 之间的顺序</strong>，只会确定<strong>分配给每个类别的概率</strong></p>
+<p>在预测过程中，我们仍然可以用下式来选择最有可能的类别:</p>
+<p><img src="/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI.assets/image-20220303093127549.png" srcset="/img/loading.gif" lazyload alt="image-20220303093127549"></p>
+<ul>
+<li>softmax回归是一个<em>线性模型</em><ul>
+<li>softmax回归的<strong>输出</strong>仍然由<strong>输入特征的仿射变换</strong>决定</li>
+<li>仿射变换是<strong>线性的</strong></li>
+</ul>
+</li>
+<li>但softmax是一个非线性函数</li>
+</ul>
+<h2 id="3-4-5-小批量样本的矢量化"><a href="#3-4-5-小批量样本的矢量化" class="headerlink" title="3.4.5. 小批量样本的矢量化"></a>3.4.5. 小批量样本的矢量化</h2><p>小批量样本的矢量化<strong>加快了X和WX和W的矩阵-向量乘法</strong></p>
+<p>提高计算效率并且充分利用GPU</p>
+<h2 id="3-4-6-损失函数"><a href="#3-4-6-损失函数" class="headerlink" title="3.4.6. 损失函数"></a>3.4.6. 损失函数</h2><p>度量预测的效果</p>
+<h3 id="最大似然估计"><a href="#最大似然估计" class="headerlink" title="最大似然估计"></a>最大似然估计</h3><p>对给定任意输入xx的每个类的条件概率</p>
+<p>数据集中可能存在<strong>标签噪声</strong>（比如某些样本可能被误标）</p>
+<h1 id="3-5-图像分类数据集（Fashion-MNIST）"><a href="#3-5-图像分类数据集（Fashion-MNIST）" class="headerlink" title="3.5 图像分类数据集（Fashion-MNIST）"></a><a target="_blank" rel="noopener" href="https://tangshusen.me/Dive-into-DL-PyTorch/#/chapter03_DL-basics/3.5_fashion-mnist?id=_35-%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB%E6%95%B0%E6%8D%AE%E9%9B%86%EF%BC%88fashion-mnist%EF%BC%89">3.5 图像分类数据集（Fashion-MNIST）</a></h1><h3 id="torchvision包"><a href="#torchvision包" class="headerlink" title="torchvision包"></a>torchvision包</h3><p>主要用来构建计算机视觉模型</p>
+<ol>
+<li><code>torchvision.datasets</code>: 一些<strong>加载数据</strong>的函数及常用的<strong>数据集</strong>接口；</li>
+<li><code>torchvision.models</code>: 包含常用的<strong>模型结构</strong>（含预训练模型），例如AlexNet、VGG、ResNet等；</li>
+<li><code>torchvision.transforms</code>: 常用的图片变换，例如裁剪、旋转等；</li>
+<li><code>torchvision.utils</code>: 其他的一些<strong>有用的方法</strong>。</li>
+</ol>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">#深度学习</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>跟李沐学AI</div>
+      <div>http://example.com/2022/04/22/跟李沐学AI/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>John Doe</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>April 22, 2022</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>Licensed under</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/04/22/Swin-transformer%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" title="Swin-transformer论文阅读">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Swin-transformer论文阅读</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/04/22/CV%E5%85%A5%E9%97%A8-%E8%A1%97%E9%81%93%E5%AD%97%E7%AC%A6%E8%AF%86%E5%88%AB/" title="CV入门-街道字符识别">
+                        <span class="hidden-mobile">CV入门-街道字符识别</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'http://example.com/2022/04/22/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI/';
+          this.page.identifier = '/2022/04/22/%E8%B7%9F%E6%9D%8E%E6%B2%90%E5%AD%A6AI/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <i class="iconfont icon-love"></i> <a href="" target="_blank" rel="nofollow noopener"><span>武汉大学杨淇雅</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

@@ -1,0 +1,2299 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.png">
+  <link rel="icon" href="/img/avatar.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="CS231n-1什么是NLP人工智能： 计算机视觉 机器人技术 知识表达和推理 人类通过语言来思考、行动 地球上很多生物都拥有不错的视觉 但只有人类拥有语言 目标： 让电脑处理、理解人类语言，完成有意义的事 siri等：与人类交流  把人类语言变成消费级技术 7-3、损失函数和优化介绍线性分类：参数分类的一种 所有训练数据中的经验知识都体现在参数矩阵W中 而W通过训练过程得到   某一种类别得分更">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CS231笔记">
+<meta property="og:url" content="http://example.com/2022/04/22/CS231%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="CS231n-1什么是NLP人工智能： 计算机视觉 机器人技术 知识表达和推理 人类通过语言来思考、行动 地球上很多生物都拥有不错的视觉 但只有人类拥有语言 目标： 让电脑处理、理解人类语言，完成有意义的事 siri等：与人类交流  把人类语言变成消费级技术 7-3、损失函数和优化介绍线性分类：参数分类的一种 所有训练数据中的经验知识都体现在参数矩阵W中 而W通过训练过程得到   某一种类别得分更">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107134755418.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107135456722.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107135456722.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107140909461.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107144726425.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107150113580.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107150700396.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107155407817.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107155541218.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107160943466.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107161748359.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107165038731.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107165550665.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107214433994.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107220435295.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107221628109.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107223603578.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107224218986.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107225617301.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107225702013.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107230013735.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107231030542.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107230222539.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107234303259.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107235523994.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107235548667.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107235601658.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107235946894.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108002406033.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108000840601.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108112206873.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108112742211.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108114058740.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108113821911.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108113837193.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108144433113.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108144736783.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108145623892.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108145750146.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108145843997.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108150017081.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108155822739.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108160324691.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108160823231.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108160943662.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108161105791.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108162116724.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108162412914.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108162723865.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108162917503.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108163518381.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108164900855.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/15bfbeaea179e9a15f78e8a969c940e6.svg">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108165322291.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108165409833.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/format,f_jpg.jpeg">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/format,f_jpg-16506189815311.jpeg">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108170435246.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108170528883.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108171805250.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108171707595.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108172401625.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108172555341.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108172940801.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108173145361.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108173638594.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108173929670.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108174425022.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108174643101.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109112525004.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109140522880.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109140601579.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109140748264.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109140927403.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109141959042.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/format,f_jpg-16506189884995.jpeg">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109142637034.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109142851135.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109142945882.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109145537870.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109145845261.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109154218545.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109154045297.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109154722465.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109155147784.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109155241286.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109160343151.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109160800344.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109160828536.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109161124112.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109163309334.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109165102416.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109165336460.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109165921956.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109170048866.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109170846639.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109171432117.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109171825786.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109172934017.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109173230485.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109173440004.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109173808802.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109174020051.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109174149761.png">
+<meta property="og:image" content="http://example.com/2022/04/22/CS231%E7%AC%94%E8%AE%B0/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109180656125.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109180848727.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109181125987.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109182113443.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109182316658.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109182950832.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109183457844.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109183502940.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109184220236.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109185257700.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220110115923156.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220110115838424.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220110120724131.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220110121246142.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220110122534049.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220110123214507.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220110142951250.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220110143040655.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220110143208098.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220110143451286.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220110143500662.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220110144222597.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220110144840967.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220110145122796.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220111105203742.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220111105231148.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220111105320484.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220111105450850.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220111111427202.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220111111701527.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220111112142563.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220111112424982.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220111112513410.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220111114003688.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220111115527697.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220111120159348.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220111120418725.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220111120502326.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220111121805881.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220111122105528.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/sum_j%7Be%5E%7BV_j%7D%7D%7D.svg+xml">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/sum_j%7Be%5Ej%7D%7D">
+<meta property="og:image" content="http://example.com/2022/04/22/CS231%E7%AC%94%E8%AE%B0/CS231%E7%AC%94%E8%AE%B0.assets/image-20220111122205543.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220111122645330.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220112150004214.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/format,f_jpg-16506190215909.jpeg">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220112141503143.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220112143019615.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220112143329100.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220112143450829.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220112150202497.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220112152809620.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220112152819096.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220112152946807.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220112153202123.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220112153520477.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/v2-62b74afd353d7fdaf9c8d6b20d38d3e1_720w.jpg">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220112153741150.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220112160734244.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220112161206697.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220112161458966.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220112162015162.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220112162133994.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220112163004224.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220112163306520.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220112164110594.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220112164244910.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220112164701701.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220112165007867.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220112165250910.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220112165603339.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220112165611183.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220112165650244.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113110306891.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113110647476.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113110905231.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113111427017.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113113609529.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113113803750.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113121118017.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113140323217.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113153859409.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113153710181.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113153959943.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113160426481.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113160817989.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113161036134.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113161142673.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113164248551.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113162304261.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113165653234.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113165846180.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113170223274.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113170620935.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113170750598.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113170944058.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113170758571.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113170855458.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113172240164.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113172512465.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113172911506.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113173048726.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113174615237.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113174844491.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113174854439.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113175316595.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113175350990.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113175603253.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113175833137.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113180939666.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113181416768.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113181842271.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113182120659.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113182505641.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114133119315.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114132559433.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114132618586.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114132844985.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114133404508.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114133911459.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114134150132.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114135424600.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114141207320.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114141759693.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114142040221.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114151224721.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114151331763.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114151409171.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114151801771.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114151806482.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114151856206.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114152101541.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114152109054.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114152219234.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114152850769.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114153904493.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114154231932.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114154524047.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114154533876.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114154742353.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114154907756.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114154928930.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114155132451.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114155616284.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114155804143.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114162050847.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114162429340.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114162610188.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114162646762.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114162941609.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114163328698.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115104448064.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115104621174.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115104936605.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115105337764.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115105548266.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115110001635.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115110105397.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115110533263.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115110543332.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115111311744.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115112139174.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115112531235.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115112412383.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115112812321.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115113400484.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115113413285.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115113559582.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115113836695.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115114717807.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115114907446.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115115028598.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115115105266.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115115144164.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115115913140.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115120025453.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115120532061.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115121824128.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115121838098.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115121923426.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115124547380.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115124649190.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115125022041.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115125701543.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115125719659.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115125843723.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115130031658.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115131320069.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115131605201.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115132253835.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115133942626.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115133808023.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115134020453.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115134030301.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115134237013.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115134342382.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115160747647.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115160905699.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115160916696.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115161023415.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115161035079.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115161136929.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115161244359.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115161615029.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115161835566.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115161841907.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115162206512.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115162333867.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115162452843.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115163211928.png">
+<meta property="og:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115164623328.png">
+<meta property="article:published_time" content="2022-04-22T09:15:34.000Z">
+<meta property="article:modified_time" content="2022-04-22T09:17:57.122Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="深度学习">
+<meta property="article:tag" content="CV">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107134755418.png">
+  
+  
+  <title>CS231笔记 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Qiya</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="CS231笔记"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-04-22 17:15" pubdate>
+          April 22, 2022 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          13k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          112 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">CS231笔记</h1>
+            
+            <div class="markdown-body">
+              
+              <h1 id="CS231n-1"><a href="#CS231n-1" class="headerlink" title="CS231n-1"></a>CS231n-1</h1><h1 id="什么是NLP"><a href="#什么是NLP" class="headerlink" title="什么是NLP"></a>什么是NLP</h1><p>人工智能：</p>
+<p>计算机视觉</p>
+<p>机器人技术</p>
+<p>知识表达和推理</p>
+<p>人类通过语言来思考、行动</p>
+<p>地球上很多生物都拥有不错的视觉</p>
+<p>但只有人类拥有语言</p>
+<p>目标：</p>
+<p>让电脑处理、理解人类语言，完成有意义的事</p>
+<p>siri等：与人类交流</p>
+<p> 把人类语言变成消费级技术</p>
+<h1 id="7-3、损失函数和优化介绍"><a href="#7-3、损失函数和优化介绍" class="headerlink" title="7-3、损失函数和优化介绍"></a>7-3、损失函数和优化介绍</h1><p>线性分类：参数分类的一种</p>
+<p>所有训练数据中的经验知识都体现在参数矩阵W中</p>
+<p>而W通过训练过程得到</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107134755418.png" srcset="/img/loading.gif" lazyload alt="image-20220107134755418"> </p>
+<p>某一种类别得分更高，可能是什么<img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107135456722.png" srcset="/img/loading.gif" lazyload alt="image-20220107135456722"></p>
+<p>线性分类器：每个种类的学习模板</p>
+<p>矩阵W的每行都对应一个分类模板</p>
+<h1 id="怎么选择W"><a href="#怎么选择W" class="headerlink" title="怎么选择W"></a>怎么选择W</h1><p>某一种类别得分更高，就可能是什么<img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107135456722.png" srcset="/img/loading.gif" lazyload alt="image-20220107135456722"></p>
+<p>用人眼观察，可以</p>
+<p>但是自动决定哪些W是最优？需要一个度量任意某个W的好坏的方法</p>
+<h2 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h2><p>一个函数，输入是W，看得分，定量估计W的好坏</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107140909461.png" srcset="/img/loading.gif" lazyload alt="image-20220107140909461"></p>
+<p>x：输入图像</p>
+<p>y：label，f输出的结果</p>
+<p>所有测试集损失函数的平均结果</p>
+<h3 id="SVM"><a href="#SVM" class="headerlink" title="SVM"></a>SVM</h3><p>多类别SVM：处理多分类时的一种推广 </p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107144726425.png" srcset="/img/loading.gif" lazyload alt="image-20220107144726425"></p>
+<p>某个值和0取max的损失函数：&#x3D;&#x3D;合页损失函数&#x3D;&#x3D;&#x3D;&#x3D;hinge loss&#x3D;&#x3D;（0-+∞）</p>
+<p>Syi：训练样本真实分类的分数（通过分类器预测出来第i个样本的真实分类的分数）</p>
+<p>​	e.g.S1: 猫的分数，S2:狗的分数，yi：这个样本的正确的分类标签</p>
+<p>y轴：损失</p>
+<p>随着真实分类的分数↑，loss线性↓，直到分数超过一个阈值，loss&#x3D;0（已经为这个样本成功分对类）</p>
+<h3 id="举例：SVM-loss"><a href="#举例：SVM-loss" class="headerlink" title="举例：SVM loss"></a>举例：SVM loss</h3><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107150113580.png" srcset="/img/loading.gif" lazyload alt="image-20220107150113580"></p>
+<p>要对所有不正确的分类全都循环一遍</p>
+<p>cat：因为car分数5.1是错的，造成max种选取了一个正数，导致最后有loss</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107150700396.png" srcset="/img/loading.gif" lazyload alt="image-20220107150700396"></p>
+<p> 最后的loss：三个的平均值</p>
+<p>（第三个最应该的却最低，loss最大）</p>
+<p> <img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107155407817.png" srcset="/img/loading.gif" lazyload alt="image-20220107155407817"></p>
+<h3 id="Q3-当所有的S，分数都近乎为0，差不多相等，loss-x3D-？"><a href="#Q3-当所有的S，分数都近乎为0，差不多相等，loss-x3D-？" class="headerlink" title="Q3:当所有的S，分数都近乎为0，差不多相等，loss&#x3D;？"></a>Q3:当所有的S，分数都近乎为0，差不多相等，loss&#x3D;？</h3><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107155541218.png" srcset="/img/loading.gif" lazyload alt="image-20220107155541218"></p>
+<p>Sj≈Syi，所以&#x3D;&#x3D;&#x3D;分类的数量-1&#x3D;&#x3D;</p>
+<p>∵遍历了C-1个类别</p>
+<p>用于：刚开始训练时，第一次迭代的loss应该&#x3D;C-1，否则可能有bug</p>
+<h3 id="x3D-x3D-矢量化code-x3D-x3D"><a href="#x3D-x3D-矢量化code-x3D-x3D" class="headerlink" title="&#x3D;&#x3D;矢量化code&#x3D;&#x3D;"></a>&#x3D;&#x3D;矢量化code&#x3D;&#x3D;</h3><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107160943466.png" srcset="/img/loading.gif" lazyload alt="image-20220107160943466"></p>
+<p>可以真正进入这里，把边际值归0</p>
+<p>可以只迭代一个类，而不是所有</p>
+<p>把想跳过的那个清0，然后计算总和</p>
+<h3 id="Q：具有loss-x3D-0的w是唯一的吗？"><a href="#Q：具有loss-x3D-0的w是唯一的吗？" class="headerlink" title="Q：具有loss&#x3D;0的w是唯一的吗？"></a>Q：具有loss&#x3D;0的w是唯一的吗？</h3><p>否，还有其他的，2w也是L&#x3D;0</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107161748359.png" srcset="/img/loading.gif" lazyload alt="image-20220107161748359"></p>
+<p>w都翻倍，阈值1没变，最终的L也没变 </p>
+<p>机器学习的重点：</p>
+<p>使用训练数据来找到一些分类器，然后将这个东西应用于测试数据</p>
+<p>并不关心训练集的表现，关心分类器在测试集上的表现</p>
+<h3 id="正则项"><a href="#正则项" class="headerlink" title="正则项"></a>正则项</h3><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107165038731.png" srcset="/img/loading.gif" lazyload alt="image-20220107165038731"></p>
+<p>鼓励模型以某种方式选择更简单的W</p>
+<p><strong>标准损失函数</strong>：有2个项：&#x3D;&#x3D;数据丢失项+正则项&#x3D;&#x3D;</p>
+<p>（R前的超参数入：用来平衡这两个项)</p>
+<h4 id="这三个项之间有什么相互作用？"><a href="#这三个项之间有什么相互作用？" class="headerlink" title="这三个项之间有什么相互作用？"></a>这三个项之间有什么相互作用？</h4><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107165550665.png" srcset="/img/loading.gif" lazyload alt="image-20220107165550665"></p>
+<p>对模型做的任何事情，种种所谓的“惩罚”，主要目的；<strong>减轻模型的复杂度</strong>，而非视图拟合数据</p>
+<h3 id="Q-L2正则化如何度量复杂性？"><a href="#Q-L2正则化如何度量复杂性？" class="headerlink" title="Q:L2正则化如何度量复杂性？"></a>Q:L2正则化如何度量复杂性？</h3><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107214433994.png" srcset="/img/loading.gif" lazyload alt="image-20220107214433994"></p>
+<h3 id="softmax-loss"><a href="#softmax-loss" class="headerlink" title="softmax loss"></a>softmax loss</h3><ul>
+<li>log函数：单调递增，当概率最大时找到最大值</li>
+<li>用softmax对分数进行转化处理，得到正确类别</li>
+</ul>
+<p><strong>损失函数</strong>是： -log P</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107220435295.png" srcset="/img/loading.gif" lazyload alt="image-20220107220435295"></p>
+<h3 id="Q-sofmax的最小值最大值是多少？"><a href="#Q-sofmax的最小值最大值是多少？" class="headerlink" title="Q:sofmax的最小值最大值是多少？"></a>Q:sofmax的最小值最大值是多少？</h3><ul>
+<li>min：0，当正确类别的概率为1时</li>
+<li>max：+∞，当正确类别的概率为0时<ul>
+<li>不会达到这个极值（因为-∞的指数才为0）</li>
+</ul>
+</li>
+</ul>
+<p>第一次迭代：（S≈0）</p>
+<p>loss应该为C取自然对数：lnC</p>
+<h2 id="两个损失函数的对比"><a href="#两个损失函数的对比" class="headerlink" title="两个损失函数的对比"></a>两个损失函数的对比</h2><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107221628109.png" srcset="/img/loading.gif" lazyload alt="image-20220107221628109"></p>
+<ol>
+<li>通过线性分类器后，计算一样，得到的分值解释方法不同</li>
+<li>SVM中，某一分值↑，因为max函数，不对loss值有影响</li>
+<li>softmax中，会有影响，且希望越大越好，loss会越小</li>
+</ol>
+<h1 id="优化过程"><a href="#优化过程" class="headerlink" title="优化过程"></a>优化过程</h1><p>找到一种有效的方式，从W的可行域里找到W取什么值是最不坏的情况（loss最小）</p>
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><h3 id="法1：随机搜索"><a href="#法1：随机搜索" class="headerlink" title="法1：随机搜索"></a>法1：随机搜索</h3><p>需要很多权重值W，随机采样，将它们输入损失函数，再看效果如何</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107223603578.png" srcset="/img/loading.gif" lazyload alt="image-20220107223603578"></p>
+<h3 id="法2：Follow-the-slope"><a href="#法2：Follow-the-slope" class="headerlink" title="法2：Follow the slope"></a>法2：Follow the slope</h3><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107224218986.png" srcset="/img/loading.gif" lazyload alt="image-20220107224218986"></p>
+<p>多元函数的导数：<strong>梯度</strong></p>
+<ul>
+<li>偏导数组成的<u>向量</u></li>
+<li>梯度中的每个元素可以告诉我们：相关方向上函数f的斜率</li>
+<li>指向函数增长最快的方向</li>
+<li>负梯度：函数下降最快的方向</li>
+<li>给出了函数在当前点的一阶线性逼近</li>
+</ul>
+<p><strong>任意方向的斜率</strong> &#x3D; 这一点梯度 · 该点单位方向向量（点积）</p>
+<h2 id="两种梯度计算方法"><a href="#两种梯度计算方法" class="headerlink" title="两种梯度计算方法"></a>两种梯度计算方法</h2><h3 id="数值梯度"><a href="#数值梯度" class="headerlink" title="数值梯度"></a>数值梯度</h3><ul>
+<li><p>简单，有意义，有用的debug工具</p>
+</li>
+<li><p><strong>实践中</strong>：</p>
+<p>深度学习就是计算函数梯度，用这些梯度迭代，更新<u>参数向量</u></p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107225617301.png" srcset="/img/loading.gif" lazyload alt="image-20220107225617301"></p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107225702013.png" srcset="/img/loading.gif" lazyload alt="image-20220107225702013"></p>
+<p>当网络很大时，有很多输入–》W维度很高，计算会很慢</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107230013735.png" srcset="/img/loading.gif" lazyload alt="image-20220107230013735"></p>
+<p>提前计算梯度的表达式，dW</p>
+</li>
+</ul>
+<h3 id="解析梯度"><a href="#解析梯度" class="headerlink" title="解析梯度"></a>解析梯度</h3><ul>
+<li>写下损失的<strong>表达式</strong>，计算机计算</li>
+</ul>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107231030542.png" srcset="/img/loading.gif" lazyload alt="image-20220107231030542"></p>
+<ul>
+<li>实践中常用</li>
+</ul>
+<h3 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h3><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107230222539.png" srcset="/img/loading.gif" lazyload alt="image-20220107230222539"></p>
+<h3 id="debug策略"><a href="#debug策略" class="headerlink" title="debug策略"></a>debug策略</h3><ul>
+<li>使用数值梯度作为单元测试，来确保解析梯度是正确的</li>
+<li>因为计算缓慢，需要减少问题的参数数量</li>
+</ul>
+<h2 id="梯度算法"><a href="#梯度算法" class="headerlink" title="梯度算法"></a>梯度算法</h2><ul>
+<li>梯度：指向函数的最大增加方向</li>
+</ul>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107234303259.png" srcset="/img/loading.gif" lazyload alt="image-20220107234303259"></p>
+<p>初始化W为随机值</p>
+<ul>
+<li>W为真时：计算损失和梯度，向<strong>梯度相反的方向</strong>&#x3D;&#x3D;更新权重值&#x3D;&#x3D;</li>
+<li>向梯度减小的方向前进，一直重复，最后网络将会收敛</li>
+<li>step_size：步长，学习率，超参数，在那个方向前进多少距离<ul>
+<li>需要设置的第一个超参数</li>
+</ul>
+</li>
+</ul>
+<h2 id="SGD"><a href="#SGD" class="headerlink" title="SGD"></a>SGD</h2><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107235523994.png" srcset="/img/loading.gif" lazyload alt="image-20220107235523994"></p>
+<p>实际中使用：随机梯度下降</p>
+<ul>
+<li><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107235548667.png" srcset="/img/loading.gif" lazyload alt="image-20220107235548667"></p>
+</li>
+<li><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107235601658.png" srcset="/img/loading.gif" lazyload alt="image-20220107235601658"></p>
+</li>
+<li><p>成为minibatch（小批量），用此估算误差总和以及实际梯度</p>
+</li>
+</ul>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220107235946894.png" srcset="/img/loading.gif" lazyload alt="image-20220107235946894"></p>
+<ul>
+<li>按惯例，都取2的幂次方，32，64等</li>
+<li>这个data_batch是随机的</li>
+</ul>
+<h1 id="特征转换"><a href="#特征转换" class="headerlink" title="特征转换"></a>特征转换</h1><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108002406033.png" srcset="/img/loading.gif" lazyload alt="image-20220108002406033"></p>
+<ul>
+<li>将直角坐标—》极坐标，从而使可以线性可分</li>
+</ul>
+<h1 id="线性分类器实际做法"><a href="#线性分类器实际做法" class="headerlink" title="线性分类器实际做法"></a>线性分类器实际做法</h1><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108000840601.png" srcset="/img/loading.gif" lazyload alt="image-20220108000840601"></p>
+<p>计算图像不同特征表示的差异&#x2F;方向梯度的直方图</p>
+<p>将整个特征连接在一起 </p>
+<p>神经网络：</p>
+<ul>
+<li>并非提前记录特征</li>
+<li>直接从数据中学习特征</li>
+<li>在整个网络中训练所有的权重</li>
+</ul>
+<h1 id="8-4、介绍神经网络-反向传播"><a href="#8-4、介绍神经网络-反向传播" class="headerlink" title="8-4、介绍神经网络-反向传播"></a>8-4、介绍神经网络-反向传播</h1><h2 id="如何用函数f定义一个分类器？"><a href="#如何用函数f定义一个分类器？" class="headerlink" title="如何用函数f定义一个分类器？"></a>如何用函数f定义一个分类器？</h2><ul>
+<li><p>函数f的<strong>参数</strong>是&#x3D;&#x3D;权重矩阵W&#x3D;&#x3D;</p>
+</li>
+<li><p><strong>输入数据x</strong>并对你想要分类的每个类别都输出一个对应的<strong>得分向量</strong></p>
+</li>
+<li><p><strong>损失函数</strong>：结合<strong>正则项</strong></p>
+<ul>
+<li><p>正则项：表示模型的复杂程度</p>
+</li>
+<li><p>为了更好地泛化，倾向于取简单的模型</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="与最小损失对应的W参数？"><a href="#与最小损失对应的W参数？" class="headerlink" title="与最小损失对应的W参数？"></a>与最小损失对应的W参数？</h3><p>找到L在W方向上的梯度：</p>
+<ul>
+<li>最优化</li>
+<li>沿着最陡的下降方向（<strong>梯度的负方向</strong>）</li>
+</ul>
+<h2 id="如何计算任意复杂函数的解析梯度？"><a href="#如何计算任意复杂函数的解析梯度？" class="headerlink" title="如何计算任意复杂函数的解析梯度？"></a>如何计算任意复杂函数的解析梯度？</h2><p><strong>计算图</strong> <img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108112206873.png" srcset="/img/loading.gif" lazyload alt="image-20220108112206873"></p>
+<p>输入x和W，矩阵乘法，计算loss，加正则项得L</p>
+<p>一旦我们能用计算图来表示一个函数， </p>
+<p>用反向传播技术递归地调用链式法则计算图中每个变量的梯度</p>
+<h2 id="卷积神经网络CNN"><a href="#卷积神经网络CNN" class="headerlink" title="卷积神经网络CNN"></a>卷积神经网络CNN</h2><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108112742211.png" srcset="/img/loading.gif" lazyload alt="image-20220108112742211"></p>
+<p>输入必须经过多层网络才能到达最后的loss</p>
+<h2 id="反向传播如何工作"><a href="#反向传播如何工作" class="headerlink" title="反向传播如何工作"></a>反向传播如何工作</h2><h3 id="反向传播示例"><a href="#反向传播示例" class="headerlink" title="反向传播示例"></a>反向传播示例</h3><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108114058740.png" srcset="/img/loading.gif" lazyload alt="image-20220108114058740"></p>
+<p>红色：反向计算得到的梯度值（多维导数）</p>
+<p>【链式法则的递归调用】</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108113821911.png" srcset="/img/loading.gif" lazyload alt="image-20220108113821911"></p>
+<p>即<img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108113837193.png" srcset="/img/loading.gif" lazyload alt="image-20220108113837193"></p>
+<p>（αf即df）</p>
+<h2 id="例：求一个函数所有变量的梯度L-x2F-x"><a href="#例：求一个函数所有变量的梯度L-x2F-x" class="headerlink" title="例：求一个函数所有变量的梯度L&#x2F;x"></a>例：求一个函数所有变量的梯度L&#x2F;x</h2><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108144433113.png" srcset="/img/loading.gif" lazyload alt="image-20220108144433113"></p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108144736783.png" srcset="/img/loading.gif" lazyload alt="image-20220108144736783"></p>
+<p>上游梯度 * 本地梯度</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108145623892.png" srcset="/img/loading.gif" lazyload alt="image-20220108145623892"></p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108145750146.png" srcset="/img/loading.gif" lazyload alt="image-20220108145750146"></p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108145843997.png" srcset="/img/loading.gif" lazyload alt="image-20220108145843997"></p>
+<p>【加法】</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108150017081.png" srcset="/img/loading.gif" lazyload alt="image-20220108150017081"></p>
+<p>【乘法】</p>
+<h1 id="sigmoid-gate"><a href="#sigmoid-gate" class="headerlink" title="sigmoid gate"></a>sigmoid gate</h1><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108155822739.png" srcset="/img/loading.gif" lazyload alt="image-20220108155822739"></p>
+<p>【在计算图中】</p>
+<p>把节点组合在一起变成一个sigmoid门：<img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108160324691.png" srcset="/img/loading.gif" lazyload alt="image-20220108160324691"></p>
+<ul>
+<li>想求一个复杂的梯度时：写出计算图–》反向传播+链式法则</li>
+</ul>
+<p><strong>sigmoid求导数</strong></p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108160823231.png" srcset="/img/loading.gif" lazyload alt="image-20220108160823231"></p>
+<p>👇</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108160943662.png" srcset="/img/loading.gif" lazyload alt="image-20220108160943662"></p>
+<p>∴本地梯度&#x3D;0.2，上游梯度&#x3D;1</p>
+<p>相乘&#x3D;0.2</p>
+<h1 id="将计算图中部分节点组合以简化计算"><a href="#将计算图中部分节点组合以简化计算" class="headerlink" title="将计算图中部分节点组合以简化计算"></a>将计算图中部分节点组合以简化计算</h1><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108161105791.png" srcset="/img/loading.gif" lazyload alt="image-20220108161105791"></p>
+<ul>
+<li>（）视作整体，变成一个sigmoid</li>
+<li>完整计算图中，有一部分节点组合起来是sigmoid形式  </li>
+<li>将此部分视为sigmoid门</li>
+</ul>
+<h1 id="加法门"><a href="#加法门" class="headerlink" title="加法门"></a><strong>加法门</strong></h1><p>分发和传递<strong>完全相同</strong>的梯度<img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108162116724.png" srcset="/img/loading.gif" lazyload alt="image-20220108162116724"></p>
+<h1 id="max门"><a href="#max门" class="headerlink" title="max门"></a><strong>max门</strong></h1><p>本地梯度：一个是0，一个是1</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108162412914.png" srcset="/img/loading.gif" lazyload alt="image-20220108162412914"></p>
+<ul>
+<li>想象成一个梯度路由器（选择了某个，不要另一个）</li>
+<li>只有这个最大值影响到函数计算</li>
+</ul>
+<h1 id="乘法门"><a href="#乘法门" class="headerlink" title="乘法门"></a><strong>乘法门</strong></h1><p>本地梯度&#x3D;另一个变量的值</p>
+<ul>
+<li>一个梯度转换器&#x2F;尺度缩放器<img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108162723865.png" srcset="/img/loading.gif" lazyload alt="image-20220108162723865"></li>
+</ul>
+<h1 id="多分支"><a href="#多分支" class="headerlink" title="多分支"></a>多分支</h1><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108162917503.png" srcset="/img/loading.gif" lazyload alt="image-20220108162917503"></p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108163518381.png" srcset="/img/loading.gif" lazyload alt="image-20220108163518381"></p>
+<p>（我们没有更新这些权重的值</p>
+<p>只是有了对这些变量的梯度）</p>
+<p>👇</p>
+<p>有了这些梯度</p>
+<p>&#x3D;&#x3D;weigth&#x3D;step_size * gradient&#x3D;&#x3D;</p>
+<p>实现<strong>更新权重</strong>（得到了需要的参数）</p>
+<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108164900855.png" srcset="/img/loading.gif" lazyload alt="image-20220108164900855"></p>
+<h2 id="雅各比矩阵"><a href="#雅各比矩阵" class="headerlink" title="雅各比矩阵"></a>雅各比矩阵</h2><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/15bfbeaea179e9a15f78e8a969c940e6.svg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>每一行：输出yi对每一个输入做偏导</p>
+<p>矩阵size：</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108165322291.png" srcset="/img/loading.gif" lazyload alt="image-20220108165322291"></p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108165409833.png" srcset="/img/loading.gif" lazyload alt="image-20220108165409833"></p>
+<p>此yacob会是一个对角矩阵</p>
+<p>∵每一个输入只影响对应的一个输出</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/format,f_jpg.jpeg" srcset="/img/loading.gif" lazyload alt="对角矩阵"></p>
+<ul>
+<li>不需要写出整个矩阵</li>
+<li>计算出y对x的偏导，填入矩阵对角线</li>
+</ul>
+<h2 id="输入是向量"><a href="#输入是向量" class="headerlink" title="输入是向量"></a>输入是向量</h2><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/format,f_jpg-16506189815311.jpeg" srcset="/img/loading.gif" lazyload alt="矩阵乘法"></p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108170435246.png" srcset="/img/loading.gif" lazyload alt="image-20220108170435246"></p>
+<h2 id="正向"><a href="#正向" class="headerlink" title="正向"></a>正向</h2><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108170528883.png" srcset="/img/loading.gif" lazyload alt="image-20220108170528883"></p>
+<h2 id="反向传播"><a href="#反向传播" class="headerlink" title="反向传播"></a>反向传播</h2><p><strong>作为检查</strong>：</p>
+<p>&#x3D;&#x3D;<strong>梯度向量size总是和原向量大小保持一致</strong>&#x3D;&#x3D;</p>
+<p>（∵梯度向量中的每一个元素代表这个元素对最终函数影响的大小）</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108171805250.png" srcset="/img/loading.gif" lazyload alt="image-20220108171805250"></p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108171707595.png" srcset="/img/loading.gif" lazyload alt="image-20220108171707595"></p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108172401625.png" srcset="/img/loading.gif" lazyload alt="image-20220108172401625"></p>
+<p>（因为f是几个q的平方和）</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108172555341.png" srcset="/img/loading.gif" lazyload alt="image-20220108172555341">q是2X1向量，有2个元素</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108172940801.png" srcset="/img/loading.gif" lazyload alt="image-20220108172940801"></p>
+<h1 id="前向、后向代码"><a href="#前向、后向代码" class="headerlink" title="前向、后向代码"></a>前向、后向代码</h1><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108173145361.png" srcset="/img/loading.gif" lazyload alt="image-20220108173145361"></p>
+<p>前向：计算每个节点的输出</p>
+<p>反向：计算梯度</p>
+<ul>
+<li>每个节点想象成门</li>
+<li>如果有整个计算图，可以迭代得到所有图的正向传播</li>
+</ul>
+<h1 id="乘法门代码"><a href="#乘法门代码" class="headerlink" title="乘法门代码"></a>乘法门代码</h1><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108173638594.png" srcset="/img/loading.gif" lazyload alt="image-20220108173638594"></p>
+<p>【所有数值都是标量】</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108173929670.png" srcset="/img/loading.gif" lazyload alt="image-20220108173929670"></p>
+<p>forward：</p>
+<ul>
+<li><p>【<strong>需要缓存前向传播的数值</strong>】</p>
+</li>
+<li><p>∵反向传播要用它计算多次</p>
+</li>
+</ul>
+<p>backward：</p>
+<ul>
+<li>需要使用已保存的self.y，与dz相乘</li>
+</ul>
+<h1 id="正向反向的应用"><a href="#正向反向的应用" class="headerlink" title="正向反向的应用"></a>正向反向的应用</h1><ul>
+<li><p>许多深度学习框架和库</p>
+</li>
+<li><p>sigmoid</p>
+</li>
+<li><p>卷积</p>
+</li>
+<li><p>Argmax</p>
+</li>
+</ul>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108174425022.png" srcset="/img/loading.gif" lazyload alt="image-20220108174425022"></p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220108174643101.png" srcset="/img/loading.gif" lazyload alt="image-20220108174643101"></p>
+<ul>
+<li>使用反向传播<strong>计算梯度</strong>：神经网络的核心技术</li>
+</ul>
+<h1 id="9-4-1、介绍神经网络"><a href="#9-4-1、介绍神经网络" class="headerlink" title="9-4.1、介绍神经网络"></a>9-4.1、介绍神经网络</h1><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109112525004.png" srcset="/img/loading.gif" lazyload alt="image-20220109112525004"></p>
+<h1 id="神经网络："><a href="#神经网络：" class="headerlink" title="神经网络："></a><strong>神经网络：</strong></h1><ul>
+<li>由简单函数组成的一组函数</li>
+<li>在顶层堆叠在一起</li>
+<li>用一种层次化的方式将它们堆叠起来</li>
+<li>为了形成一个更复杂的非线性函数</li>
+</ul>
+<p><strong>【多阶段分层计算】</strong></p>
+<ul>
+<li>将多个线性层堆在顶层</li>
+<li>和其他非线性函数结合</li>
+</ul>
+<p><strong>w1：</strong>各式范本的集合（红车、黄车……不只有10个）</p>
+<p><strong>h：</strong>对w1这些范本的所有<strong>得分</strong>（第一层输出）</p>
+<p>​		即max（0，W1x）</p>
+<p><strong>再上一层：</strong>将这些得分组合起来</p>
+<p><strong>w2：</strong>h里所有向量的权重（类比：w1是x向量的权重）</p>
+<p>​		所有范本的<strong>加权</strong>，使在<strong>多个范本中权衡</strong>，得到特定分类的最后得分</p>
+<p>【非线性通常出现在h以前】</p>
+<h1 id="任意深度的神经网络"><a href="#任意深度的神经网络" class="headerlink" title="任意深度的神经网络"></a>任意深度的神经网络</h1><p> <img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109140522880.png" srcset="/img/loading.gif" lazyload alt="image-20220109140522880"></p>
+<h2 id="2层网络代码"><a href="#2层网络代码" class="headerlink" title="2层网络代码"></a>2层网络代码</h2><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109140601579.png" srcset="/img/loading.gif" lazyload alt="image-20220109140601579"></p>
+<p>20行</p>
+<p>运用前向、反向、链式法则计算梯度</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109140748264.png" srcset="/img/loading.gif" lazyload alt="image-20220109140748264"></p>
+<h1 id="神经元"><a href="#神经元" class="headerlink" title="神经元"></a>神经元</h1><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109140927403.png" srcset="/img/loading.gif" lazyload alt="image-20220109140927403"></p>
+<ul>
+<li>cell body后 f 处得到激活函数</li>
+<li>应用在神经元端部</li>
+<li>得到的值作为输出</li>
+<li>最后将值传输到和相关联的神经元</li>
+</ul>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109141959042.png" srcset="/img/loading.gif" lazyload alt="image-20220109141959042"></p>
+<p>【要传递下去的是放电率firing_rate】</p>
+<h1 id="ReLU-函数"><a href="#ReLU-函数" class="headerlink" title="ReLU 函数"></a>ReLU 函数</h1><p><strong>线性整流函数</strong>（Rectified Linear Unit, <strong>ReLU</strong>），又称<strong>修正线性单元，</strong>是一种<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E4%BA%BA%E5%B7%A5%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/382460">人工神经网络</a>中常用的&#x3D;&#x3D;激活函数&#x3D;&#x3D;（activation function），通常指代以<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%96%9C%E5%9D%A1%E5%87%BD%E6%95%B0">斜坡函数</a>及其变种为代表的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E9%9D%9E%E7%BA%BF%E6%80%A7%E5%87%BD%E6%95%B0/16029251">非线性函数</a>。</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/format,f_jpg-16506189884995.jpeg" srcset="/img/loading.gif" lazyload alt="ReLU 函数"></p>
+<p>和神经元工作机制最为相似的一个激活函数</p>
+<h1 id="激活函数"><a href="#激活函数" class="headerlink" title="激活函数"></a>激活函数</h1><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109142637034.png" srcset="/img/loading.gif" lazyload alt="image-20220109142637034"></p>
+<h1 id="两层神经网络-x2F-单隐藏层神经网络"><a href="#两层神经网络-x2F-单隐藏层神经网络" class="headerlink" title="两层神经网络&#x2F;单隐藏层神经网络"></a>两层神经网络&#x2F;单隐藏层神经网络</h1><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109142851135.png" srcset="/img/loading.gif" lazyload alt="image-20220109142851135"></p>
+<p><strong>全连接层</strong>：hidden layer和output layer</p>
+<h1 id="三层神经网络-x2F-双隐藏层神经网络"><a href="#三层神经网络-x2F-双隐藏层神经网络" class="headerlink" title="三层神经网络&#x2F;双隐藏层神经网络"></a>三层神经网络&#x2F;双隐藏层神经网络</h1><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109142945882.png" srcset="/img/loading.gif" lazyload alt="image-20220109142945882"></p>
+<p>每一个隐藏层是一个向量</p>
+<p>一组神经元的集合</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109145537870.png" srcset="/img/loading.gif" lazyload alt="image-20220109145537870"></p>
+<p>利用<strong>矩阵乘法</strong> np.dot（）计算神经元的值</p>
+<p>通过一次矩阵乘法，得出了该层所有神经元输出结果</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109145845261.png" srcset="/img/loading.gif" lazyload alt="image-20220109145845261"></p>
+<p>f：使用了sigmoid函数（x）</p>
+<blockquote>
+<p>在<em>Python</em>中有两种函数,一种是def定义的函数,另一种是<em><strong>lambda函数</strong></em>,也就是大家常说的<strong>匿名函数</strong>。今天我就和大家聊聊<em>lambda函数</em>,在<em>Python</em>编程中,大家习惯将其称为表达式。</p>
+</blockquote>
+<p>x：numpy的randn函数，3X1随机矩阵</p>
+<p>h1：w1和第一个输入x做矩阵乘法，+b1，sigmoid函数</p>
+<p>h2：w2和第二个输入h2做矩阵乘法，+b2，sigmoid函数</p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>神经网络：很多层线性层，在层间添加非线性</p>
+<p> 通过学习任务所需的中间模板（红车、黄车、各种颜色车）</p>
+<p>把中间特征组合起来得到<strong>某一类别的最终评分函数</strong></p>
+<h1 id="10-5、卷积神经网络历史"><a href="#10-5、卷积神经网络历史" class="headerlink" title="10-5、卷积神经网络历史"></a>10-5、卷积神经网络历史</h1><blockquote>
+<p>与神经网络类似，但需要训练卷积层</p>
+<p>因为：卷积层更能保留输入的空间结构</p>
+</blockquote>
+<h1 id="11-5、1-卷积神经网络-卷积和池化"><a href="#11-5、1-卷积神经网络-卷积和池化" class="headerlink" title="11-5、1 卷积神经网络-卷积和池化"></a>11-5、1 卷积神经网络-卷积和池化</h1><h1 id="全连接层"><a href="#全连接层" class="headerlink" title="全连接层"></a>全连接层</h1><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109154218545.png" srcset="/img/loading.gif" lazyload alt="image-20220109154218545"></p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109154045297.png" srcset="/img/loading.gif" lazyload alt="image-20220109154045297"></p>
+<p>W与输入x进行点积运算，从而得到一个数字</p>
+<p>（神经元的值）</p>
+<h1 id="卷积层"><a href="#卷积层" class="headerlink" title="卷积层"></a>卷积层</h1><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109154722465.png" srcset="/img/loading.gif" lazyload alt="image-20220109154722465"></p>
+<p><strong>与全连接层的区别</strong>：</p>
+<p>可以保全空间结构</p>
+<p>不用展开成长向量，可以保持图片原本的三维输入结构</p>
+<p> <strong>权重：</strong></p>
+<p>小卷积核</p>
+<p>把卷积核在整个图像上滑动</p>
+<p>计算出每一个空间定位时的&#x3D;&#x3D;<strong>点积</strong>结果&#x3D;&#x3D;</p>
+<ul>
+<li>原始图像：三维，三个通道，RGB</li>
+<li>卷积核：也是立体，遍布三个通道</li>
+</ul>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109155147784.png" srcset="/img/loading.gif" lazyload alt="image-20220109155147784"></p>
+<p>一次卷积共计算：5 * 5 * 3次+bias偏置</p>
+<h2 id="卷积核w的基本方法："><a href="#卷积核w的基本方法：" class="headerlink" title="卷积核w的基本方法："></a>卷积核w的基本方法：</h2><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109155241286.png" srcset="/img/loading.gif" lazyload alt="image-20220109155241286"></p>
+<p>（将卷积核展开与w做向量点积&#x3D;卷积核每个元素与w对应相乘）</p>
+<h2 id="如何滑动卷积核？"><a href="#如何滑动卷积核？" class="headerlink" title="如何滑动卷积核？"></a>如何滑动卷积核？</h2><p>从左上角开始</p>
+<p>遍历输入的所有像素点</p>
+<p>在每个位置，都进行点积运算</p>
+<p>每一次运算都会在<strong>输出激活映射</strong>中产生一个值</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109160343151.png" srcset="/img/loading.gif" lazyload alt="image-20220109160343151"></p>
+<p>【维度发生了变化】</p>
+<p>还可以一次滑动两个像素值</p>
+<p>不同尺寸的输出取决于滑动方法</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109160800344.png" srcset="/img/loading.gif" lazyload alt="image-20220109160800344"></p>
+<h3 id="使用多个卷积核："><a href="#使用多个卷积核：" class="headerlink" title="使用多个卷积核："></a>使用多个卷积核：</h3><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109160828536.png" srcset="/img/loading.gif" lazyload alt="image-20220109160828536"></p>
+<p>6个卷积核，每个对应不同激活层</p>
+<h2 id="卷积神经网络中我们如何使用这些卷积层？"><a href="#卷积神经网络中我们如何使用这些卷积层？" class="headerlink" title="卷积神经网络中我们如何使用这些卷积层？"></a>卷积神经网络中我们如何使用这些卷积层？</h2><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109161124112.png" srcset="/img/loading.gif" lazyload alt="image-20220109161124112"></p>
+<p>经过多个卷积核得到下一层……</p>
+<ul>
+<li><p>采用多个卷积核</p>
+</li>
+<li><p>每一个卷积核会产生一个激活映射</p>
+</li>
+<li><p>前面的卷积核：低阶的图像特征</p>
+<ul>
+<li>边缘特征</li>
+</ul>
+</li>
+<li><p>越往后的卷积核：越复杂的图像特征</p>
+<ul>
+<li>边角、斑点</li>
+</ul>
+</li>
+</ul>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109163309334.png" srcset="/img/loading.gif" lazyload alt="image-20220109163309334"></p>
+<p>【堆叠在一起的层：从简单到复杂的特征序列】</p>
+<p>激活函数映射的每一个都对应滑动这些卷积核的一个输出以及这些卷积核产生输出的位置</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109165102416.png" srcset="/img/loading.gif" lazyload alt="image-20220109165102416"></p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109165336460.png" srcset="/img/loading.gif" lazyload alt="image-20220109165336460"></p>
+<p>一张图片通过：卷积层、非线性层relu、池化层（降低激活映射的采样尺寸）、全连接层连接所有的卷积输出，获得一个最终的分值函数</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109165921956.png" srcset="/img/loading.gif" lazyload alt="image-20220109165921956"></p>
+<p>7X7，步长为2，得到3X3输出</p>
+<p>​			步长为1，得到5X5输出</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109170048866.png" srcset="/img/loading.gif" lazyload alt="image-20220109170048866"></p>
+<p>步长为3，会导致不对称的输出，不拟合</p>
+<h2 id="输出尺寸公式"><a href="#输出尺寸公式" class="headerlink" title="输出尺寸公式"></a>输出尺寸公式</h2><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109170846639.png" srcset="/img/loading.gif" lazyload alt="image-20220109170846639"></p>
+<p>有哪些可用的步长：即这个方程的解（整数）</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109171432117.png" srcset="/img/loading.gif" lazyload alt="image-20220109171432117"></p>
+<p><strong>填补0</strong>：可以得到原始图像size 的输出size</p>
+<p>【目的：保持原尺寸输出】</p>
+<p> （∵缩小尺寸会丢失一些信息）</p>
+<p>实际输出图像&#x3D;7X7X使用的卷积核数目</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109171825786.png" srcset="/img/loading.gif" lazyload alt="image-20220109171825786"></p>
+<p>深度：使用的卷积核的数量</p>
+<p> 每个卷积核将产生一个1X7X7的激活映射图输出</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109172934017.png" srcset="/img/loading.gif" lazyload alt="image-20220109172934017"></p>
+<p>32x32x10</p>
+<p>（因为卷积和做点乘时有深度，3已经算在里面了）</p>
+<p>卷积核5x5，隐含了深度</p>
+<p>👇</p>
+<h3 id="参数数量是多少？"><a href="#参数数量是多少？" class="headerlink" title="参数数量是多少？"></a>参数数量是多少？</h3><p>5x5x3x10&#x3D;750</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109173230485.png" srcset="/img/loading.gif" lazyload alt="image-20220109173230485"></p>
+<h2 id="小结-1"><a href="#小结-1" class="headerlink" title="小结"></a>小结</h2><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109173440004.png" srcset="/img/loading.gif" lazyload alt="image-20220109173440004"></p>
+<h2 id="1x1卷积"><a href="#1x1卷积" class="headerlink" title="1x1卷积"></a>1x1卷积</h2><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109173808802.png" srcset="/img/loading.gif" lazyload alt="image-20220109173808802"></p>
+<p>1<em>1的卷积作用就是<strong>改变深度</strong>，而且*<em>可以在后面加激活函数</em></em></p>
+<h2 id="torch框架代码"><a href="#torch框架代码" class="headerlink" title="torch框架代码"></a>torch框架代码</h2><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109174020051.png" srcset="/img/loading.gif" lazyload alt="image-20220109174020051"></p>
+<h2 id="caffe框架代码"><a href="#caffe框架代码" class="headerlink" title="caffe框架代码"></a>caffe框架代码</h2><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109174149761.png" srcset="/img/loading.gif" lazyload alt="image-20220109174149761"></p>
+<h2 id="如何确定步长"><a href="#如何确定步长" class="headerlink" title="如何确定步长"></a>如何确定步长</h2><p>与分辨率有关</p>
+<p>步长过大：</p>
+<p>缩小了激活映射的尺寸</p>
+<p>降采样，一种池化处理，但优于池化</p>
+<h1 id="12-5、2-卷积神经网络-视觉之外的卷积神经网络"><a href="#12-5、2-卷积神经网络-视觉之外的卷积神经网络" class="headerlink" title="12-5、2 卷积神经网络-视觉之外的卷积神经网络"></a>12-5、2 卷积神经网络-视觉之外的卷积神经网络</h1><img src="CS231%E7%AC%94%E8%AE%B0.assets/image-20220109180656125.png" srcset="/img/loading.gif" lazyload alt="image-20220109180656125" style="zoom:50%;" />
+
+<p>卷积层：感受野</p>
+<p>卷积核的数量：深度</p>
+<p>e.g.5个卷积核，得到深度为5的输出</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109180848727.png" srcset="/img/loading.gif" lazyload alt="image-20220109180848727"></p>
+<p>5个卷积核作用与统一区域，却又不同的功用</p>
+<h1 id="对比全连接层："><a href="#对比全连接层：" class="headerlink" title="对比全连接层："></a>对比全连接层：</h1><p>神经元与全体输入量都发生关联</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109181125987.png" srcset="/img/loading.gif" lazyload alt="image-20220109181125987"></p>
+<p>卷积核：只与图像的一个局部区域发生关联</p>
+<h1 id="池化层"><a href="#池化层" class="headerlink" title="池化层"></a>池化层</h1><p>让所生成的表示更小更容易控制</p>
+<p>降低采样率</p>
+<p>为了最后有更少的参数</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109182113443.png" srcset="/img/loading.gif" lazyload alt="image-20220109182113443"></p>
+<p>仅在平面上池化，深度不变</p>
+<h2 id="最大池化法"><a href="#最大池化法" class="headerlink" title="最大池化法"></a>最大池化法</h2><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109182316658.png" srcset="/img/loading.gif" lazyload alt="image-20220109182316658"></p>
+<p>滑动区域</p>
+<p>步长为2，使得不会互相重叠（处理不同区域）</p>
+<p>提取所在区域的输入的<strong>最大值</strong></p>
+<p>（取得那些比较显著的像素\检测边缘、噪声）</p>
+<p> <strong>改变步长和池化都可以降采样</strong></p>
+<h1 id="小结-2"><a href="#小结-2" class="headerlink" title="小结"></a>小结</h1><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109182950832.png" srcset="/img/loading.gif" lazyload alt="image-20220109182950832"></p>
+<ul>
+<li>输入层WXHXD</li>
+<li>设置超参数卷积核尺寸、池化的空间范围、步长</li>
+<li>计算输出WXHXD<ul>
+<li>输出尺寸公式</li>
+<li>深度不变</li>
+</ul>
+</li>
+</ul>
+<p><strong>一般不在池化层做填零</strong></p>
+<p>因为池化层只做降采样</p>
+<h2 id="池化层的常见设置："><a href="#池化层的常见设置：" class="headerlink" title="池化层的常见设置："></a>池化层的常见设置：</h2><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109183457844.png" srcset="/img/loading.gif" lazyload alt="image-20220109183457844"></p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109183502940.png" srcset="/img/loading.gif" lazyload alt="image-20220109183502940"></p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109184220236.png" srcset="/img/loading.gif" lazyload alt="image-20220109184220236"></p>
+<ul>
+<li><p>每一列都是激活映射的输出</p>
+</li>
+<li><p>除了第一次，每一次输入都是上一次输出</p>
+</li>
+<li><p>最后的输出拉长成<strong>一维向量</strong>，与<strong>朴素神经网络连接</strong>，得到卷积网络最后的<strong>全连接层</strong></p>
+</li>
+</ul>
+<p>（最后得到像之前分值一样的输出）</p>
+<p>&#x3D;&#x3D;相当于说<strong>卷积层</strong>是<strong>提取图片的特征</strong>，然后将特征送到<strong>全连接层</strong>来做<strong>分类</strong>&#x3D;&#x3D;</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220109185257700.png" srcset="/img/loading.gif" lazyload alt="image-20220109185257700"></p>
+<h1 id="小结-3"><a href="#小结-3" class="headerlink" title="小结"></a>小结</h1><p>一个趋势：</p>
+<ul>
+<li><p>小尺寸卷积核和大深度的网络结构</p>
+</li>
+<li><p>完全弃用池化和全连接层</p>
+</li>
+<li><p>保留卷积层</p>
+</li>
+<li><p>形成非常深的卷积网络</p>
+</li>
+</ul>
+<h1 id="13-6、训练神经网络-激活函数"><a href="#13-6、训练神经网络-激活函数" class="headerlink" title="13-6、训练神经网络-激活函数"></a>13-6、训练神经网络-激活函数</h1><p>神经网络：</p>
+<ul>
+<li>任何函数都可以用计算图表示</li>
+<li>一种计算图，包含若干个线性层，而层与层之间通过非线性函数进行连接实现堆叠</li>
+</ul>
+<p>卷积神经网络：</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220110115923156.png" srcset="/img/loading.gif" lazyload alt="image-20220110115923156"></p>
+<ul>
+<li>一种特殊的网络</li>
+<li>使用卷积层贯穿整个网络的层次结构中</li>
+<li>保持输入的空间结构</li>
+<li>经过卷积、降采样、全连接层</li>
+<li><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220110115838424.png" srcset="/img/loading.gif" lazyload alt="image-20220110115838424"></li>
+</ul>
+<p>需要实现：</p>
+<ul>
+<li>学习滤波器权重或参数的值</li>
+<li>然后通过优化来更新网络参数</li>
+</ul>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220110120724131.png" srcset="/img/loading.gif" lazyload alt="image-20220110120724131"></p>
+<p>  在损失区域找到最低点，实现最优化</p>
+<h2 id="最小批量数据："><a href="#最小批量数据：" class="headerlink" title="最小批量数据："></a>最小批量数据：</h2><ul>
+<li>对数据连续的批量抽样</li>
+<li>通过计算图或神经网络将数据进行<strong>正向传播</strong></li>
+<li>得到<strong>loss</strong></li>
+<li><strong>反向传播</strong>计算梯度（找到最小的loss）</li>
+<li>（根据此loss）更新<strong>参数</strong>或权重</li>
+</ul>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220110121246142.png" srcset="/img/loading.gif" lazyload alt="image-20220110121246142"></p>
+<h2 id="1-激活函数"><a href="#1-激活函数" class="headerlink" title="1 激活函数"></a>1 激活函数</h2><p>任意特定层如何产生输出：</p>
+<ul>
+<li>输入数据</li>
+<li>在<strong>全连接层</strong>或<strong>卷积层</strong>，输入x权重值</li>
+<li>输入一个<strong>激活函数&#x2F;非线性单元</strong>（计算图中一个结点）</li>
+</ul>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220110122534049.png" srcset="/img/loading.gif" lazyload alt="image-20220110122534049"></p>
+<h3 id="1-1-sigmoid的几个问题"><a href="#1-1-sigmoid的几个问题" class="headerlink" title="1.1 sigmoid的几个问题"></a>1.1 sigmoid的几个问题</h3><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220110123214507.png" srcset="/img/loading.gif" lazyload alt="image-20220110123214507"></p>
+<h4 id="1-梯度消失"><a href="#1-梯度消失" class="headerlink" title="1 梯度消失"></a>1 梯度消失</h4><p>输入的x太大或太小：饱和的神经会会造成梯度消失：</p>
+<ul>
+<li>x&#x3D;10或-10，导数为0，反向传播，经过链式法则，梯度为0，无法得到梯度流的反馈<ul>
+<li>阻止梯度的传递</li>
+</ul>
+</li>
+<li>x&#x3D;0，一个比较好的梯度</li>
+</ul>
+<h4 id="2-sigmoid输出非0中心的函数"><a href="#2-sigmoid输出非0中心的函数" class="headerlink" title="2 sigmoid输出非0中心的函数"></a>2 sigmoid输出非0中心的函数</h4><h4 id=""><a href="#" class="headerlink" title=""></a><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220110142951250.png" srcset="/img/loading.gif" lazyload alt="image-20220110142951250"></h4><p>梯度更新的效率会非常低</p>
+<h4 id="3-使用了指数函数，计算代价有点高"><a href="#3-使用了指数函数，计算代价有点高" class="headerlink" title="3 使用了指数函数，计算代价有点高"></a>3 使用了指数函数，计算代价有点高</h4><p>  但不是主要问题，因为进行卷积时和点乘的计算代价会更大！<img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220110143040655.png" srcset="/img/loading.gif" lazyload alt="image-20220110143040655"></p>
+<p>函数<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=sigmoid">sigmoid</a>在多分类上的推广，目的是将多分类的结果以概率的形式展现出来。</p>
+<h3 id="1-2-tanh"><a href="#1-2-tanh" class="headerlink" title="1.2 tanh"></a>1.2 tanh</h3><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220110143208098.png" srcset="/img/loading.gif" lazyload alt="image-20220110143208098"></p>
+<h4 id="1-梯度消失-1"><a href="#1-梯度消失-1" class="headerlink" title="1 梯度消失"></a>1 梯度消失</h4><ul>
+<li>阻止梯度的传递</li>
+</ul>
+<h4 id="2-以0为中心"><a href="#2-以0为中心" class="headerlink" title="2 以0为中心"></a>2 以0为中心</h4><h4 id="3-范围被压缩在-1-1"><a href="#3-范围被压缩在-1-1" class="headerlink" title="3 范围被压缩在 [-1,1]"></a>3 范围被压缩在 [-1,1]</h4><h3 id="1-3-ReLU"><a href="#1-3-ReLU" class="headerlink" title="1.3 ReLU"></a>1.3 ReLU</h3><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220110143451286.png" srcset="/img/loading.gif" lazyload alt="image-20220110143451286"></p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220110143500662.png" srcset="/img/loading.gif" lazyload alt="image-20220110143500662"></p>
+<ul>
+<li>在输入上按元素进行操作</li>
+</ul>
+<h4 id="1-正半轴无梯度消失-x2F-无饱和现象"><a href="#1-正半轴无梯度消失-x2F-无饱和现象" class="headerlink" title="1 正半轴无梯度消失&#x2F;无饱和现象"></a>1 正半轴无梯度消失&#x2F;无饱和现象</h4><h4 id="2-计算成本比其他低"><a href="#2-计算成本比其他低" class="headerlink" title="2 计算成本比其他低"></a>2 计算成本比其他低</h4><p>AlexNet是第一个在imagenet和大规模数据上表现出色的重要的卷积神经网络，使用了relu</p>
+<h4 id="3-问题：不以0为中心"><a href="#3-问题：不以0为中心" class="headerlink" title="3 问题：不以0为中心"></a>3 问题：不以0为中心</h4><h4 id="4-问题：负半轴梯度饱和"><a href="#4-问题：负半轴梯度饱和" class="headerlink" title="4 问题：负半轴梯度饱和"></a>4 问题：负半轴梯度饱和</h4><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220110144222597.png" srcset="/img/loading.gif" lazyload alt="image-20220110144222597"></p>
+<p>-10：0</p>
+<p>0：不确定，实践中可以取0</p>
+<p>10：没问题</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220110144840967.png" srcset="/img/loading.gif" lazyload alt="image-20220110144840967"></p>
+<p>data cloud：训练数据</p>
+<p>如果权重设置的非常差，恰巧不在数据云里：</p>
+<ul>
+<li>出现了deadrelu（即经过relu激活函数输出为0）</li>
+<li>无法得到一个激活神经元的数据输入</li>
+<li>也不会有一个合适的梯度传回</li>
+<li><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220110145122796.png" srcset="/img/loading.gif" lazyload alt="image-20220110145122796"></li>
+</ul>
+<p>学习率太高（步长）：</p>
+<ul>
+<li>从一个ReLU函数开始</li>
+<li>权值会不断更新（&#x3D;rate x 梯度）</li>
+<li>relu单元会被数据的多样性所淘汰</li>
+<li></li>
+</ul>
+<p><strong>权值矩阵不再更新</strong>的时候，要不就是到达<strong>最小点</strong>，要不就是<strong>挂了</strong></p>
+<p>实际应用中：</p>
+<p>使用较小的正偏置来初始化ReLU</p>
+<p>以增加它在初始化时被激活的可能性</p>
+<p>并获得一些更新</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220111105203742.png" srcset="/img/loading.gif" lazyload alt="image-20220111105203742"></p>
+<h3 id="1-4-Leaky-ReLU"><a href="#1-4-Leaky-ReLU" class="headerlink" title="1.4 Leaky ReLU"></a>1.4 Leaky ReLU</h3><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220111105231148.png" srcset="/img/loading.gif" lazyload alt="image-20220111105231148"></p>
+<p>不是和0比较，和0.01x比较</p>
+<h3 id="参数整流器-PReLU"><a href="#参数整流器-PReLU" class="headerlink" title="参数整流器 PReLU"></a>参数整流器 PReLU</h3><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220111105320484.png" srcset="/img/loading.gif" lazyload alt="image-20220111105320484"></p>
+<p>α：当作一个可以反向传播和学习的参数</p>
+<h3 id="指数线性单元-ELU"><a href="#指数线性单元-ELU" class="headerlink" title="指数线性单元 ELU"></a>指数线性单元 ELU</h3><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220111105450850.png" srcset="/img/loading.gif" lazyload alt="image-20220111105450850"></p>
+<p>负饱和机制</p>
+<p>输出均值&#x3D;0</p>
+<p>比relus更饱和的行为</p>
+<p><em>实际拟合过程中哪个激活函数好还是要通过结果说话</em></p>
+<h2 id="最大输出神经元"><a href="#最大输出神经元" class="headerlink" title="最大输出神经元"></a>最大输出神经元</h2><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220111111427202.png" srcset="/img/loading.gif" lazyload alt="image-20220111111427202"></p>
+<p>泛化了relu和leaky relu</p>
+<p>因为只是提取了这两个线性函数的最大值</p>
+<p>不会饱和、消失</p>
+<p>问题：每个神经元的参数数量翻倍</p>
+<p>w1–&gt;w1、w2</p>
+<h2 id="实际中选择激活函数："><a href="#实际中选择激活函数：" class="headerlink" title="实际中选择激活函数："></a>实际中选择激活函数：</h2><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220111111701527.png" srcset="/img/loading.gif" lazyload alt="image-20220111111701527"></p>
+<h1 id="数据预处理"><a href="#数据预处理" class="headerlink" title="数据预处理"></a>数据预处理</h1><ul>
+<li>均值化</li>
+<li>归一化</li>
+</ul>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220111112142563.png" srcset="/img/loading.gif" lazyload alt="image-20220111112142563"></p>
+<p>为什么0均值化：</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220111112424982.png" srcset="/img/loading.gif" lazyload alt="image-20220111112424982"></p>
+<p>当输入数据全正时：输出梯度也全正？？</p>
+<p>为什么归一化：</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220111112513410.png" srcset="/img/loading.gif" lazyload alt="image-20220111112513410"></p>
+<p>实际：</p>
+<ul>
+<li>0均值化√</li>
+<li>归一化×<ul>
+<li>因为图像中每个位置已经得到了<strong>相对可比较</strong>的范围与分布</li>
+<li>一般机器学习会有<strong>差别很大</strong>的特征</li>
+</ul>
+</li>
+<li>训练和测试过程都有数据预处理</li>
+</ul>
+<blockquote>
+<p>我的理解是，因为到时候会有梯度下降，数据分布在0周围，那对w求梯度就不会恒正或者恒负，不会走不到二四象限</p>
+</blockquote>
+<blockquote>
+<p>不做0标准化处理的话，你的数据会偏向某一侧，会导致你训练的过程中W可能不是沿着最优的方向前进</p>
+</blockquote>
+<p>零中心化是指**&#x3D;&#x3D;输入变量减去它的均值&#x3D;&#x3D;**</p>
+<ul>
+<li>那么此时（以二维数据为例）数据会聚集在原点的的周围</li>
+<li>好处是能<strong>加快调参的速度</strong>；</li>
+<li>还能增加<strong>基向量的正交性</strong></li>
+</ul>
+<h2 id="中心化"><a href="#中心化" class="headerlink" title="中心化"></a>中心化</h2><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220111114003688.png" srcset="/img/loading.gif" lazyload alt="image-20220111114003688"></p>
+<h3 id="输入-整张图像均值"><a href="#输入-整张图像均值" class="headerlink" title="输入-整张图像均值"></a>输入-整张图像均值</h3><h3 id="输入-单通道均值"><a href="#输入-单通道均值" class="headerlink" title="输入-单通道均值"></a>输入-单通道均值</h3><ul>
+<li>和上没什么区别</li>
+<li>更容易传送和处理</li>
+</ul>
+<h4 id="均值如何得到？"><a href="#均值如何得到？" class="headerlink" title="均值如何得到？"></a>均值如何得到？</h4><p>从你所有的训练图像中得到</p>
+<p>拿到所有的训练图像，计算它们的均值</p>
+<p>不用分批（per batch）</p>
+<p>**&#x3D;&#x3D;网络第一层的输入&#x3D;&#x3D;**：零均值化！</p>
+<p>用深度网络时</p>
+<h2 id="初始化网络权值"><a href="#初始化网络权值" class="headerlink" title="初始化网络权值"></a>初始化网络权值</h2><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220111115527697.png" srcset="/img/loading.gif" lazyload alt="image-20220111115527697"></p>
+<h3 id="0初始化？"><a href="#0初始化？" class="headerlink" title="0初始化？"></a>0初始化？</h3><p>开始设置的参数不同，每个神经元的输出不同吧，后面神经元的梯度可能和前面神经元的输出有关，应该也会不同</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220111120159348.png" srcset="/img/loading.gif" lazyload alt="image-20220111120159348"></p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220111120418725.png" srcset="/img/loading.gif" lazyload alt="image-20220111120418725"></p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220111120502326.png" srcset="/img/loading.gif" lazyload alt="image-20220111120502326"></p>
+<p>均值总是在0附近</p>
+<p>这里讲的不是很清楚，建议好好研究一下<strong>前面的反向传播</strong>，尤其是关于<strong>向量和矩阵</strong>的，然后仔细做一下作业1，然后可能就能听懂了</p>
+<p>简单来讲就是正向传播时，由于权重<strong>W设置的太小</strong>，一直乘W导致<strong>每一层的输入x越来越小</strong>，而反向传播时，梯度dW又是取决于x的大小的，<strong>x太小则dW太小，权重不更新</strong></p>
+<p>正传w1w2w3x导致<strong>x变小</strong>，反传链式求导dw&#x3D;x1x2x3导致<strong>梯度变小</strong></p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220111121805881.png" srcset="/img/loading.gif" lazyload alt="image-20220111121805881"></p>
+<p>【层初始化代码】</p>
+<p><strong>激活函数</strong>用于将一层的结果处理一下转交下一层。假设某层结果已经经过了tanh激活的处理变为输入x，那么<strong>x∈(-1, 1)<strong>，使得梯度在反向传播时乘上</strong>该层输入x变小</strong>（∵小数），如果层数很多，那么<strong>梯度最终会消失</strong>，饱和，权重不再更新</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220111122105528.png" srcset="/img/loading.gif" lazyload alt="image-20220111122105528"></p>
+<h2 id="softmax"><a href="#softmax" class="headerlink" title="softmax"></a>softmax</h2><p>Softmax计算简单，效果显著，非常好用</p>
+<p><strong>softmax用于多分类过程中</strong>，它将多个<a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E7%A5%9E%E7%BB%8F%E5%85%83&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22:%22answer%22,%22sourceId%22:240869755%7D">神经元</a>的输出，映射到（0,1）区间内，可以看成概率来理解，从而来进行多分类！</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/sum_j%7Be%5E%7BV_j%7D%7D%7D.svg+xml" srcset="/img/loading.gif" lazyload alt="[公式]"></p>
+<p>loss：<img src="/CS231%E7%AC%94%E8%AE%B0.assets/sum_j%7Be%5Ej%7D%7D" srcset="/img/loading.gif" lazyload alt="[公式]">.svg+xml)</p>
+<h2 id="小结-4"><a href="#小结-4" class="headerlink" title="小结"></a>小结</h2><p>初始化网络</p>
+<ul>
+<li>权重太小：网络崩溃</li>
+<li>权重太大：网络饱和</li>
+</ul>
+<img src="CS231%E7%AC%94%E8%AE%B0.assets/image-20220111122205543.png" srcset="/img/loading.gif" lazyload alt="image-20220111122205543" style="zoom:200%;" />
+
+<p>输入少：➗较小数&#x3D;较大权重</p>
+<p>有少量输入，用每一个输入值✖权重</p>
+<p> 输入多：➗较大数&#x3D;较小权重</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220111122645330.png" srcset="/img/loading.gif" lazyload alt="image-20220111122645330"></p>
+<h1 id="14-6、1训练神经网络（上）-批量归一化"><a href="#14-6、1训练神经网络（上）-批量归一化" class="headerlink" title="14-6、1训练神经网络（上）-批量归一化"></a>14-6、1训练神经网络（上）-批量归一化</h1><p> <img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220112150004214.png" srcset="/img/loading.gif" lazyload alt="image-20220112150004214"></p>
+<ul>
+<li>在我们想要的高斯范围内保持激活</li>
+<li>在<strong>训练开始</strong>时才设置这个值</li>
+<li>而不是在权重初始化时</li>
+<li>以便能够在<strong>每一层都有很好的单位高斯分布</strong></li>
+</ul>
+<p>高斯分布：</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/format,f_jpg-16506190215909.jpeg" srcset="/img/loading.gif" lazyload alt="正态分布"></p>
+<p>我觉得是这样：<strong>权重有个初始化</strong>，在迭代过程中，<strong>根据梯度不断更新权重</strong></p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220112141503143.png" srcset="/img/loading.gif" lazyload alt="image-20220112141503143"></p>
+<ul>
+<li>在FC或者卷积层后插入BN</li>
+</ul>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220112143019615.png" srcset="/img/loading.gif" lazyload alt="image-20220112143019615"></p>
+<p>网络可以学习：</p>
+<ul>
+<li>y&#x3D;方差</li>
+<li>β&#x3D;均值</li>
+<li>都是通过学习得到的参数</li>
+</ul>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220112143329100.png" srcset="/img/loading.gif" lazyload alt="image-20220112143329100"></p>
+<h2 id="BN思想"><a href="#BN思想" class="headerlink" title="BN思想"></a>BN思想</h2><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220112143450829.png" srcset="/img/loading.gif" lazyload alt="image-20220112143450829"></p>
+<p>输入：</p>
+<p>计算小批量均值（对每个输入的小批量都做这个操作）</p>
+<p>计算方差</p>
+<p>通过均值和方差进行归一化</p>
+<p> 额外的缩放和平移因子</p>
+<p>从而改进了整个网络的梯度流</p>
+<p>还具有更强的性能</p>
+<p>能够在更广范围的学习率和不同初始值下工作</p>
+<p>训练更容易</p>
+<p>也是正则化的一种方法</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220112150202497.png" srcset="/img/loading.gif" lazyload alt="image-20220112150202497"></p>
+<h2 id="Q-高斯后是否会影响网络结构？"><a href="#Q-高斯后是否会影响网络结构？" class="headerlink" title="Q:高斯后是否会影响网络结构？"></a>Q:高斯后是否会影响网络结构？</h2><p>不会，只是将数据缩放到一个能很好运行的区域</p>
+<p>对每一层的输入进行归一化</p>
+<p>（层间的输入大约相近与高斯分布）</p>
+<p>在这个过程中没有改变权重</p>
+<h1 id="如何监视训练"><a href="#如何监视训练" class="headerlink" title="如何监视训练"></a>如何监视训练</h1><p>在训练过程调整超参数</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220112152809620.png" srcset="/img/loading.gif" lazyload alt="image-20220112152809620"></p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220112152819096.png" srcset="/img/loading.gif" lazyload alt="image-20220112152819096"></p>
+<p>有50个神经元的隐藏层</p>
+<h3 id="step3-网络初始化："><a href="#step3-网络初始化：" class="headerlink" title="step3 网络初始化："></a>step3 网络初始化：</h3><p>检查loss是否合理</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220112152946807.png" srcset="/img/loading.gif" lazyload alt="image-20220112152946807"></p>
+<p>网络进行前向传播</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220112153202123.png" srcset="/img/loading.gif" lazyload alt="image-20220112153202123"></p>
+<p>初始损失：</p>
+<p>loss，grad&#x3D;……（，，0.0）–》2.3</p>
+<p>因为没有加正则化项，loss是数据的损失值</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220112153520477.png" srcset="/img/loading.gif" lazyload alt="image-20220112153520477"></p>
+<p>添加额外的正则化项 le3：</p>
+<p>loss上升了（符合预期）</p>
+<blockquote>
+<p>正则化：<strong>正则化是为了防止过拟合</strong></p>
+<p><strong>规则化就是说给需要训练的目标函数加上一些规则（限制），让他们不要自我膨胀</strong></p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/v2-62b74afd353d7fdaf9c8d6b20d38d3e1_720w.jpg" srcset="/img/loading.gif" lazyload alt="img">红色过拟合，没必要这么多特征</p>
+</blockquote>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220112153741150.png" srcset="/img/loading.gif" lazyload alt="image-20220112153741150"></p>
+<h3 id="step-4-开始训练"><a href="#step-4-开始训练" class="headerlink" title="step 4 开始训练"></a>step 4 开始训练</h3><p> <img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220112160734244.png" srcset="/img/loading.gif" lazyload alt="image-20220112160734244"></p>
+<p>先用一批小数据集</p>
+<p>👆以上，都是完整性检查👆</p>
+<h4 id="先来一个小的学习率："><a href="#先来一个小的学习率：" class="headerlink" title="先来一个小的学习率："></a>先来一个小的学习率：</h4><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220112161206697.png" srcset="/img/loading.gif" lazyload alt="image-20220112161206697"></p>
+<p>加上一个小的正则化项，调整学习率</p>
+<p>loss基本不变：</p>
+<ul>
+<li>∵设置的<strong>学习率太低</strong>**</li>
+<li>此时梯度<strong>更新就会很小</strong></li>
+<li>cost也一样</li>
+</ul>
+<p>train：训练集</p>
+<p>val：验证集</p>
+<h3 id="Q-loss基本不变，为什么准确率提高了？"><a href="#Q-loss基本不变，为什么准确率提高了？" class="headerlink" title="Q:loss基本不变，为什么准确率提高了？"></a>Q:loss基本不变，为什么准确率提高了？</h3><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220112161458966.png" srcset="/img/loading.gif" lazyload alt="image-20220112161458966"></p>
+<p>A：虽然分布依然很分散</p>
+<p>因此我们的损失项loss很接近</p>
+<p>但是我们把这些所有的分布都朝着正确的方向在轻微的移动，权重参数在朝着正确的方向改变，现在准确率可能发生突变，因为正选取最大的准确率，所以准确率会得到一个很大的提升</p>
+<blockquote>
+<p>比如说选三类，原来概率都是三分之一，那么现在正确的那一类加了0.1，loss变化不大，但能选对了</p>
+</blockquote>
+<h4 id="一个大的学习率"><a href="#一个大的学习率" class="headerlink" title="一个大的学习率"></a>一个大的学习率</h4><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220112162015162.png" srcset="/img/loading.gif" lazyload alt="image-20220112162015162"></p>
+<p>cost&#x3D;nan，太大了！（即loss）</p>
+<h4 id="一般来说设置学习率："><a href="#一般来说设置学习率：" class="headerlink" title="一般来说设置学习率："></a>一般来说设置学习率：</h4><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220112162133994.png" srcset="/img/loading.gif" lazyload alt="image-20220112162133994"></p>
+<p>根据loss调整大小</p>
+<h1 id="超参数选择（超参数优化）"><a href="#超参数选择（超参数优化）" class="headerlink" title="超参数选择（超参数优化）"></a>超参数选择（超参数优化）</h1><h2 id="交叉验证"><a href="#交叉验证" class="headerlink" title="交叉验证"></a>交叉验证</h2><p>在训练集上训练—&gt;验证集上验证</p>
+<blockquote>
+<p>epoth 使用训练集的全部数据进行一次完整的训练，称为“一代训练”</p>
+</blockquote>
+<p>选择较分散的数据，用几个epoch的迭代去学习，哪些超参数有效，做出调整</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220112163004224.png" srcset="/img/loading.gif" lazyload alt="image-20220112163004224"></p>
+<p>采用对数来优化，效果会更好</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220112163306520.png" srcset="/img/loading.gif" lazyload alt="image-20220112163306520"></p>
+<p>因为根据lr和val_acc可知，当lr在e-04左右，acc最高，所以调整lr在10-4~10-0区间</p>
+<p>？？？<img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220112164110594.png" srcset="/img/loading.gif" lazyload alt="image-20220112164110594"></p>
+<h2 id="需要调整的超参数"><a href="#需要调整的超参数" class="headerlink" title="需要调整的超参数"></a>需要调整的超参数</h2><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220112164244910.png" srcset="/img/loading.gif" lazyload alt="image-20220112164244910"></p>
+<p>网络结构</p>
+<p>学习率、衰减表、更新类型、正则化</p>
+<p>隐藏层数量、深度</p>
+<h2 id="一个好的学习率长啥样"><a href="#一个好的学习率长啥样" class="headerlink" title="一个好的学习率长啥样"></a>一个好的学习率长啥样</h2><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220112164701701.png" srcset="/img/loading.gif" lazyload alt="image-20220112164701701"></p>
+<ol>
+<li>损失爆炸：lr太高</li>
+<li>有突变：lr太高</li>
+<li>过于线性：lr太低</li>
+<li>好的：相对陡峭，又连续下降</li>
+</ol>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220112165007867.png" srcset="/img/loading.gif" lazyload alt="image-20220112165007867"></p>
+<p>初始，梯度平缓，什么也没学到（loss没变，即没什么改进）</p>
+<p>某一点后：开始调节</p>
+<h2 id="可视化精度"><a href="#可视化精度" class="headerlink" title="可视化精度"></a>可视化精度</h2><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220112165250910.png" srcset="/img/loading.gif" lazyload alt="image-20220112165250910"></p>
+<p>训练精度和验证精度间：</p>
+<ul>
+<li>big gap：过拟合，+正则项权重</li>
+<li>no gap：没有过拟合，增加模型容量，</li>
+</ul>
+<h2 id="小结-5"><a href="#小结-5" class="headerlink" title="小结"></a>小结</h2><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220112165603339.png" srcset="/img/loading.gif" lazyload alt="image-20220112165603339"></p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220112165611183.png" srcset="/img/loading.gif" lazyload alt="image-20220112165611183"></p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220112165650244.png" srcset="/img/loading.gif" lazyload alt="image-20220112165650244"></p>
+<h1 id="15-7、训练-更好地优化"><a href="#15-7、训练-更好地优化" class="headerlink" title="15-7、训练-更好地优化"></a>15-7、训练-更好地优化</h1><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113110306891.png" srcset="/img/loading.gif" lazyload alt="image-20220113110306891"></p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113110647476.png" srcset="/img/loading.gif" lazyload alt="image-20220113110647476"></p>
+<p>网络深度↑，初始w更重要</p>
+<p>因为是不断乘以w</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113110905231.png" srcset="/img/loading.gif" lazyload alt="image-20220113110905231"></p>
+<p>数据预处理：</p>
+<ul>
+<li>如果不归一化、正则化，稍微转动就会破坏分类器</li>
+<li>loss会对w很敏感</li>
+</ul>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113111427017.png" srcset="/img/loading.gif" lazyload alt="image-20220113111427017"></p>
+<p>BN:</p>
+<ul>
+<li>在神经网络中额外加入一层</li>
+<li>以获得中间的激活值</li>
+<li>均值为0，方差为1</li>
+</ul>
+<p>用小批量数据计算平均值、方差，再对整个数据及逆行归一化</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113113609529.png" srcset="/img/loading.gif" lazyload alt="image-20220113113609529"></p>
+<p>x：训练次数</p>
+<p>train：准确率不断上升</p>
+<p>val：不再变化：过拟合了！—》加入正则化</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113113803750.png" srcset="/img/loading.gif" lazyload alt="image-20220113113803750"></p>
+<h1 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h1><h2 id="最简单的优化算法：随机梯度下降-SGD"><a href="#最简单的优化算法：随机梯度下降-SGD" class="headerlink" title="最简单的优化算法：随机梯度下降 SGD"></a>最简单的优化算法：随机梯度下降 SGD</h2><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113121118017.png" srcset="/img/loading.gif" lazyload alt="image-20220113121118017"></p>
+<ul>
+<li>评估小批数据中损失的梯度</li>
+<li>想梯度为负的方向更新参数向量</li>
+</ul>
+<h3 id="problem-with-SGD"><a href="#problem-with-SGD" class="headerlink" title="problem with SGD"></a>problem with SGD</h3><h2 id="SGD-Momentum"><a href="#SGD-Momentum" class="headerlink" title="SGD+Momentum"></a>SGD+Momentum</h2><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113140323217.png" srcset="/img/loading.gif" lazyload alt="image-20220113140323217"></p>
+<ul>
+<li>保持一个不随时间变化的速度<ul>
+<li>初始化为0</li>
+</ul>
+</li>
+<li>将速度估计添加到这个这个速度上</li>
+<li>在这个速度的方向上步进  vx</li>
+<li>而不是在梯度的方向上步进 dx<img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113153859409.png" srcset="/img/loading.gif" lazyload alt="image-20220113153859409"></li>
+</ul>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113153710181.png" srcset="/img/loading.gif" lazyload alt="image-20220113153710181"></p>
+<p> ρ：摩擦系数对速度进行衰减</p>
+<p>意义：</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113153959943.png" srcset="/img/loading.gif" lazyload alt="image-20220113153959943"></p>
+<p>有了速度，可以越过局部最优点</p>
+<p>最近梯度平均的平滑移动</p>
+<p>并且在梯度上有一个能够及时回来的指数衰减权重</p>
+<h2 id="AdaGrad"><a href="#AdaGrad" class="headerlink" title="AdaGrad"></a>AdaGrad</h2><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113160426481.png" srcset="/img/loading.gif" lazyload alt="image-20220113160426481"></p>
+<p> 两个轴，两个维度方向上，</p>
+<p>梯度很大：</p>
+<ul>
+<li>会➗一个很大的数的平方，降低了这个方向上的训练进度</li>
+</ul>
+<p>梯度很小：</p>
+<ul>
+<li>与上相反</li>
+</ul>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113160817989.png" srcset="/img/loading.gif" lazyload alt="image-20220113160817989"></p>
+<h3 id="2-步长会越来越小（即x）"><a href="#2-步长会越来越小（即x）" class="headerlink" title="2 步长会越来越小（即x）"></a>2 步长会越来越小（即x）</h3><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113161036134.png" srcset="/img/loading.gif" lazyload alt="image-20220113161036134"></p>
+<h2 id="改进：RMSProp"><a href="#改进：RMSProp" class="headerlink" title="改进：RMSProp"></a>改进：RMSProp</h2><p>梯度平方估计被衰减</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113161142673.png" srcset="/img/loading.gif" lazyload alt="image-20220113161142673"></p>
+<ul>
+<li>给梯度的平方加上动量</li>
+<li>而不是给梯度本身 </li>
+<li>x（步长）在一个维度上训练会加快，在另一个维度上训练减慢</li>
+</ul>
+<p>训练可能会变慢</p>
+<h4 id="Q：1e-7是干嘛的"><a href="#Q：1e-7是干嘛的" class="headerlink" title="Q：1e-7是干嘛的"></a>Q：1e-7是干嘛的<img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113164248551.png" srcset="/img/loading.gif" lazyload alt="image-20220113164248551"></h4><p>保证不是➗0，∴＋一个很小的常数</p>
+<h4 id="如何避免开始时步长很大？"><a href="#如何避免开始时步长很大？" class="headerlink" title="如何避免开始时步长很大？"></a>如何避免开始时步长很大？</h4><h2 id="结合-动量-amp-AdaGrad-amp-RMSProp的方法：Adam"><a href="#结合-动量-amp-AdaGrad-amp-RMSProp的方法：Adam" class="headerlink" title="结合+动量&amp;AdaGrad&amp;RMSProp的方法：Adam"></a>结合+动量&amp;AdaGrad&amp;RMSProp的方法：Adam</h2><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113162304261.png" srcset="/img/loading.gif" lazyload alt="image-20220113162304261"></p>
+<h3 id="1-更新第一动量和第二动量"><a href="#1-更新第一动量和第二动量" class="headerlink" title="1 更新第一动量和第二动量"></a>1 更新第一动量和第二动量</h3><p>第一动量 &#x3D; <strong>梯度</strong>的加权和</p>
+<p>第二动量：<strong>梯度平方</strong>的动态近似值</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113165653234.png" srcset="/img/loading.gif" lazyload alt="image-20220113165653234"></p>
+<h3 id="2-构造第一动量和第二动量的无偏估计"><a href="#2-构造第一动量和第二动量的无偏估计" class="headerlink" title="2 构造第一动量和第二动量的无偏估计"></a>2 构造第一动量和第二动量的无偏估计</h3><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113165846180.png" srcset="/img/loading.gif" lazyload alt="image-20220113165846180"></p>
+<p>现在再用无偏估计值做更新，而不是1中的动量</p>
+<h3 id="3-小结"><a href="#3-小结" class="headerlink" title="3 小结"></a>3 小结</h3><p>Adam也是像带动量的SGD一样，但没有像SGD动量一样绕过太多</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113170223274.png" srcset="/img/loading.gif" lazyload alt="image-20220113170223274"></p>
+<p>【损失函数等高线图】</p>
+<h3 id="实际中"><a href="#实际中" class="headerlink" title="实际中"></a>实际中</h3><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113170620935.png" srcset="/img/loading.gif" lazyload alt="image-20220113170620935"></p>
+<p>不同阶段使用不同学习率</p>
+<h3 id="衰减策略"><a href="#衰减策略" class="headerlink" title="衰减策略"></a>衰减策略</h3><h4 id="1-步长衰减："><a href="#1-步长衰减：" class="headerlink" title="1 步长衰减："></a>1 步长衰减：</h4><ul>
+<li><p>在第10万次迭代时，可以衰减一个因子，然后继续训练<img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113170750598.png" srcset="/img/loading.gif" lazyload alt="image-20220113170750598"></p>
+</li>
+<li><p>残差网络中：<img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113170944058.png" srcset="/img/loading.gif" lazyload alt="image-20220113170944058"></p>
+</li>
+<li><p>衰减处（降低学习率）：迭代时把学习率<strong>乘上一个因子</strong></p>
+<ul>
+<li>模型已经接近一个不错的取值区域，此时梯度已经很小，保持原有学习速率只能在最优点附近徘徊</li>
+<li>降低学习率，目标函数能够进一步降低（即loss函数上进一步取得进步</li>
+<li></li>
+</ul>
+</li>
+</ul>
+<h4 id="2-指数衰减："><a href="#2-指数衰减：" class="headerlink" title="2 指数衰减："></a>2 指数衰减：</h4><ul>
+<li><p>训练时<strong>持续衰减</strong><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113170758571.png" srcset="/img/loading.gif" lazyload alt="image-20220113170758571"></p>
+</li>
+<li><p>另一种连续衰减方法（非指数衰减）<img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113170855458.png" srcset="/img/loading.gif" lazyload alt="image-20220113170855458"></p>
+</li>
+</ul>
+<h3 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h3><p>开始训练时应该不带学习率衰减，用一个不错的学习率</p>
+<h2 id="二阶优化"><a href="#二阶优化" class="headerlink" title="二阶优化"></a>二阶优化</h2><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113172240164.png" srcset="/img/loading.gif" lazyload alt="image-20220113172240164"></p>
+<ol>
+<li>用一个二次函数来局部逼近函数</li>
+<li>∵二次函数，可以直接跳到<strong>最小值点</strong></li>
+</ol>
+<h2 id="牛顿步长"><a href="#牛顿步长" class="headerlink" title="牛顿步长"></a>牛顿步长</h2><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113172512465.png" srcset="/img/loading.gif" lazyload alt="image-20220113172512465"></p>
+<ul>
+<li>没有学习率</li>
+<li>二次逼近直接走到二次函数的最小值点</li>
+<li>N*N矩阵，太大了！</li>
+</ul>
+<p>👇</p>
+<h2 id="拟牛顿法"><a href="#拟牛顿法" class="headerlink" title="拟牛顿法"></a>拟牛顿法</h2><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113172911506.png" srcset="/img/loading.gif" lazyload alt="image-20220113172911506"></p>
+<ul>
+<li>很少随机性、少参数</li>
+</ul>
+<h2 id="如何减少训练和测试之间的误差差距？"><a href="#如何减少训练和测试之间的误差差距？" class="headerlink" title="如何减少训练和测试之间的误差差距？"></a>如何减少训练和测试之间的误差差距？</h2><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113173048726.png" srcset="/img/loading.gif" lazyload alt="image-20220113173048726"></p>
+<ol>
+<li><p>选择从<strong>不同的随机初始值</strong>上训练10个不同的模型</p>
+</li>
+<li><p>测试时：测试10个，再取平均</p>
+<p>提升了性能</p>
+</li>
+</ol>
+<h1 id="正则化"><a href="#正则化" class="headerlink" title="正则化"></a>正则化</h1><p>提高单一模型的效果</p>
+<p>（并不需要测试10个这样的集成模型方法）</p>
+<p>在模型中加入一些成分，防止训练集上的过拟合</p>
+<p>从而使测试集上的效果得到提升</p>
+<h2 id="1-加入额外的一项"><a href="#1-加入额外的一项" class="headerlink" title="1 加入额外的一项"></a>1 加入额外的一项</h2><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113174615237.png" srcset="/img/loading.gif" lazyload alt="image-20220113174615237"></p>
+<h2 id="2-dropout"><a href="#2-dropout" class="headerlink" title="2 dropout"></a>2 dropout</h2><p>全连接网络：</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113174844491.png" srcset="/img/loading.gif" lazyload alt="image-20220113174844491"></p>
+<p>经过dropout：（置零一些神经元（激活函数））</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113174854439.png" srcset="/img/loading.gif" lazyload alt="image-20220113174854439"></p>
+<ul>
+<li>网络变小了一号</li>
+<li>只用到了其中一部分神经元</li>
+<li>每次遍历，正向传递都是不同的部分</li>
+</ul>
+<p>在哪使用：一般全连接层</p>
+<p>​					sometimes卷积层</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113175316595.png" srcset="/img/loading.gif" lazyload alt="image-20220113175316595"></p>
+<p>随机将一部分神经元置零：<img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113175350990.png" srcset="/img/loading.gif" lazyload alt="image-20220113175350990"></p>
+<h3 id="dropout为什么有用？"><a href="#dropout为什么有用？" class="headerlink" title="dropout为什么有用？"></a>dropout为什么有用？</h3><ul>
+<li>避免了特征间的相互适应</li>
+<li>每一层通过不同的零散特征来判断，而非一些特征组合<ul>
+<li>抑制了过拟合<img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113175603253.png" srcset="/img/loading.gif" lazyload alt="image-20220113175603253"></li>
+</ul>
+</li>
+</ul>
+<h3 id="dropout后的网络的变化"><a href="#dropout后的网络的变化" class="headerlink" title="dropout后的网络的变化"></a>dropout后的网络的变化</h3><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113175833137.png" srcset="/img/loading.gif" lazyload alt="image-20220113175833137"></p>
+<p>多了一个z，表示随机被置零的项</p>
+<h4 id="？平均化这个随机性（也不能太随机了！"><a href="#？平均化这个随机性（也不能太随机了！" class="headerlink" title="？平均化这个随机性（也不能太随机了！"></a>？平均化这个随机性（也不能太随机了！</h4><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113180939666.png" srcset="/img/loading.gif" lazyload alt="image-20220113180939666"></p>
+<p>通过积分来边缘化随机性</p>
+<p>局部逼近这个积分？</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113181416768.png" srcset="/img/loading.gif" lazyload alt="image-20220113181416768"></p>
+<p>训练期间：最后取了平均</p>
+<p>train期望是test期望的一半</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113181842271.png" srcset="/img/loading.gif" lazyload alt="image-20220113181842271"></p>
+<p>预测函数：概率*输出层的输出</p>
+<h3 id="dropout小结"><a href="#dropout小结" class="headerlink" title="dropout小结"></a>dropout小结</h3><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113182120659.png" srcset="/img/loading.gif" lazyload alt="image-20220113182120659"></p>
+<p>dropout在</p>
+<p>正向传播中：添加两行</p>
+<p>预测predict：乘以概率p</p>
+<h4 id="逆转dropout，使得测试高效"><a href="#逆转dropout，使得测试高效" class="headerlink" title="逆转dropout，使得测试高效"></a>逆转dropout，使得测试高效</h4><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220113182505641.png" srcset="/img/loading.gif" lazyload alt="image-20220113182505641"></p>
+<p>测试时消除✖p这一乘法运算带来的时间消耗：</p>
+<ul>
+<li>测试时使用整个权重w</li>
+<li>训练时➗ p</li>
+</ul>
+<p>👇</p>
+<p>训练时间会更多，因为每一次都是一些新的网络</p>
+<p>但测试的鲁棒性更强</p>
+<h1 id="16-7、1-正则化"><a href="#16-7、1-正则化" class="headerlink" title="16-7、1 正则化"></a>16-7、1 正则化</h1><h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><p>&#x3D;&#x3D;为了减小训练误差和测试误差的间隙&#x3D;&#x3D;</p>
+<h2 id="如何做"><a href="#如何做" class="headerlink" title="如何做"></a>如何做</h2><ul>
+<li>训练时加入一些随机量</li>
+<li>测试时抵消随机量</li>
+</ul>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114133119315.png" srcset="/img/loading.gif" lazyload alt="image-20220114133119315"></p>
+<h2 id="比如："><a href="#比如：" class="headerlink" title="比如："></a>比如：</h2><ul>
+<li><h3 id="1-dropout"><a href="#1-dropout" class="headerlink" title="1 dropout"></a>1 dropout</h3><ul>
+<li>通过调整p调整正则化的力度（可控）</li>
+</ul>
+</li>
+<li><h3 id="2-Batch-Normalization"><a href="#2-Batch-Normalization" class="headerlink" title="2 Batch Normalization"></a>2 Batch Normalization</h3><ul>
+<li>因为每一次训练每个数据和谁一起被训练是随机的</li>
+</ul>
+</li>
+<li><p>两个都具有正则化效果</p>
+</li>
+<li><p>最好<strong>不要</strong>在模型中<strong>同时使用</strong>BN和dropout，同时使用会导致<strong>方差偏移</strong>现象</p>
+</li>
+<li><h3 id="3-数据增强"><a href="#3-数据增强" class="headerlink" title="3 数据增强"></a>3 数据增强</h3><ul>
+<li><p>以某种方式<strong>随机</strong>地<strong>转换图像</strong></p>
+</li>
+<li><p>使得标签可以<strong>保留不变</strong></p>
+</li>
+<li><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114132559433.png" srcset="/img/loading.gif" lazyload alt="image-20220114132559433"></p>
+</li>
+<li><h4 id="1-随机裁剪"><a href="#1-随机裁剪" class="headerlink" title="1 随机裁剪"></a>1 随机裁剪</h4></li>
+<li><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114132618586.png" srcset="/img/loading.gif" lazyload alt="image-20220114132618586"></p>
+</li>
+<li><p>5中标准裁剪+翻转<img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114132844985.png" srcset="/img/loading.gif" lazyload alt="image-20220114132844985"></p>
+</li>
+<li><h4 id="2-色彩抖动"><a href="#2-色彩抖动" class="headerlink" title="2 色彩抖动"></a>2 色彩抖动</h4></li>
+</ul>
+</li>
+<li><h3 id="4-DropConnect"><a href="#4-DropConnect" class="headerlink" title="4 DropConnect"></a>4 DropConnect</h3><ul>
+<li><p>随机将<strong>权重矩阵</strong>的一些值置零<img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114133404508.png" srcset="/img/loading.gif" lazyload alt="image-20220114133404508"></p>
+</li>
+<li><p>而不是神经元置零</p>
+</li>
+<li><p>wx，w&#x3D;0，输出wx&#x3D;0，激活层少一个输入</p>
+</li>
+</ul>
+</li>
+<li><h3 id="5-Fractional-Max-Pooling"><a href="#5-Fractional-Max-Pooling" class="headerlink" title="5 Fractional Max Pooling"></a>5 Fractional Max Pooling</h3><ul>
+<li>局部最大池化</li>
+<li>每次在池化层操作时，将随机池化正在池化的区域 </li>
+<li>测试时再抵消随机化<img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114133911459.png" srcset="/img/loading.gif" lazyload alt="image-20220114133911459"></li>
+</ul>
+</li>
+<li><h3 id="6-Stochastic-Depth"><a href="#6-Stochastic-Depth" class="headerlink" title="6 Stochastic Depth"></a>6 Stochastic Depth</h3><ul>
+<li><strong>训练时</strong>随机丢掉一些网络层，只用部分层</li>
+<li><strong>测试时</strong>用全部网络</li>
+<li>效果类似dropout<img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114134150132.png" srcset="/img/loading.gif" lazyload alt="image-20220114134150132"></li>
+</ul>
+</li>
+</ul>
+<h2 id="in-practice："><a href="#in-practice：" class="headerlink" title="in practice："></a>in practice：</h2><ul>
+<li>通常使用BN就够了</li>
+<li>帮助收敛，尤其很深的网络</li>
+<li>如果发现网络<strong>过拟合</strong>，BN不够，可以加入dropout</li>
+</ul>
+<h2 id="过拟合产生的原因"><a href="#过拟合产生的原因" class="headerlink" title="过拟合产生的原因"></a>过拟合产生的原因</h2><ul>
+<li>数据过少</li>
+<li>……</li>
+</ul>
+<p>解决：</p>
+<ul>
+<li>正则化</li>
+<li>迁移学习（见下章）</li>
+</ul>
+<h1 id="17-7、2-迁移学习"><a href="#17-7、2-迁移学习" class="headerlink" title="17-7、2 迁移学习"></a>17-7、2 迁移学习</h1><h2 id="意义"><a href="#意义" class="headerlink" title="意义"></a>意义</h2><ul>
+<li>不需要使用超大的样本集</li>
+<li>也能训练CNN（卷积神经网络）</li>
+</ul>
+<h2 id="小数据集"><a href="#小数据集" class="headerlink" title="小数据集"></a>小数据集</h2><ul>
+<li>重新随机初始化最后的矩阵 FC-C</li>
+<li>冻结前面层的权重</li>
+<li>只需要训练一个线性分类器（最后层 ）<img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114135424600.png" srcset="/img/loading.gif" lazyload alt="image-20220114135424600"></li>
+</ul>
+<h2 id="充裕数据集"><a href="#充裕数据集" class="headerlink" title="充裕数据集"></a>充裕数据集</h2><ul>
+<li>微调网络</li>
+<li>在最后一层收敛</li>
+<li>在数据集上充分训练后</li>
+<li>试着更新整个网络的权值</li>
+<li>通用策略：<ul>
+<li>更新网络时调低学习率</li>
+<li>因为已经在imagenet上有较强泛化能力，只需要微小调整来适应此数据集</li>
+</ul>
+</li>
+</ul>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114141207320.png" srcset="/img/loading.gif" lazyload alt="image-20220114141207320"></p>
+<h2 id="迁移学习很常见"><a href="#迁移学习很常见" class="headerlink" title="迁移学习很常见"></a>迁移学习很常见</h2><ul>
+<li>所有模型都有一个卷积神经网络CNN</li>
+<li>不会从头训练</li>
+<li>大多情况：在ImageNet预训练，然后根据任务精调</li>
+</ul>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114141759693.png" srcset="/img/loading.gif" lazyload alt="image-20220114141759693"></p>
+<p>对于各种模型，如果没有大数据集：</p>
+<ul>
+<li>下载相关的预训练模型<ul>
+<li>重新初始化部分模型</li>
+<li>or 在数据上精调模型</li>
+<li>model zoo，提供了不同模型的预训练版本</li>
+</ul>
+</li>
+</ul>
+<h2 id="小结-6"><a href="#小结-6" class="headerlink" title="小结"></a>小结</h2><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114142040221.png" srcset="/img/loading.gif" lazyload alt="image-20220114142040221"></p>
+<ul>
+<li>最优化：<ul>
+<li>改进训练效果</li>
+</ul>
+</li>
+<li>正则化：<ul>
+<li>改变测试集上的性能</li>
+<li>集成模型</li>
+<li>dropout</li>
+</ul>
+</li>
+<li>迁移学习：<ul>
+<li>​	小样本也能训练好</li>
+</ul>
+</li>
+</ul>
+<h1 id="18-8、深度学习软件"><a href="#18-8、深度学习软件" class="headerlink" title="18-8、深度学习软件"></a>18-8、深度学习软件</h1><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114151224721.png" srcset="/img/loading.gif" lazyload alt="image-20220114151224721"></p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114151331763.png" srcset="/img/loading.gif" lazyload alt="image-20220114151331763"></p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114151409171.png" srcset="/img/loading.gif" lazyload alt="image-20220114151409171"></p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114151801771.png" srcset="/img/loading.gif" lazyload alt="image-20220114151801771"></p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114151806482.png" srcset="/img/loading.gif" lazyload alt="image-20220114151806482"></p>
+<p>矩阵乘法！</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114151856206.png" srcset="/img/loading.gif" lazyload alt="image-20220114151856206"></p>
+<p>GPU：并行，同时把每个点计算出来</p>
+<p>CPU：穿行，一个一个点计算</p>
+<p>cuDNN：<img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114152101541.png" srcset="/img/loading.gif" lazyload alt="image-20220114152101541"></p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114152109054.png" srcset="/img/loading.gif" lazyload alt="image-20220114152109054"></p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114152219234.png" srcset="/img/loading.gif" lazyload alt="image-20220114152219234"></p>
+<h2 id="数据从cpu读取太慢，无法匹配GPU"><a href="#数据从cpu读取太慢，无法匹配GPU" class="headerlink" title="数据从cpu读取太慢，无法匹配GPU"></a>数据从cpu读取太慢，无法匹配GPU</h2><ul>
+<li>设定好cpu的预读内容</li>
+<li>避免比较笨的序列化操作</li>
+<li>先把数据从硬盘里读出来</li>
+</ul>
+<h2 id="深度学习框架"><a href="#深度学习框架" class="headerlink" title="深度学习框架"></a>深度学习框架</h2><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114152850769.png" srcset="/img/loading.gif" lazyload alt="image-20220114152850769"></p>
+<h3 id="用处："><a href="#用处：" class="headerlink" title="用处："></a>用处：</h3><h4 id="1-构建计算图"><a href="#1-构建计算图" class="headerlink" title="1 构建计算图"></a>1 构建计算图</h4><p>计算任何想要计算的函数</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114153904493.png" srcset="/img/loading.gif" lazyload alt="image-20220114153904493"></p>
+<h4 id="2-自动计算梯度、反向传播"><a href="#2-自动计算梯度、反向传播" class="headerlink" title="2 自动计算梯度、反向传播"></a>2 自动计算梯度、反向传播</h4><h4 id="3-能够在GPU上高效执行"><a href="#3-能够在GPU上高效执行" class="headerlink" title="3 能够在GPU上高效执行"></a>3 能够在GPU上高效执行</h4><h2 id="举例：一个计算图"><a href="#举例：一个计算图" class="headerlink" title="举例：一个计算图"></a>举例：一个计算图</h2><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114154231932.png" srcset="/img/loading.gif" lazyload alt="image-20220114154231932"></p>
+<h3 id="使用numpy"><a href="#使用numpy" class="headerlink" title="使用numpy"></a>使用numpy</h3><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114154524047.png" srcset="/img/loading.gif" lazyload alt="image-20220114154524047"></p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114154533876.png" srcset="/img/loading.gif" lazyload alt="image-20220114154533876"></p>
+<p>必须自己计算梯度、不能在gpu跑</p>
+<h3 id="tensorflow"><a href="#tensorflow" class="headerlink" title="tensorflow"></a>tensorflow</h3><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114154742353.png" srcset="/img/loading.gif" lazyload alt="image-20220114154742353"></p>
+<p>能计算梯度、能在gpu跑</p>
+<p>gpu和cpu切换：&#x2F;gpu：0或 &#x2F;cpu：0</p>
+<h3 id="pytorch"><a href="#pytorch" class="headerlink" title="pytorch"></a>pytorch</h3><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114154907756.png" srcset="/img/loading.gif" lazyload alt="image-20220114154907756"></p>
+<p>反向传播：.backward()</p>
+<p>计算梯度：x.grad.data</p>
+<p>切换到gpu：<img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114154928930.png" srcset="/img/loading.gif" lazyload alt="image-20220114154928930"></p>
+<p>把所有东西转换成cuda数据类型</p>
+<h3 id="比较三个框架"><a href="#比较三个框架" class="headerlink" title="比较三个框架"></a>比较三个框架</h3><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114155132451.png" srcset="/img/loading.gif" lazyload alt="image-20220114155132451"></p>
+<h1 id="示例：tf进行全连接"><a href="#示例：tf进行全连接" class="headerlink" title="示例：tf进行全连接"></a>示例：tf进行全连接</h1><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114155616284.png" srcset="/img/loading.gif" lazyload alt="image-20220114155616284"></p>
+<p>先定义图结构</p>
+<p>再多次运行图</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114155804143.png" srcset="/img/loading.gif" lazyload alt="image-20220114155804143"></p>
+<p>【placeholder创建四个输入结点】</p>
+<p>运行图模型时，会输入数据，将它们放到计算图中的输入槽中</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114162050847.png" srcset="/img/loading.gif" lazyload alt="image-20220114162050847"></p>
+<p>【在这些符号变量上做操作，以便想要进行的运算】</p>
+<ul>
+<li>maximum：relu的非线性特性</li>
+<li>matmul：矩阵乘法计算输出的预测结果</li>
+<li>diff：欧氏距离</li>
+<li>loss：目标值y和预测值之间的损失</li>
+</ul>
+<p> <img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114162429340.png" srcset="/img/loading.gif" lazyload alt="image-20220114162429340"></p>
+<p>【计算损失值在w1和w2方向上的梯度】</p>
+<p>免去了写反向传播代码</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114162610188.png" srcset="/img/loading.gif" lazyload alt="image-20220114162610188"></p>
+<p>【进入session运行计算&amp;输入数据】</p>
+<ul>
+<li><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114162646762.png" srcset="/img/loading.gif" lazyload alt="image-20220114162646762">【tf从numpy数组中接收数据】</p>
+</li>
+<li><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114162941609.png" srcset="/img/loading.gif" lazyload alt="image-20220114162941609"></p>
+</li>
+<li><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220114163328698.png" srcset="/img/loading.gif" lazyload alt="image-20220114163328698">【训练网络】</p>
+<ul>
+<li>session.run请求tf计算损失和梯度</li>
+<li>计算梯度以更新权重</li>
+</ul>
+</li>
+</ul>
+<h3 id="problem"><a href="#problem" class="headerlink" title="problem"></a>problem</h3><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115104448064.png" srcset="/img/loading.gif" lazyload alt="image-20220115104448064"></p>
+<p>​	【在cpu和gpu之间进行<strong>数据复制非常耗费资源</strong>】</p>
+<ul>
+<li>梯度值的个数与权重值个数一致，</li>
+<li>每次运行图时，我们将从numpy数组中复制<strong>权重</strong>到tf中，才能得到<strong>梯度</strong></li>
+<li>然后从tf中复制<strong>梯度</strong>到numpy数组</li>
+</ul>
+<h3 id="改进：把w1、w2变成variable"><a href="#改进：把w1、w2变成variable" class="headerlink" title="改进：把w1、w2变成variable"></a>改进：把w1、w2变成variable</h3><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115104621174.png" srcset="/img/loading.gif" lazyload alt="image-20220115104621174"></p>
+<p>【变量可以一直保持在图中】</p>
+<p>与占位符的区别：</p>
+<ul>
+<li>占位符：相当于w1、w2都在计算图外部，需要用numpy数组初始化</li>
+<li>变量：存在于计算图中，tf负责初始化<ul>
+<li>tf.randomnormal<img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115104936605.png" srcset="/img/loading.gif" lazyload alt="image-20220115104936605"></li>
+</ul>
+</li>
+</ul>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115105337764.png" srcset="/img/loading.gif" lazyload alt="image-20220115105337764"></p>
+<p>【在计算图中改变参数w】</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115105548266.png" srcset="/img/loading.gif" lazyload alt="image-20220115105548266"></p>
+<p>【初始化w1、w2】</p>
+<p>【计算loss】</p>
+<p>问题：</p>
+<p>并没有更新w，loss一直没变！</p>
+<p>解决：</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115110001635.png" srcset="/img/loading.gif" lazyload alt="image-20220115110001635"></p>
+<p>添加w1、w2作为输出<img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115110105397.png" srcset="/img/loading.gif" lazyload alt="image-20220115110105397"></p>
+<p>【将w12作为仿制结点，告诉图计算仿制结点】</p>
+<h4 id="Q-为什么不把xy也放进计算图？"><a href="#Q-为什么不把xy也放进计算图？" class="headerlink" title="Q:为什么不把xy也放进计算图？"></a>Q:为什么不把xy也放进计算图？</h4><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115110533263.png" srcset="/img/loading.gif" lazyload alt="image-20220115110533263"></p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115110543332.png" srcset="/img/loading.gif" lazyload alt="image-20220115110543332"></p>
+<p>（人为输入不同值，而不是被更新）</p>
+<h2 id="tf：optimizer"><a href="#tf：optimizer" class="headerlink" title="tf：optimizer"></a>tf：optimizer</h2><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115111311744.png" srcset="/img/loading.gif" lazyload alt="image-20220115111311744"></p>
+<p>optimizer：计算梯度，1e-5是学习率</p>
+<p>.minimize最小化loss并得到更新权重</p>
+<h2 id="tf：loss"><a href="#tf：loss" class="headerlink" title="tf：loss"></a>tf：loss</h2><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115112139174.png" srcset="/img/loading.gif" lazyload alt="image-20220115112139174"></p>
+<h2 id="tf：layers"><a href="#tf：layers" class="headerlink" title="tf：layers"></a>tf：layers<img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115112531235.png" srcset="/img/loading.gif" lazyload alt="image-20220115112531235"></h2><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115112412383.png" srcset="/img/loading.gif" lazyload alt="image-20220115112412383"></p>
+<p>初始化取值更好了</p>
+<p>收敛速度更快</p>
+<h2 id="keras"><a href="#keras" class="headerlink" title="keras"></a>keras</h2><p>一个非常方便的API</p>
+<p> <img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115112812321.png" srcset="/img/loading.gif" lazyload alt="image-20220115112812321"></p>
+<h1 id="pytorch-1"><a href="#pytorch-1" class="headerlink" title="pytorch"></a>pytorch</h1><h2 id="明确定义了三个层次"><a href="#明确定义了三个层次" class="headerlink" title="明确定义了三个层次"></a>明确定义了三个层次</h2><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115113400484.png" srcset="/img/loading.gif" lazyload alt="image-20220115113400484"></p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115113413285.png" srcset="/img/loading.gif" lazyload alt="image-20220115113413285"></p>
+<h3 id="1-tensors"><a href="#1-tensors" class="headerlink" title="1 tensors"></a>1 tensors</h3><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115113559582.png" srcset="/img/loading.gif" lazyload alt="image-20220115113559582"></p>
+<ol>
+<li>建立随机数据</li>
+<li>前向传播</li>
+<li>反向传播</li>
+<li>手动更新权值</li>
+</ol>
+<h4 id="使得代码在gpu运行："><a href="#使得代码在gpu运行：" class="headerlink" title="使得代码在gpu运行："></a>使得代码在gpu运行：<img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115113836695.png" srcset="/img/loading.gif" lazyload alt="image-20220115113836695"></h4><p>把张量类型转换成cuda类型</p>
+<p>&#x3D;&#x3D;pytorch张量&#x3D;Numpy+GPU&#x3D;&#x3D;</p>
+<h3 id="2-variable"><a href="#2-variable" class="headerlink" title="2 variable"></a>2 variable</h3><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115114717807.png" srcset="/img/loading.gif" lazyload alt="image-20220115114717807"></p>
+<p>x:结点，<strong>变量</strong></p>
+<p>x.data: <strong>张量</strong></p>
+<p>x.grad: 梯度<strong>变量</strong></p>
+<p>x.grad.data：梯度变量的<strong>张量</strong></p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115114907446.png" srcset="/img/loading.gif" lazyload alt="image-20220115114907446"></p>
+<p>【告诉构造器是否需要计算该变量上的梯度】</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115115028598.png" srcset="/img/loading.gif" lazyload alt="image-20220115115028598"></p>
+<p>【计算预测值、loss】</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115115105266.png" srcset="/img/loading.gif" lazyload alt="image-20220115115105266"></p>
+<p>【反向传播得到需要的所有梯度值】</p>
+<p>&#x3D;&#x3D;梯度都是自动求解的&#x3D;&#x3D;</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115115144164.png" srcset="/img/loading.gif" lazyload alt="image-20220115115144164"></p>
+<p>【用梯度对权重进行更新】</p>
+<p>梯度都在.grad.data中</p>
+<h3 id="pytorch与tf区别"><a href="#pytorch与tf区别" class="headerlink" title="pytorch与tf区别"></a>pytorch与tf区别</h3><ul>
+<li>tf：<ul>
+<li>先构建显示的图</li>
+<li>重复运行</li>
+</ul>
+</li>
+<li>pytorch：<ul>
+<li>每次前向传播都会构建一个新的图</li>
+</ul>
+</li>
+</ul>
+<h3 id="自定义前向后向"><a href="#自定义前向后向" class="headerlink" title="自定义前向后向"></a>自定义前向后向</h3><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115115913140.png" srcset="/img/loading.gif" lazyload alt="image-20220115115913140"></p>
+<p>【定义了一个relu的for、back】</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115120025453.png" srcset="/img/loading.gif" lazyload alt="image-20220115120025453"></p>
+<p>【使用这个relu】</p>
+<p>把rulu固定在了计算图中</p>
+<h3 id="nn包"><a href="#nn包" class="headerlink" title="nn包"></a>nn包</h3><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115120532061.png" srcset="/img/loading.gif" lazyload alt="image-20220115120532061"></p>
+<p>【定义model为一些层的序列】</p>
+<ul>
+<li>线性层</li>
+<li>relu</li>
+</ul>
+<p>MSELoss：均方差损失</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115121824128.png" srcset="/img/loading.gif" lazyload alt="image-20220115121824128"></p>
+<p>【前向传播】</p>
+<p>&#x3D;&#x3D;每次前向传播都建立了新计算图&#x3D;&#x3D;</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115121838098.png" srcset="/img/loading.gif" lazyload alt="image-20220115121838098"></p>
+<p>【计算梯度】</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115121923426.png" srcset="/img/loading.gif" lazyload alt="image-20220115121923426"></p>
+<p>【循环】 </p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115124547380.png" srcset="/img/loading.gif" lazyload alt="image-20220115124547380"></p>
+<p>【使用adam更新法则】</p>
+<p>【对模型中的参数进行优化，parameters、lr</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115124649190.png" srcset="/img/loading.gif" lazyload alt="image-20220115124649190"></p>
+<h4 id="定义一个新的modules"><a href="#定义一个新的modules" class="headerlink" title="定义一个新的modules"></a>定义一个新的modules</h4><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115125022041.png" srcset="/img/loading.gif" lazyload alt="image-20220115125022041"></p>
+<p>forward中，x传入第一层，clamp计算relu，输出作为第二层的输入</p>
+<h3 id="dataloaders"><a href="#dataloaders" class="headerlink" title="dataloaders"></a>dataloaders</h3><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115125701543.png" srcset="/img/loading.gif" lazyload alt="image-20220115125701543"></p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115125719659.png" srcset="/img/loading.gif" lazyload alt="image-20220115125719659"></p>
+<h3 id="pytorch：预训练模型"><a href="#pytorch：预训练模型" class="headerlink" title="pytorch：预训练模型"></a>pytorch：预训练模型</h3><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115125843723.png" srcset="/img/loading.gif" lazyload alt="image-20220115125843723"></p>
+<h2 id="torch-vs-pytorch"><a href="#torch-vs-pytorch" class="headerlink" title="torch vs pytorch"></a>torch vs pytorch</h2><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115130031658.png" srcset="/img/loading.gif" lazyload alt="image-20220115130031658"></p>
+<h2 id="tf-vs-pytorch"><a href="#tf-vs-pytorch" class="headerlink" title="tf vs pytorch"></a>tf vs pytorch</h2><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115131320069.png" srcset="/img/loading.gif" lazyload alt="image-20220115131320069"></p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115131605201.png" srcset="/img/loading.gif" lazyload alt="image-20220115131605201"></p>
+<p>动态图：</p>
+<ul>
+<li>在循环中，每次运行都是不同的图结构</li>
+<li>便于做<strong>条件控制</strong></li>
+<li>便于<strong>循环</strong><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115132253835.png" srcset="/img/loading.gif" lazyload alt="image-20220115132253835"></li>
+<li>应用：<ul>
+<li>循环网络</li>
+<li>循环网络</li>
+<li>模块化网络</li>
+</ul>
+</li>
+</ul>
+<p>静态图：</p>
+<ul>
+<li>在循环外，固定好了模式</li>
+</ul>
+<h1 id="caffe"><a href="#caffe" class="headerlink" title="caffe"></a>caffe</h1><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115133942626.png" srcset="/img/loading.gif" lazyload alt="image-20220115133942626"></p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115133808023.png" srcset="/img/loading.gif" lazyload alt="image-20220115133808023"></p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115134020453.png" srcset="/img/loading.gif" lazyload alt="image-20220115134020453"></p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115134030301.png" srcset="/img/loading.gif" lazyload alt="image-20220115134030301"></p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115134237013.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="使用建议"><a href="#使用建议" class="headerlink" title="使用建议"></a>使用建议</h1><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115134342382.png" srcset="/img/loading.gif" lazyload alt="image-20220115134342382"></p>
+<p>手机端、生产：caffe</p>
+<p>科研：pytorch</p>
+<h1 id="框架小结"><a href="#框架小结" class="headerlink" title="框架小结"></a>框架小结</h1><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115160747647.png" srcset="/img/loading.gif" lazyload alt="image-20220115160747647"></p>
+<p>主要是：</p>
+<ul>
+<li>1 调制forward、backward函数<img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115160905699.png" srcset="/img/loading.gif" lazyload alt="image-20220115160905699"></li>
+<li>2 定义顺序<img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115160916696.png" srcset="/img/loading.gif" lazyload alt="image-20220115160916696"></li>
+</ul>
+<h1 id="19-9、CNN"><a href="#19-9、CNN" class="headerlink" title="19-9、CNN"></a>19-9、CNN</h1><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115161023415.png" srcset="/img/loading.gif" lazyload alt="image-20220115161023415"></p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115161035079.png" srcset="/img/loading.gif" lazyload alt="image-20220115161035079"></p>
+<h1 id="LeNet-5"><a href="#LeNet-5" class="headerlink" title="LeNet-5"></a>LeNet-5</h1><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115161136929.png" srcset="/img/loading.gif" lazyload alt="image-20220115161136929"></p>
+<h1 id="AlexNet"><a href="#AlexNet" class="headerlink" title="AlexNet"></a>AlexNet</h1><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115161244359.png" srcset="/img/loading.gif" lazyload alt="image-20220115161244359"></p>
+<p>  5层卷积，2层池化，2层正则，3层全连接</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115161615029.png" srcset="/img/loading.gif" lazyload alt="image-20220115161615029"></p>
+<p> 深度：96，即 55x55x96</p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115161835566.png" srcset="/img/loading.gif" lazyload alt="image-20220115161835566"></p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115161841907.png" srcset="/img/loading.gif" lazyload alt="image-20220115161841907"></p>
+<p>【池化层没有参数】</p>
+<ul>
+<li>parameter：0</li>
+<li>只是观察池化区域，取得最大值</li>
+<li>卷积层有参数w权重</li>
+</ul>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115162206512.png" srcset="/img/loading.gif" lazyload alt="image-20220115162206512"></p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115162333867.png" srcset="/img/loading.gif" lazyload alt="image-20220115162333867"></p>
+<p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115162452843.png" srcset="/img/loading.gif" lazyload alt="image-20220115162452843"></p>
+<h1 id="VGG"><a href="#VGG" class="headerlink" title="VGG"></a>VGG</h1><p><img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115163211928.png" srcset="/img/loading.gif" lazyload alt="image-20220115163211928"></p>
+<ul>
+<li>使用最小的卷积核3x3</li>
+<li>只关注相邻的像素</li>
+</ul>
+<p>意思应该是用<strong>多次小的卷积</strong>相比<strong>一次大的卷积</strong>用的参数更少然后更加非线性？</p>
+<p>3层3<em>3（步长1）的卷积核来卷积效果等同于用1层7</em>7（步长1）的卷积核来卷积，可以用(N-F)&#x2F;stride+1这个公式自己推导</p>
+<p> <img src="/CS231%E7%AC%94%E8%AE%B0.assets/image-20220115164623328.png" srcset="/img/loading.gif" lazyload alt="image-20220115164623328"></p>
+<p>continue….</p>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">#深度学习</a>
+      
+        <a href="/tags/CV/">#CV</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>CS231笔记</div>
+      <div>http://example.com/2022/04/22/CS231笔记/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>John Doe</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>April 22, 2022</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>Licensed under</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/04/22/CV%E5%85%A5%E9%97%A8-%E8%A1%97%E9%81%93%E5%AD%97%E7%AC%A6%E8%AF%86%E5%88%AB/" title="CV入门-街道字符识别">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">CV入门-街道字符识别</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/04/22/%E6%AD%A6%E6%B1%89%E5%A4%A7%E5%AD%A6%E8%B6%85%E7%AE%97%E4%B8%AD%E5%BF%83%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/" title="武汉大学超算中心使用方法">
+                        <span class="hidden-mobile">武汉大学超算中心使用方法</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'http://example.com/2022/04/22/CS231%E7%AC%94%E8%AE%B0/';
+          this.page.identifier = '/2022/04/22/CS231%E7%AC%94%E8%AE%B0/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <i class="iconfont icon-love"></i> <a href="" target="_blank" rel="nofollow noopener"><span>武汉大学杨淇雅</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

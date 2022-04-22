@@ -1,0 +1,763 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.png">
+  <link rel="icon" href="/img/avatar.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="武汉大学超算中心Linux基础知识武大超算采用的是Linux系统 用户对计算机资源管理和使用的一种工具 用户通过登录的shell与远程计算机资源建立连接 每个用户都被管理员赋予一定的权限和计算机的资源 可以通过自己的shell输入命令来指导远程计算机对自己分配到的一些资源进行操作 比如在文件夹下新建文件、删除文件，或者安装程序 用户登录时都在计算机的登录节点操作自己的文件 如果有一些运算量比较大的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="武汉大学超算中心使用方法">
+<meta property="og:url" content="http://example.com/2022/04/22/%E6%AD%A6%E6%B1%89%E5%A4%A7%E5%AD%A6%E8%B6%85%E7%AE%97%E4%B8%AD%E5%BF%83%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="武汉大学超算中心Linux基础知识武大超算采用的是Linux系统 用户对计算机资源管理和使用的一种工具 用户通过登录的shell与远程计算机资源建立连接 每个用户都被管理员赋予一定的权限和计算机的资源 可以通过自己的shell输入命令来指导远程计算机对自己分配到的一些资源进行操作 比如在文件夹下新建文件、删除文件，或者安装程序 用户登录时都在计算机的登录节点操作自己的文件 如果有一些运算量比较大的">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/%E6%AD%A6%E6%B1%89%E5%A4%A7%E5%AD%A6%E8%B6%85%E7%AE%97%E4%B8%AD%E5%BF%83%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95.assets/v2-13998440b32e5d164ef1d67b7f3af8ab_1440w.png">
+<meta property="og:image" content="http://example.com/%E6%AD%A6%E6%B1%89%E5%A4%A7%E5%AD%A6%E8%B6%85%E7%AE%97%E4%B8%AD%E5%BF%83%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95.assets/image-20220126205508958.png">
+<meta property="og:image" content="http://example.com/%E6%AD%A6%E6%B1%89%E5%A4%A7%E5%AD%A6%E8%B6%85%E7%AE%97%E4%B8%AD%E5%BF%83%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95.assets/image-20220126205520977.png">
+<meta property="og:image" content="http://example.com/%E6%AD%A6%E6%B1%89%E5%A4%A7%E5%AD%A6%E8%B6%85%E7%AE%97%E4%B8%AD%E5%BF%83%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95.assets/image-20220126210632064.png">
+<meta property="og:image" content="http://example.com/%E6%AD%A6%E6%B1%89%E5%A4%A7%E5%AD%A6%E8%B6%85%E7%AE%97%E4%B8%AD%E5%BF%83%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95.assets/image-20220126210609081.png">
+<meta property="og:image" content="http://example.com/%E6%AD%A6%E6%B1%89%E5%A4%A7%E5%AD%A6%E8%B6%85%E7%AE%97%E4%B8%AD%E5%BF%83%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95.assets/image-20220126210647886.png">
+<meta property="og:image" content="http://example.com/%E6%AD%A6%E6%B1%89%E5%A4%A7%E5%AD%A6%E8%B6%85%E7%AE%97%E4%B8%AD%E5%BF%83%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2MjI3NDU3,size_16,color_FFFFFF,t_70.jpeg">
+<meta property="og:image" content="http://example.com/%E6%AD%A6%E6%B1%89%E5%A4%A7%E5%AD%A6%E8%B6%85%E7%AE%97%E4%B8%AD%E5%BF%83%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MDUwNjA2Nw==,size_16,color_FFFFFF,t_70.png">
+<meta property="og:image" content="http://example.com/%E6%AD%A6%E6%B1%89%E5%A4%A7%E5%AD%A6%E8%B6%85%E7%AE%97%E4%B8%AD%E5%BF%83%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MDUwNjA2Nw==,size_16,color_FFFFFF,t_70-16506188801391.png">
+<meta property="article:published_time" content="2022-04-22T09:14:32.000Z">
+<meta property="article:modified_time" content="2022-04-22T09:14:46.577Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="工具">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/%E6%AD%A6%E6%B1%89%E5%A4%A7%E5%AD%A6%E8%B6%85%E7%AE%97%E4%B8%AD%E5%BF%83%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95.assets/v2-13998440b32e5d164ef1d67b7f3af8ab_1440w.png">
+  
+  
+  <title>武汉大学超算中心使用方法 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Qiya</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="武汉大学超算中心使用方法"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-04-22 17:14" pubdate>
+          April 22, 2022 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.3k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          20 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">武汉大学超算中心使用方法</h1>
+            
+            <div class="markdown-body">
+              
+              <h1 id="武汉大学超算中心"><a href="#武汉大学超算中心" class="headerlink" title="武汉大学超算中心"></a>武汉大学超算中心</h1><h2 id="Linux基础知识"><a href="#Linux基础知识" class="headerlink" title="Linux基础知识"></a>Linux基础知识</h2><p>武大超算采用的是Linux系统</p>
+<p>用户对计算机资源管理和使用的一种工具</p>
+<p>用户通过登录的shel<strong>l与远程计算机资源建立连接</strong></p>
+<p>每个用户都被管理员赋予一定的<strong>权限</strong>和<strong>计算机的资源</strong></p>
+<p>可以通过自己的<strong>shell输入命令</strong>来指导<strong>远程计算机</strong>对自己分配到的一些资源进行操作</p>
+<p>比如在文件夹下<strong>新建文件、删除文件</strong>，或者<strong>安装程序</strong></p>
+<p>用户登录时都在计算机的<strong>登录节点</strong>操作自己的文件</p>
+<p>如果有一些<strong>运算量比较大</strong>的程序，用户可以<strong>输入命令</strong>，将这些程序<strong>提交到其它节点</strong>去执行</p>
+<h3 id="2-Linux的一些基本命令——对文件和目录的管理"><a href="#2-Linux的一些基本命令——对文件和目录的管理" class="headerlink" title="2.Linux的一些基本命令——对文件和目录的管理"></a><strong>2.Linux的一些基本命令——对文件和目录的管理</strong></h3><p>cd </p>
+<p>绝对路径以“&#x2F;”开头</p>
+<p>相对路径就是从当前操作的路径开始，不以“&#x2F;”开头</p>
+<p>rm</p>
+<p>删除文件</p>
+<p>cp</p>
+<p>复制文件从一个位置到另外一个位置</p>
+<p>mv</p>
+<p>移动文件从一个位置到另外一个位置</p>
+<p>ls</p>
+<p>列出该目录下的所有文件</p>
+<h3 id="3-shell脚本和vi编辑器"><a href="#3-shell脚本和vi编辑器" class="headerlink" title="3.shell脚本和vi编辑器"></a><strong>3.shell脚本和vi编辑器</strong></h3><h4 id="shell脚本"><a href="#shell脚本" class="headerlink" title="shell脚本:"></a>shell脚本:</h4><p>把每次都要在shell输入的命令写在一个后缀为.sh的文本文件中</p>
+<p>linux运行这个shell脚本相当于执行里面的语句</p>
+<h4 id="vi是什么呢？"><a href="#vi是什么呢？" class="headerlink" title="vi是什么呢？"></a>vi是什么呢？</h4><p>linux文件下<strong>编辑文本文件</strong>的一个工具</p>
+<p>输入”vi xxx.cpp”就可以<strong>编辑cpp文件</strong></p>
+<p>输入“vi xxx.py”就可以<strong>编辑python脚本</strong></p>
+<p>输入”vi xxx.sh”皆可以<strong>编辑sh脚本</strong></p>
+<p>&#x3D;&#x3D;使用vi，可以直接在linux上编辑自己的程序脚本还有提交要用的sh脚本&#x3D;&#x3D;</p>
+<p>在命令行输入conda activate base，再输入命令python，就可以看到python的版本已经变化了，代表可以使用安装的anaconda。</p>
+<p><img src="/%E6%AD%A6%E6%B1%89%E5%A4%A7%E5%AD%A6%E8%B6%85%E7%AE%97%E4%B8%AD%E5%BF%83%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95.assets/v2-13998440b32e5d164ef1d67b7f3af8ab_1440w.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>输入**quit()**退出python解释器</p>
+<p><img src="/%E6%AD%A6%E6%B1%89%E5%A4%A7%E5%AD%A6%E8%B6%85%E7%AE%97%E4%B8%AD%E5%BF%83%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95.assets/image-20220126205508958.png" srcset="/img/loading.gif" lazyload alt="image-20220126205508958"></p>
+<p><img src="/%E6%AD%A6%E6%B1%89%E5%A4%A7%E5%AD%A6%E8%B6%85%E7%AE%97%E4%B8%AD%E5%BF%83%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95.assets/image-20220126205520977.png" srcset="/img/loading.gif" lazyload alt="image-20220126205520977"></p>
+<p>如果要提交到<strong>计算节点</strong>运行python程序的话</p>
+<h2 id="使用gpu"><a href="#使用gpu" class="headerlink" title="使用gpu"></a>使用gpu</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">srun -A panjun --gres=gpu:1 -p gpu -u python train.py<br></code></pre></td></tr></table></figure>
+
+<h2 id="查看预装软件"><a href="#查看预装软件" class="headerlink" title="查看预装软件"></a>查看预装软件</h2><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-keyword">module</span> avail<br></code></pre></td></tr></table></figure>
+
+<p><img src="/%E6%AD%A6%E6%B1%89%E5%A4%A7%E5%AD%A6%E8%B6%85%E7%AE%97%E4%B8%AD%E5%BF%83%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95.assets/image-20220126210632064.png" srcset="/img/loading.gif" lazyload alt="image-20220126210632064"></p>
+<p><img src="/%E6%AD%A6%E6%B1%89%E5%A4%A7%E5%AD%A6%E8%B6%85%E7%AE%97%E4%B8%AD%E5%BF%83%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95.assets/image-20220126210609081.png" srcset="/img/loading.gif" lazyload alt="image-20220126210609081"></p>
+<p><img src="/%E6%AD%A6%E6%B1%89%E5%A4%A7%E5%AD%A6%E8%B6%85%E7%AE%97%E4%B8%AD%E5%BF%83%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95.assets/image-20220126210647886.png" srcset="/img/loading.gif" lazyload alt="image-20220126210647886"></p>
+<h2 id="一些功能应用"><a href="#一些功能应用" class="headerlink" title="一些功能应用"></a>一些功能应用</h2><p>1.<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=module&spm=1001.2101.3001.7020">module</a>模块</p>
+<p>可以看超算上面有什么<strong>已经安装好的底层</strong></p>
+<p>有gcc<strong>从5到7</strong>的版本</p>
+<p>也有cuda9，9.2，10，10.1</p>
+<p><strong>根据自己的需求module load</strong></p>
+<p>3.gpu</p>
+<p>gpu是付费的，需要跟导师申请，然后<strong>gpu–导师</strong>，一般有两种方式<strong>salloc和sbatch</strong>都可以连接上gpu</p>
+<p>salloc：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell">salloc -A XXX（这里改成自己导师的名字） -p gpu --gres=gpu:4（这是申请导师的4块gpu，然后就进入节点了）<br>ssh 节点（进入节点）<br>module load XXX（自己需要的模块）<br>python XXX.py(或者编译C代码，matlab，java看自己需求)<br></code></pre></td></tr></table></figure>
+
+<p>sbatch：</p>
+<p><img src="/%E6%AD%A6%E6%B1%89%E5%A4%A7%E5%AD%A6%E8%B6%85%E7%AE%97%E4%B8%AD%E5%BF%83%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2MjI3NDU3,size_16,color_FFFFFF,t_70.jpeg" srcset="/img/loading.gif" lazyload alt="画红线的位置需要填写的，蓝色位置为导师名字"></p>
+<p>把这个提交，<strong>用srun提交作业</strong></p>
+<h2 id="使用gpu-1"><a href="#使用gpu-1" class="headerlink" title="使用gpu"></a>使用gpu</h2><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">srun -A panjun <span class="hljs-attribute">--gres</span>=gpu:1 -p gpu -u python train.py<br></code></pre></td></tr></table></figure>
+
+<p>## 使用付费节点</p>
+<p>- CPU: <code>-A zywang4</code></p>
+<p>- GPU: <code>-A zywang4 -p gpu --gres=gpu:</code></p>
+<p>如：</p>
+<p><strong>srun -A zywang4 -p gpu –gres&#x3D;gpu:1  0.bash</strong></p>
+<p>sbatch -p gpu –gres&#x3D;gpu:4 x.sbatch</p>
+<h2 id="磁盘查询命令"><a href="#磁盘查询命令" class="headerlink" title="磁盘查询命令"></a>磁盘查询命令</h2><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">lfs quota -uh jrhu <span class="hljs-regexp">/home/</span>jrhu<br>lfs quota -uh jrhu <span class="hljs-regexp">/project/</span>jrhu<br></code></pre></td></tr></table></figure>
+
+<h1 id="login-node"><a href="#login-node" class="headerlink" title="login node"></a>login node</h1><p>202.114.96.180</p>
+<h1 id="file-node"><a href="#file-node" class="headerlink" title="file node"></a>file node</h1><p>千兆带宽的传输节点 202.114.96.177</p>
+<h2 id="查看残留进程"><a href="#查看残留进程" class="headerlink" title="查看残留进程"></a>查看残留进程</h2><p>非常重要 没事就检查一下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">squeue -u jrhu<br></code></pre></td></tr></table></figure>
+
+<h2 id="kill-残留进程"><a href="#kill-残留进程" class="headerlink" title="kill 残留进程"></a>kill 残留进程</h2><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm"><span class="hljs-keyword">scancel </span>&lt;<span class="hljs-keyword">job </span>id&gt;<br></code></pre></td></tr></table></figure>
+
+<h2 id="2-Sinfo"><a href="#2-Sinfo" class="headerlink" title="2. Sinfo"></a>2. Sinfo</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">sinfo               <span class="hljs-comment">#查看所有分区状态</span><br>sinfo -a            <span class="hljs-comment">#查看所有分区状态</span><br>sinfo -N            <span class="hljs-comment">#查看节点状态</span><br>sinfo -n node-name  <span class="hljs-comment">#查看指定节点状态</span><br>sinfo --<span class="hljs-built_in">help</span>        <span class="hljs-comment">#查看sinfo的说明</span><br></code></pre></td></tr></table></figure>
+
+<p>Slurm提交作业有3种模式，分别为交<strong>互模式</strong>，<strong>批处理模式</strong>，分配模式</p>
+<h3 id="4-1-参数说明"><a href="#4-1-参数说明" class="headerlink" title="4.1 参数说明"></a>4.1 参数说明</h3><p>以下所有参数在 <code>srun, sbatch, salloc</code> 中均可以使用。更多参数见<code>srun --help</code>, <code>sbatch --help</code>, <code>salloc --help</code>。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs shell">-c, --cpu-per-task=NCPUs        #指定每个进程使用核数，不指定默认为1<br>-e, --error=error_filename      #指定错误文件输出<br>-J, --job-name=JOBNAME          #指定作业名称<br>--mail-type=END/FAIL/ALL        #邮件提醒，可选:END,FAIL,ALL<br>--mail-user=mail_address        #通知邮箱地址<br>-n, --ntask=NTASKs #指定总进程数；不使用cpus-per-task，可理解为进程数即为核数 <br>--ntask-per-node=N #指定每个节点进程数/核数，使用-n参数后变为每个节点最多运行的进程数<br>-N, --nodes=N                   #指定节点数量<br>-o, --output=out_filename       #指定输出文件输出<br>-p, --partion=debug             #指定分区<br>-t, --time=dd-hh:mm:ss          #作业最大运行时间<br>-w, --nodelist=node[1,2]        #指定优先使用节点，不可与避免节点冲突<br>-x, --exclude=node[3,5-6]       #指定避免使用节点，不可与优先节点冲突<br>--mem-per-cpu=MB                #指定计算cpu最大占用内存大小<br></code></pre></td></tr></table></figure>
+
+<h3 id="交互模式-Srun"><a href="#交互模式-Srun" class="headerlink" title="交互模式 Srun"></a>交互模式 Srun</h3><p>交互式作业提交，提交命令后，<strong>等待作业执行完成之后返回命令行窗口</strong>。</p>
+<h3 id="批处理模式-Sbatch"><a href="#批处理模式-Sbatch" class="headerlink" title="批处理模式 Sbatch"></a>批处理模式 Sbatch</h3><p>用户编写作业脚本，指定资源需求约束，提交后台执行作业</p>
+<p>运行 <code>sbatch filename</code> 来<strong>提交任务</strong></p>
+<p>计算开始后，工作目录中会生成<strong>以 slurm 开头的.out 文件</strong>为输出文件</p>
+<p><img src="/%E6%AD%A6%E6%B1%89%E5%A4%A7%E5%AD%A6%E8%B6%85%E7%AE%97%E4%B8%AD%E5%BF%83%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MDUwNjA2Nw==,size_16,color_FFFFFF,t_70.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p><img src="/%E6%AD%A6%E6%B1%89%E5%A4%A7%E5%AD%A6%E8%B6%85%E7%AE%97%E4%B8%AD%E5%BF%83%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MDUwNjA2Nw==,size_16,color_FFFFFF,t_70-16506188801391.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%B7%A5%E5%85%B7/">#工具</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>武汉大学超算中心使用方法</div>
+      <div>http://example.com/2022/04/22/武汉大学超算中心使用方法/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>John Doe</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>April 22, 2022</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>Licensed under</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/04/22/CS231%E7%AC%94%E8%AE%B0/" title="CS231笔记">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">CS231笔记</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/04/22/%E4%BD%BF%E7%94%A8%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%A3%80%E6%B5%8B%E9%9D%A2%E9%83%A8%E5%85%B3%E9%94%AE%E7%82%B9%E6%95%99%E7%A8%8B/" title="使用卷积神经网络检测面部关键点教程">
+                        <span class="hidden-mobile">使用卷积神经网络检测面部关键点教程</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'http://example.com/2022/04/22/%E6%AD%A6%E6%B1%89%E5%A4%A7%E5%AD%A6%E8%B6%85%E7%AE%97%E4%B8%AD%E5%BF%83%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/';
+          this.page.identifier = '/2022/04/22/%E6%AD%A6%E6%B1%89%E5%A4%A7%E5%AD%A6%E8%B6%85%E7%AE%97%E4%B8%AD%E5%BF%83%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <i class="iconfont icon-love"></i> <a href="" target="_blank" rel="nofollow noopener"><span>武汉大学杨淇雅</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

@@ -1,0 +1,840 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.png">
+  <link rel="icon" href="/img/avatar.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="[调参]CV炼丹技巧&#x2F;经验 https:&#x2F;&#x2F;www.cnblogs.com&#x2F;kk17&#x2F;p&#x2F;10156849.html 调参就是trial-and-error. 快速尝试, 快速纠错这是调参的关键 可视化你只是训练完成后(或者准确率到达一个阶段后), 才能可视化 权重的可视化[Visualize Layer Weights] 不满足平滑结果的图像数据不好? 没有预处理? 网络结构问题? L">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CV炼丹技巧总结">
+<meta property="og:url" content="http://example.com/2022/04/22/CV%E7%82%BC%E4%B8%B9%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="[调参]CV炼丹技巧&#x2F;经验 https:&#x2F;&#x2F;www.cnblogs.com&#x2F;kk17&#x2F;p&#x2F;10156849.html 调参就是trial-and-error. 快速尝试, 快速纠错这是调参的关键 可视化你只是训练完成后(或者准确率到达一个阶段后), 才能可视化 权重的可视化[Visualize Layer Weights] 不满足平滑结果的图像数据不好? 没有预处理? 网络结构问题? L">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/CV%E7%82%BC%E4%B8%B9%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93.assets/image-20220322094426088.png">
+<meta property="og:image" content="http://example.com/CV%E7%82%BC%E4%B8%B9%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93.assets/image-20220322095808834.png">
+<meta property="og:image" content="http://example.com/CV%E7%82%BC%E4%B8%B9%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93.assets/image-20220322100732586.png">
+<meta property="article:published_time" content="2022-04-22T08:57:16.000Z">
+<meta property="article:modified_time" content="2022-04-22T09:00:34.497Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="深度学习">
+<meta property="article:tag" content="CV">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/CV%E7%82%BC%E4%B8%B9%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93.assets/image-20220322094426088.png">
+  
+  
+  <title>CV炼丹技巧总结 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Qiya</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="CV炼丹技巧总结"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-04-22 16:57" pubdate>
+          April 22, 2022 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.2k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          19 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">CV炼丹技巧总结</h1>
+            
+            <div class="markdown-body">
+              
+              <h1 id="调参-CV炼丹技巧-x2F-经验"><a href="#调参-CV炼丹技巧-x2F-经验" class="headerlink" title="[调参]CV炼丹技巧&#x2F;经验 "></a>[<a target="_blank" rel="noopener" href="https://www.cnblogs.com/kk17/p/10156849.html">调参]CV炼丹技巧&#x2F;经验 </a></h1><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/kk17/p/10156849.html">https://www.cnblogs.com/kk17/p/10156849.html</a></p>
+<p>调参就是trial-and-error.</p>
+<p>快速尝试, 快速纠错这是调参的关键</p>
+<h2 id="可视化"><a href="#可视化" class="headerlink" title="可视化"></a>可视化</h2><p>你只是<strong>训练完成后</strong>(或者<strong>准确率到达一个阶段</strong>后), 才能可视化</p>
+<p>权重的可视化[Visualize Layer Weights]</p>
+<h2 id="不满足平滑结果的图像"><a href="#不满足平滑结果的图像" class="headerlink" title="不满足平滑结果的图像"></a>不满足平滑结果的图像</h2><p>数据不好? 没有预处理? 网络结构问题? Learning Rate太大或者太小? 或者就是差了一个LRN层？</p>
+<h2 id="现在的趋势"><a href="#现在的趋势" class="headerlink" title="现在的趋势"></a>现在的趋势</h2><p>鼓励使用<strong>小filter</strong>, <strong>3x3</strong>大小, 多加层次</p>
+<p>具有<strong>不平滑的权重的网络</strong>同样可以获得很好的结果</p>
+<h2 id="基本原则"><a href="#基本原则" class="headerlink" title="基本原则:"></a><strong>基本原则:</strong></h2><h3 id="1-快速试错"><a href="#1-快速试错" class="headerlink" title="1 快速试错"></a><strong>1 快速试错</strong></h3><p>刚开始, 先上<strong>小规模数据</strong>, <strong>模型往大了放</strong>, 只要不爆显存, 能用<strong>256个filter</strong>你就别用128个. 直接奔着<strong>过拟合</strong>去. 没错, 就是训练过拟合网络, 连测试集验证集这些都可以不用</p>
+<h4 id="验证训练代码的流程正确与否"><a href="#验证训练代码的流程正确与否" class="headerlink" title="验证训练代码的流程正确与否"></a>验证训练代码的流程正确与否</h4><ul>
+<li>小数据量<ul>
+<li>生成速度快</li>
+<li>少跑点循环</li>
+</ul>
+</li>
+<li>如果小数据量下，网络很大，都没有朝着过拟合趋近—》输入输出可能有问题</li>
+</ul>
+<h3 id="2-loss设计要合理"><a href="#2-loss设计要合理" class="headerlink" title="2 loss设计要合理"></a>2 loss设计要合理</h3><ul>
+<li><p>一般来说<strong>分类就是Softmax</strong>, <strong>回归就是L2的loss</strong></p>
+</li>
+<li><h4 id="L1loss-amp-L2loss"><a href="#L1loss-amp-L2loss" class="headerlink" title="L1loss&amp;L2loss"></a>L1loss&amp;L2loss</h4></li>
+</ul>
+<p><img src="/CV%E7%82%BC%E4%B8%B9%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93.assets/image-20220322094426088.png" srcset="/img/loading.gif" lazyload alt="image-20220322094426088"></p>
+<ul>
+<li><p>绝对值和平方差的区别</p>
+</li>
+<li><p>回归问题中，计算loss时注意输入归一化(normalization)。输出也要归一化(normalization)</p>
+<ul>
+<li>否则使用L2loss时，预测1000和实际0之间的差值太大，影响实际的loss</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-观察loss胜于观察准确率"><a href="#3-观察loss胜于观察准确率" class="headerlink" title="3 观察loss胜于观察准确率"></a>3 观察loss胜于观察准确率</h3><blockquote>
+<p>一般来说，评测指标：准确率</p>
+</blockquote>
+<ul>
+<li>准确率有时会突变，000000–突然—&gt;1</li>
+<li>训练过程观察loss更合理</li>
+<li>不能说前面一段时间没起色就不管了. 有些情况下就是前面一段时间看不出起色, 然后开始稳定学习.</li>
+</ul>
+<h3 id="4-确认分类网络学习充分"><a href="#4-确认分类网络学习充分" class="headerlink" title="4 确认分类网络学习充分"></a>4 确认分类网络学习充分</h3><ul>
+<li>图片分类时，如果<strong>预测各类别都在0.5上下</strong>，说明还没有学习出类别之间的界限，速妖再学习学习</li>
+<li>随着学习过程, 网络预测会慢慢的移动到<strong>0,1这种极值</strong>附近</li>
+</ul>
+<h3 id="5-Learning-Rate设置合理"><a href="#5-Learning-Rate设置合理" class="headerlink" title="5 Learning Rate设置合理"></a>5 Learning Rate设置合理</h3><p><strong>太大，需要调小：</strong></p>
+<ul>
+<li>loss爆炸&#x2F;NAN</li>
+</ul>
+<p><strong>太小，需要调大：</strong></p>
+<ul>
+<li>学不到东西，没有更新</li>
+<li>半天loss没反应</li>
+</ul>
+<p><strong>loss爆炸，太大，NaN：</strong></p>
+<ul>
+<li>太大了，调小</li>
+</ul>
+<p><strong>学不到东西，半天loss没有反应：</strong></p>
+<ul>
+<li>太小了，调大</li>
+</ul>
+<p><strong>loss一路降下来，突然不再降：</strong></p>
+<ul>
+<li>进一步调小</li>
+</ul>
+<blockquote>
+<p><strong>先上一个小lr保证不爆炸，等loss下降后，再升lr，之后再慢慢降lr</strong></p>
+<p>LR在可以工作的最大值下往小收一收, 免得ReLU把神经元弄死了</p>
+</blockquote>
+<h3 id="6-对比训练集和验证集的loss"><a href="#6-对比训练集和验证集的loss" class="headerlink" title="6 对比训练集和验证集的loss"></a>6 对比训练集和验证集的loss</h3><ul>
+<li><p><strong>过拟合</strong>：</p>
+<ul>
+<li>训练集好，验证集差</li>
+</ul>
+</li>
+<li><p><strong>欠拟合</strong>：</p>
+<ul>
+<li>训练集差，验证集差</li>
+</ul>
+</li>
+</ul>
+<h3 id="7-清楚receptive-field的大小"><a href="#7-清楚receptive-field的大小" class="headerlink" title="7 清楚receptive field的大小"></a>7 清楚receptive field的大小</h3><p><img src="/CV%E7%82%BC%E4%B8%B9%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93.assets/image-20220322095808834.png" srcset="/img/loading.gif" lazyload alt="image-20220322095808834"></p>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项:"></a><strong>注意事项:</strong></h2><ol>
+<li>预处理: -mean&#x2F;std zero-center就够了</li>
+<li>打乱数据</li>
+<li>Dropout</li>
+<li>第一层的filter, 数量不要太少. 否则根本学不出来(底层特征很重要)</li>
+<li>调参请在验证集上<ol>
+<li>用验证集判断是否过拟合！(validate loss very big)【0.3~0.6】</li>
+<li>好：【&lt;0.01】</li>
+<li>欠拟合：train+val  all【&gt;0.3】</li>
+</ol>
+</li>
+</ol>
+<p><img src="/CV%E7%82%BC%E4%B8%B9%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93.assets/image-20220322100732586.png" srcset="/img/loading.gif" lazyload alt="image-20220322100732586"></p>
+<p><strong>模型在验证集的表现由两部分组成</strong>:</p>
+<ul>
+<li>对训练集规律的掌握 trainset loss</li>
+<li>对训练集的适应程度 validation set loss</li>
+</ul>
+<p>&#x3D;&#x3D;调参的本质就是要找到那个<strong>best model</strong> 平衡点&#x3D;&#x3D;</p>
+<h2 id="调试hyperparameters-的先后顺序"><a href="#调试hyperparameters-的先后顺序" class="headerlink" title="调试hyperparameters 的先后顺序"></a>调试hyperparameters 的先后顺序</h2><h3 id="1、优先调-learning-rate"><a href="#1、优先调-learning-rate" class="headerlink" title="1、优先调 learning rate"></a><strong>1、优先调 learning rate</strong></h3><p>如果对表现不满意应该优先调学习速率</p>
+<h3 id="2、加-Dropout，-加-BN-加Data-Argument"><a href="#2、加-Dropout，-加-BN-加Data-Argument" class="headerlink" title="2、加 Dropout， 加 BN, 加Data Argument"></a><strong>2、加 Dropout， 加 BN, 加Data Argument</strong></h3><p><strong>设计模型之初</strong>：</p>
+<ul>
+<li><p>模型尽量深，卷积核尽量多，强行让模型拟合训练集</p>
+</li>
+<li><p>容易遇到的问题就是<strong>过拟合</strong></p>
+</li>
+<li><h4 id="过拟合解决方法："><a href="#过拟合解决方法：" class="headerlink" title="过拟合解决方法："></a>过拟合解决方法：</h4><ul>
+<li>正则化</li>
+<li>加大训练数据集<ul>
+<li>多标记</li>
+<li>数据增强（图像裁剪、对称变换、旋转平移）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="3、调模型的层数和卷积核数量"><a href="#3、调模型的层数和卷积核数量" class="headerlink" title="3、调模型的层数和卷积核数量"></a><strong>3、调模型的层数和卷积核数量</strong></h3><p><strong>增加模型层数（变高）：</strong></p>
+<ul>
+<li><p>这两个参数都是对模型理论容量具有<strong>巨大影响</strong>的参数</p>
+</li>
+<li><p><strong>增大模型的层数</strong>和<strong>卷积核的数量</strong>都会提升模型的容量</p>
+</li>
+<li><p>增大<strong>模型层数</strong>（让模型变高）可以让模型获得<strong>更好的非线性</strong></p>
+<ul>
+<li>缺点：会让模型更难训练，面临梯度消失的风险，引入死单元</li>
+</ul>
+</li>
+</ul>
+<p><strong>增加卷积核（变胖）</strong></p>
+<ul>
+<li><strong>不引入训练困难</strong>的情况下<strong>让模型更好的拟合训练集</strong></li>
+<li>降低 <strong>training loss</strong></li>
+<li>更容易<strong>过拟合</strong></li>
+</ul>
+<p>&#x3D;&#x3D;理想情况下表现优越的模型一般长的<strong>高高瘦瘦</strong>（每层卷积核不多）&#x3D;&#x3D;</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>近两年论文基本都用同样的参数设定：</p>
+<ul>
+<li>几十到几百epoch</li>
+<li>sgd，mini batch size从几十到几百皆可</li>
+<li>步长0.1，可手动收缩</li>
+<li>weight decay取0.005</li>
+<li>momentum取0.9</li>
+<li>dropout加relu</li>
+<li>weight用高斯分布初始化</li>
+<li>bias全初始化为0</li>
+<li>输入特征和预测目标都做好归一化</li>
+</ul>
+<h1 id="如何成为一名成功的“炼丹师”——DL训练技巧"><a href="#如何成为一名成功的“炼丹师”——DL训练技巧" class="headerlink" title="如何成为一名成功的“炼丹师”——DL训练技巧"></a>如何成为一名成功的“炼丹师”——DL训练技巧</h1><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU0NTAyNTQ1OQ==&amp;mid=2247484020&amp;idx=3&amp;sn=6882d32290f44d15cb353ea92849356b&amp;chksm=fb727ea8cc05f7be022025b20d6e8e71170eb5eb1ce383d526aabe8b92a759fd426e9cd114b3#rd">https://mp.weixin.qq.com/s?__biz=MzU0NTAyNTQ1OQ==&amp;mid=2247484020&amp;idx=3&amp;sn=6882d32290f44d15cb353ea92849356b&amp;chksm=fb727ea8cc05f7be022025b20d6e8e71170eb5eb1ce383d526aabe8b92a759fd426e9cd114b3#rd</a></p>
+<blockquote>
+<p><strong>DNN（深度神经网络）</strong>在训练过程中遇到的一些问题</p>
+</blockquote>
+<h2 id="1-数据集准备"><a href="#1-数据集准备" class="headerlink" title="1 数据集准备"></a>1 数据集准备</h2><p>大量、高质量且带有准确标签</p>
+<h2 id="2-数据预处理"><a href="#2-数据预处理" class="headerlink" title="2 数据预处理"></a>2 数据预处理</h2><ul>
+<li>0均值和1方差化</li>
+</ul>
+<h2 id="3-Minibatch"><a href="#3-Minibatch" class="headerlink" title="3 Minibatch"></a>3 <strong>Minibatch</strong></h2><ul>
+<li>一般建议用128,<strong>8</strong>这组，但是<strong>128</strong>,<strong>1</strong>也很好，只是效率会非常慢</li>
+<li>千万不要用<strong>过大</strong>的数值，否则很容易<strong>过拟合</strong></li>
+</ul>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">#深度学习</a>
+      
+        <a href="/tags/CV/">#CV</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>CV炼丹技巧总结</div>
+      <div>http://example.com/2022/04/22/CV炼丹技巧总结/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>John Doe</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>April 22, 2022</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>Licensed under</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/04/22/CV%E7%82%BC%E4%B8%B9%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%932/" title="CV炼丹技巧总结2">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">CV炼丹技巧总结2</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/04/22/CSS/" title="CSS">
+                        <span class="hidden-mobile">CSS</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'http://example.com/2022/04/22/CV%E7%82%BC%E4%B8%B9%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93/';
+          this.page.identifier = '/2022/04/22/CV%E7%82%BC%E4%B8%B9%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <i class="iconfont icon-love"></i> <a href="" target="_blank" rel="nofollow noopener"><span>武汉大学杨淇雅</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

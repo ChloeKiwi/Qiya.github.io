@@ -1,0 +1,807 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.png">
+  <link rel="icon" href="/img/avatar.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/page/2/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Qiya</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="今天不想跑，所以才去跑"></span>
+          
+        </div>
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div id="board"
+          style="margin-top: 0">
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/04/22/ML-DL%E8%87%AA%E5%B7%B1%E5%86%99%E4%BB%A3%E7%A0%81%E8%AE%B0%E5%BD%95/" target="_blank">
+          <img src="/img/avatar.png" srcset="/img/loading.gif" lazyload alt="ML/DL自己写代码记录">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/04/22/ML-DL%E8%87%AA%E5%B7%B1%E5%86%99%E4%BB%A3%E7%A0%81%E8%AE%B0%E5%BD%95/" target="_blank">
+          ML/DL自己写代码记录
+        </a>
+      </h1>
+
+      <a class="index-excerpt" href="/2022/04/22/ML-DL%E8%87%AA%E5%B7%B1%E5%86%99%E4%BB%A3%E7%A0%81%E8%AE%B0%E5%BD%95/" target="_blank">
+        <div>
+          
+          机器&#x2F;深度学习自己写代码记录txt变矩阵 [idx,:]第idx行所有列被[0-2]列赋值  &#96;&#96;&#96;pythonreturnMat[index,:] &#x3D; listFromLine[0:3]1234567    - 初始化矩阵：  - &#96;&#96;&#96;python    returnMat &#x3D; np.zeros((lenthOfLines,3))   去掉首位空格并
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-04-22 17:10" pubdate>
+              2022-04-22
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">#深度学习</a>
+            
+              <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">#机器学习</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/04/22/tensorflow%E5%AE%89%E8%A3%85/" target="_blank">
+          <img src="/img/avatar.png" srcset="/img/loading.gif" lazyload alt="tensorflow安装">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/04/22/tensorflow%E5%AE%89%E8%A3%85/" target="_blank">
+          tensorflow安装
+        </a>
+      </h1>
+
+      <a class="index-excerpt" href="/2022/04/22/tensorflow%E5%AE%89%E8%A3%85/" target="_blank">
+        <div>
+          
+          tensorflow安装conda创建环境123conda create -n tensorflow python&#x3D;3.5.2conda create -n tensorflow python&#x3D;3.6.13    conda激活1activate tensorflow    conda下安装python1已完成 conda下安装tensorflow1pip install -i https:&#x2F;&#x2F;p
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-04-22 17:09" pubdate>
+              2022-04-22
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">#深度学习</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/04/22/Pytorch%E4%B8%8Etensorflow%E5%AF%B9%E6%AF%94/" target="_blank">
+          <img src="/img/avatar.png" srcset="/img/loading.gif" lazyload alt="Pytorch与tensorflow对比">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/04/22/Pytorch%E4%B8%8Etensorflow%E5%AF%B9%E6%AF%94/" target="_blank">
+          Pytorch与tensorflow对比
+        </a>
+      </h1>
+
+      <a class="index-excerpt" href="/2022/04/22/Pytorch%E4%B8%8Etensorflow%E5%AF%B9%E6%AF%94/" target="_blank">
+        <div>
+          
+          pytorch和tensorFlow的区别ytorch是一个动态的框架，而TensorFlow是一个静态的框架 TensorFlow的尿性是：  需要先构建一个TensorFlow的计算图 构建好了之后，这样一个计算图是不能够变的了 然后我们再传入不同的数据进去，进行计算  固定了计算的流程，势必带来了不灵活性 pytorch就是一个动态的框架，这就和python的逻辑是一样的，要对变量做任何操作
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-04-22 17:09" pubdate>
+              2022-04-22
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">#深度学习</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/04/22/Pytorch%E6%8A%A5%E9%94%99%E5%90%88%E9%9B%86/" target="_blank">
+          <img src="/img/avatar.png" srcset="/img/loading.gif" lazyload alt="Pytorch报错合集">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/04/22/Pytorch%E6%8A%A5%E9%94%99%E5%90%88%E9%9B%86/" target="_blank">
+          Pytorch报错合集
+        </a>
+      </h1>
+
+      <a class="index-excerpt" href="/2022/04/22/Pytorch%E6%8A%A5%E9%94%99%E5%90%88%E9%9B%86/" target="_blank">
+        <div>
+          
+          pytorch报错合集RGBA问题 Util.py种，加上jpeg格式 观察了一番，拆分数据好像不是通过split_data进行的 将alldataset中的两个py文件删掉了 注释掉了 还是有问题！！！ 重新在dataset下建立了一个父文件夹allclass，再把所有类放进去可以了…… 什么有病……%￥￥#%@2123131#￥%#@  第二天又有问题了…… 不知道是不是全部的上传有问题（昨天
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-04-22 17:06" pubdate>
+              2022-04-22
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">#深度学习</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/04/22/Pytorch%E6%9D%82%E7%A2%8E%E8%AE%B0%E5%BD%95/" target="_blank">
+          <img src="/img/avatar.png" srcset="/img/loading.gif" lazyload alt="Pytorch杂碎记录">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/04/22/Pytorch%E6%9D%82%E7%A2%8E%E8%AE%B0%E5%BD%95/" target="_blank">
+          Pytorch杂碎记录
+        </a>
+      </h1>
+
+      <a class="index-excerpt" href="/2022/04/22/Pytorch%E6%9D%82%E7%A2%8E%E8%AE%B0%E5%BD%95/" target="_blank">
+        <div>
+          
+          pytorch1torch.manual_seed(0) torch.backends.cudnn.deterministic &#x3D; False torch.backends.cudnn.benchmark &#x3D; True   ​              TORCH.BACKENDS控制PyTorch支持的各种后端行为 These backends include:  torch.backends.
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-04-22 17:06" pubdate>
+              2022-04-22
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">#深度学习</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/04/22/MarcovChain%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E9%93%BE/" target="_blank">
+          <img src="/img/avatar.png" srcset="/img/loading.gif" lazyload alt="MarcovChain马尔科夫链">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/04/22/MarcovChain%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E9%93%BE/" target="_blank">
+          MarcovChain马尔科夫链
+        </a>
+      </h1>
+
+      <a class="index-excerpt" href="/2022/04/22/MarcovChain%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E9%93%BE/" target="_blank">
+        <div>
+          
+          Marcov chainhttps:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;26453269 转移概率矩阵P 预测第N天的状态  Sn &#x3D; Sn-1 * P (看见没，只跟它前面一个状态Sn-1有关) 总结：马尔可夫链就是这样一个任性的过程，它将来的状态分布只取决于现在，跟过去无关！ 随机变量随时间按照Markov性进行变化 https:&#x2F;&#x2F;blog.csdn.net&#x2F;mid_Fa
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-04-22 17:04" pubdate>
+              2022-04-22
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">#机器学习</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/04/22/KNN%E7%AE%97%E6%B3%95/" target="_blank">
+          <img src="/img/avatar.png" srcset="/img/loading.gif" lazyload alt="KNN算法">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/04/22/KNN%E7%AE%97%E6%B3%95/" target="_blank">
+          KNN算法
+        </a>
+      </h1>
+
+      <a class="index-excerpt" href="/2022/04/22/KNN%E7%AE%97%E6%B3%95/" target="_blank">
+        <div>
+          
+          kNN算法[HOMEWORK]算法特点 基本分类与回归方法 监督学习：样本集中每个数据都存在标签 样本集中每一个数据与所属分类的对应关系   新数据的每个特征与样本集中数据对应的特征进行比较，算法提取样本最相似数据(最近邻)的分类标签 k-近邻算法中k：只选择样本数据集中前k个最相似的数据 选择k个最相似数据中出现次数最多的分类  核心思想一个样本在特征空间中的k个最相邻的样本中的大多数属于某一个
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-04-22 17:03" pubdate>
+              2022-04-22
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">#机器学习</a>
+            
+              <a href="/tags/%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A/">#课程作业</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/04/22/CV%E7%82%BC%E4%B8%B9%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%932/" target="_blank">
+          <img src="/img/avatar.png" srcset="/img/loading.gif" lazyload alt="CV炼丹技巧总结2">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/04/22/CV%E7%82%BC%E4%B8%B9%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%932/" target="_blank">
+          CV炼丹技巧总结2
+        </a>
+      </h1>
+
+      <a class="index-excerpt" href="/2022/04/22/CV%E7%82%BC%E4%B8%B9%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%932/" target="_blank">
+        <div>
+          
+          cv调参经验汇总1 数据集准备 大量、高质量且带有准确标签  验证集使用： 使用验证集，可以知道什么时候开始降低学习率和什么时候停止训练；   数据增广： 数据尽可能多：扭转剪切分割以扩充    2 数据预处理 0均值和1方差化 其他方法 打乱训练集顺序  3 参数设定 将各个参数的设置部分集中在一起，否则调参很麻烦 先参考相关论文，以论文中给出的参数作为初始参数 先调重要、对实验结果影响大的参数
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-04-22 17:01" pubdate>
+              2022-04-22
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">#深度学习</a>
+            
+              <a href="/tags/CV/">#CV</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/04/22/CV%E7%82%BC%E4%B8%B9%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93/" target="_blank">
+          <img src="/img/avatar.png" srcset="/img/loading.gif" lazyload alt="CV炼丹技巧总结">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/04/22/CV%E7%82%BC%E4%B8%B9%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93/" target="_blank">
+          CV炼丹技巧总结
+        </a>
+      </h1>
+
+      <a class="index-excerpt" href="/2022/04/22/CV%E7%82%BC%E4%B8%B9%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93/" target="_blank">
+        <div>
+          
+          [调参]CV炼丹技巧&#x2F;经验 https:&#x2F;&#x2F;www.cnblogs.com&#x2F;kk17&#x2F;p&#x2F;10156849.html 调参就是trial-and-error. 快速尝试, 快速纠错这是调参的关键 可视化你只是训练完成后(或者准确率到达一个阶段后), 才能可视化 权重的可视化[Visualize Layer Weights] 不满足平滑结果的图像数据不好? 没有预处理? 网络结构问题? L
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-04-22 16:57" pubdate>
+              2022-04-22
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">#深度学习</a>
+            
+              <a href="/tags/CV/">#CV</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/04/22/CSS/" target="_blank">
+          <img src="/img/avatar.png" srcset="/img/loading.gif" lazyload alt="CSS">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/04/22/CSS/" target="_blank">
+          CSS
+        </a>
+      </h1>
+
+      <a class="index-excerpt" href="/2022/04/22/CSS/" target="_blank">
+        <div>
+          
+          [TOC] Html&amp;CSS关于height:100%和height:100vh的区别height:100vh &#x3D;&#x3D; height:100%; 当元素没有内容时候，设置height:100%，该元素不会被撑开，此时高度为0 height:100vh，该元素会被撑开屏幕高度一致 vh就是当前屏幕可见高度的1% 网页复现     让块级盒子水平居中对齐： 有一个宽：widt
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-04-22 16:55" pubdate>
+              2022-04-22
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%89%8D%E7%AB%AF/">#前端</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#board">3</a><a class="extend next" rel="next" href="/page/3/#board"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <i class="iconfont icon-love"></i> <a href="" target="_blank" rel="nofollow noopener"><span>武汉大学杨淇雅</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
